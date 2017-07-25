@@ -15,21 +15,39 @@
  */
 package io.atlasmap.validators;
 import io.atlasmap.core.AtlasMappingUtil;
-// TODO: Fix circular dependency
-// import io.atlasmap.java.v2.JavaField;
+import io.atlasmap.spi.AtlasValidator;
 import io.atlasmap.v2.*;
-import io.atlasmap.validators.DefaultAtlasValidationsHelper;
+import io.atlasmap.validators.AtlasValidationTestHelper;
 
+import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class BaseMappingTest {
+public abstract class BaseValidatorTest {
 
-    protected static Logger logger = LoggerFactory.getLogger(BaseMappingTest.class);
+    protected static Logger logger = LoggerFactory.getLogger(BaseValidatorTest.class);
 
 //    protected io.atlasmap.java.v2.ObjectFactory javaModelFactory = new io.atlasmap.java.v2.ObjectFactory();
     protected AtlasMappingUtil mappingUtil = new AtlasMappingUtil("io.atlasmap.v2");
-
+    protected AtlasValidationTestHelper validationHelper = null;
+    protected List<Validation> validations = null;
+    protected AtlasValidator validator = null;
+    
+    @Before
+    public void setUp() {
+        validationHelper = new AtlasValidationTestHelper();
+        validations = validationHelper.getValidation();
+    }
+    
+    @After
+    public void tearDown() {
+        validationHelper = null;
+        validations = null;
+    }
+    
     protected AtlasMapping getAtlasMappingFullValid() throws Exception {
         AtlasMapping mapping = AtlasModelFactory.createAtlasMapping();
 
@@ -130,7 +148,7 @@ public abstract class BaseMappingTest {
 
     protected void debugErrors(Validations validations) {
         for (Validation validation : validations.getValidation()) {
-            logger.debug(DefaultAtlasValidationsHelper.validationToString(validation));
+            logger.debug(AtlasValidationTestHelper.validationToString(validation));
         }
     }
 }

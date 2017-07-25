@@ -22,23 +22,22 @@ import org.junit.Ignore;
 import org.junit.Test;
 import io.atlasmap.v2.Validation;
 import io.atlasmap.v2.ValidationStatus;
-import io.atlasmap.validators.AtlasValidationHelper;
-import io.atlasmap.validators.DefaultAtlasValidationsHelper;
+import io.atlasmap.validators.AtlasValidationTestHelper;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
-public class AtlasValidationHelperTest {
+public class AtlasValidationTestHelperTest {
     
-    private AtlasValidationHelper validations = null;
+    private AtlasValidationTestHelper validations = null;
     private Validation error = null;
     private Validation warning = null;
     private Validation info = null;
     
     @Before
     public void setUp() {
-        validations = new DefaultAtlasValidationsHelper();
+        validations = new AtlasValidationTestHelper();
         error = new Validation();
         error.setField("test.field");
         error.setMessage("Error message");

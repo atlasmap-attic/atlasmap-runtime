@@ -20,7 +20,7 @@ import io.atlasmap.v2.ValidationStatus;
 import io.atlasmap.v2.Validations;
 import java.util.List;
 
-public class DefaultAtlasValidationsHelper extends Validations implements AtlasValidationHelper {
+public class AtlasValidationTestHelper extends Validations {
 
     private static final long serialVersionUID = -7993298271986178508L;
 
