@@ -15,15 +15,19 @@
  */
 package io.atlasmap.core;
 
-import org.junit.Test;
-
-import io.atlasmap.core.AtlasUtil;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class AtlasUtilTest {
 
@@ -103,17 +107,8 @@ public class AtlasUtilTest {
 	@Test
 	public void testFindClassesForPackage() {
 	    List<Class<?>> classes = AtlasUtil.findClassesForPackage("io.atlasmap.v2");
-	    assertNotNull(classes);
-	    int found = 0;
-	    for(Class<?> clazz : classes) {
-	        //System.out.println(clazz);
-	        if("io.atlasmap.v2.Field".equals(clazz.getName())) { found++; }
-	        if("io.atlasmap.v2.AtlasMapping".equals(clazz.getName())) { found++; }
-	        if("io.atlasmap.v2.Action".equals(clazz.getName())) { found++; }
-	        if("io.atlasmap.v2.Capitalize".equals(clazz.getName())) { found++; }
-	    }
-	    
-	    assertEquals(new Integer(4), new Integer(found));
+	    assertThat(classes.stream().map(Class::getName).collect(Collectors.toList()))
+	    	.contains("io.atlasmap.v2.Field", "io.atlasmap.v2.AtlasMapping", "io.atlasmap.v2.Action", "io.atlasmap.v2.Capitalize");
 	}
 
 }
