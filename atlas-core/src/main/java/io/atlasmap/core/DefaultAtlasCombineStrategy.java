@@ -119,7 +119,13 @@ public class DefaultAtlasCombineStrategy implements AtlasCombineStrategy {
     
     protected static Map<Integer, String> sortByKey(Map<Integer, String> map) {
         return map.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
+                .sorted(Map.Entry.comparingByKey((key1, key2) -> {
+					if(key1 == null || key2 == null) {
+						return 0;//1 or -1; whatever, the null value can be retrieved only with .get(null)
+					} else {
+						return key1.compareTo(key2);
+					}
+				}))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
     }

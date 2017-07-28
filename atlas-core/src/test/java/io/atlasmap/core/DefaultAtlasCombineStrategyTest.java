@@ -207,4 +207,16 @@ public class DefaultAtlasCombineStrategyTest {
             count++;
         }
     }
+    
+    @Test
+    public void testSortByKeyWithNullKeys() {
+        Map<Integer, String> generatedCombineMap = generateCombineMap(4);
+        generatedCombineMap.put(null, "valueWithNullKey");
+		Map<Integer, String> cMap = DefaultAtlasCombineStrategy.sortByKey(generatedCombineMap);
+        assertEquals("a", cMap.get(0));
+        assertEquals("b", cMap.get(1));
+        assertEquals("c", cMap.get(2));
+        assertEquals("d", cMap.get(3));
+        assertEquals("valueWithNullKey", cMap.get(null));
+    }
 }
