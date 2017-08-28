@@ -23,7 +23,7 @@
     <parent>
         <artifactId>atlas-xml-parent</artifactId>
         <groupId>io.atlasmap</groupId>
-        <version>1.19.0-SNAPSHOT</version>
+        <version>1.19.0.fuse-000002</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -57,6 +57,12 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
