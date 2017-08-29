@@ -16,6 +16,7 @@
     limitations under the License.
 
 -->
+<!-- ${project.version} -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:atlas="http://atlasmap.io/v2"
     xmlns:atlasx="http://atlasmap.io/xml/v2" targetNamespace="http://atlasmap.io/xml/v2"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
