@@ -16,7 +16,6 @@
     limitations under the License.
 
 -->
-<!-- ${project.version} -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://atlasmap.io/xml/test/v2"
     targetNamespace="http://atlasmap.io/xml/test/v2" elementFormDefault="qualified"
     attributeFormDefault="unqualified">
@@ -165,3 +164,6 @@
         </restriction>
     </simpleType>
 </schema>
+
+<!-- Atlasmap: ${project.version} -->
+
