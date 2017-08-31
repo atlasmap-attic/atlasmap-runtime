@@ -92,11 +92,18 @@ public class SchemaInspectorTest {
         assertEquals(FieldType.STRING, f.getFieldType());
     }
 
-    @Ignore("TODO support $ref")
+    @Ignore("internet access")
     @Test
-    public void inspectJsonSchema_calendar() throws Exception {
+    public void inspectJsonSchema_calendar_external() throws Exception {
         final String instance = new String(Files
                 .readAllBytes(Paths.get("src/test/resources/inspect/schema/calendar.json")));
+        doInspectJsonSchema_calendar(instance);
+    }
+
+    @Test
+    public void inspectJsonSchema_calendar_internal() throws Exception {
+        final String instance = new String(Files
+                .readAllBytes(Paths.get("src/test/resources/inspect/schema/calendar-internal.json")));
         doInspectJsonSchema_calendar(instance);
     }
 
@@ -165,11 +172,18 @@ public class SchemaInspectorTest {
         assertEquals(FieldType.NUMBER, f.getFieldType());
     }
 
-    @Ignore("TODO support $ref")
+    @Ignore("internet access")
     @Test
-    public void inspectJsonSchema_card() throws Exception {
+    public void inspectJsonSchema_card_external() throws Exception {
         final String schema = new String(Files
                 .readAllBytes(Paths.get("src/test/resources/inspect/schema/card.json")));
+        doInspectJsonSchema_card(schema);
+    }
+
+    @Test
+    public void inspectJsonSchema_card_internal() throws Exception {
+        final String schema = new String(Files
+                .readAllBytes(Paths.get("src/test/resources/inspect/schema/card-internal.json")));
         doInspectJsonSchema_card(schema);
     }
 
