@@ -210,14 +210,8 @@ public class AtlasUtil {
         return params;
     }
 
-    public static int countCharacters(String text, char match) {
-        int count = 0;
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == match) {
-                count++;
-            }
-        }
-        return count;
+    public static long countCharacters(String text, char match) {
+    	return text.chars().filter(c -> c == match).count();
     }
 
     public static List<Class<?>> findClassesForPackage(String scannedPackage) {
