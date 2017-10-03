@@ -95,27 +95,27 @@ public class JavaValidationServiceTest {
         Mapping sepMapping = AtlasModelFactory.createMapping(MappingType.SEPARATE);
 
         // MappedField
-        JavaField inputField = AtlasJavaModelFactory.createJavaField();
-        inputField.setFieldType(FieldType.STRING);
-        inputField.setPath("firstName");
+        JavaField sourceField = AtlasJavaModelFactory.createJavaField();
+        sourceField.setFieldType(FieldType.STRING);
+        sourceField.setPath("firstName");
 
-        JavaField outputField = AtlasJavaModelFactory.createJavaField();
-        outputField.setFieldType(FieldType.STRING);
-        outputField.setPath("firstName");
+        JavaField targetField = AtlasJavaModelFactory.createJavaField();
+        targetField.setFieldType(FieldType.STRING);
+        targetField.setPath("firstName");
 
-        mapMapping.getInputField().add(inputField);
-        mapMapping.getOutputField().add(outputField);
+        mapMapping.getSourceField().add(sourceField);
+        mapMapping.getTargetField().add(targetField);
 
         JavaField sIJavaField = AtlasJavaModelFactory.createJavaField();
         sIJavaField.setFieldType(FieldType.STRING);
         sIJavaField.setPath("displayName");
-        sepMapping.getInputField().add(sIJavaField);
+        sepMapping.getSourceField().add(sIJavaField);
 
         JavaField sOJavaField = AtlasJavaModelFactory.createJavaField();
         sOJavaField.setFieldType(FieldType.STRING);
         sOJavaField.setPath("lastName");
         sOJavaField.setIndex(1);
-        sepMapping.getOutputField().add(sOJavaField);
+        sepMapping.getTargetField().add(sOJavaField);
 
         mapping.getMappings().getMapping().add(mapMapping);
         mapping.getMappings().getMapping().add(sepMapping);
@@ -131,15 +131,15 @@ public class JavaValidationServiceTest {
 
     protected Mapping createMockMapping() {
         // Mock MappedField
-        MockField inputField = new MockField();
-        inputField.setName("input.name");
-        MockField outputField = new MockField();
-        outputField.setName("out.name");
+        MockField sourceField = new MockField();
+        sourceField.setName("source.name");
+        MockField targetField = new MockField();
+        targetField.setName("target.name");
 
         Mapping mapping = new Mapping();
         mapping.setMappingType(MappingType.MAP);
-        mapping.getInputField().add(inputField);
-        mapping.getOutputField().add(inputField);
+        mapping.getSourceField().add(sourceField);
+        mapping.getTargetField().add(sourceField);
         return mapping;
     }
 
@@ -225,7 +225,7 @@ public class JavaValidationServiceTest {
     }
 
     @Test
-    public void testValidateMappingInvalidSeparateInputFieldType() throws Exception {
+    public void testValidateMappingInvalidSeparateSourceFieldType() throws Exception {
         AtlasMapping atlasMapping = getAtlasMappingFullValid();
 
         Mapping separateFieldMapping = AtlasModelFactory.createMapping(MappingType.SEPARATE);
@@ -235,13 +235,13 @@ public class JavaValidationServiceTest {
         bIJavaField.setValue(Boolean.TRUE);
         bIJavaField.setPath("firstName");
 
-        separateFieldMapping.getInputField().add(bIJavaField);
+        separateFieldMapping.getSourceField().add(bIJavaField);
 
         JavaField sOJavaField = javaModelFactory.createJavaField();
         sOJavaField.setFieldType(FieldType.STRING);
         sOJavaField.setPath("lastName");
         sOJavaField.setIndex(0);
-        separateFieldMapping.getOutputField().add(sOJavaField);
+        separateFieldMapping.getTargetField().add(sOJavaField);
 
         atlasMapping.getMappings().getMapping().add(separateFieldMapping);
 
@@ -256,13 +256,13 @@ public class JavaValidationServiceTest {
 
         Validation validation = validations.get(0);
         assertNotNull(validation);
-        assertEquals("Input.Field", validation.getField());
+        assertEquals("Source.Field", validation.getField());
         assertEquals("(BOOLEAN)", validation.getValue().toString());
-        assertEquals("Input field must be of type STRING for a Separate Mapping", validation.getMessage());
+        assertEquals("Source field must be of type STRING for a Separate Mapping", validation.getMessage());
         assertEquals(ValidationStatus.ERROR, validation.getStatus());
         validation = validations.get(1);
         assertNotNull(validation);
-        assertEquals("Field.Input/Output.conversion", validation.getField());
+        assertEquals("Field.Source/Target.conversion", validation.getField());
         assertEquals("(BOOLEAN) --> (STRING)", validation.getValue().toString());
         assertEquals("Conversion between source and target types is supported", validation.getMessage());
         assertEquals(ValidationStatus.INFO, validation.getStatus());
@@ -275,8 +275,8 @@ public class JavaValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        JavaField in = (JavaField) fieldMapping.getInputField().get(0);
-        in.setFieldType(FieldType.CHAR);
+        JavaField source = (JavaField) fieldMapping.getSourceField().get(0);
+        source.setFieldType(FieldType.CHAR);
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
         validations.addAll(targetValidationService.validateMapping(mapping));
@@ -296,12 +296,12 @@ public class JavaValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        JavaField in = (JavaField) fieldMapping.getInputField().get(0);
-        in.setFieldType(FieldType.COMPLEX);
-        in.setClassName("io.atlasmap.java.module.MockJavaClass");
+        JavaField source = (JavaField) fieldMapping.getSourceField().get(0);
+        source.setFieldType(FieldType.COMPLEX);
+        source.setClassName("io.atlasmap.java.module.MockJavaClass");
 
-        JavaField out = (JavaField) fieldMapping.getOutputField().get(0);
-        out.setFieldType(FieldType.STRING);
+        JavaField target = (JavaField) fieldMapping.getTargetField().get(0);
+        target.setFieldType(FieldType.STRING);
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
         validations.addAll(targetValidationService.validateMapping(mapping));
@@ -310,7 +310,7 @@ public class JavaValidationServiceTest {
         assertTrue(validationHelper.hasWarnings());
         assertFalse(validationHelper.hasInfos());
         assertThat(1, is(validationHelper.getCount()));
-        assertTrue(validations.stream().anyMatch(me -> me.getField().equals("Field.Input/Output.conversion")));
+        assertTrue(validations.stream().anyMatch(me -> me.getField().equals("Field.Source/Target.conversion")));
 
         Long errorCount = validations.stream()
                 .filter(atlasMappingError -> atlasMappingError.getStatus().compareTo(ValidationStatus.WARN) == 0)
@@ -326,13 +326,13 @@ public class JavaValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        JavaField in = (JavaField) fieldMapping.getInputField().get(0);
-        in.setFieldType(FieldType.DATE);
-        in.setClassName("java.util.Date");
+        JavaField source = (JavaField) fieldMapping.getSourceField().get(0);
+        source.setFieldType(FieldType.DATE);
+        source.setClassName("java.util.Date");
 
-        JavaField out = (JavaField) fieldMapping.getOutputField().get(0);
-        out.setFieldType(FieldType.COMPLEX);
-        out.setClassName("java.time.ZonedDateTime");
+        JavaField target = (JavaField) fieldMapping.getTargetField().get(0);
+        target.setFieldType(FieldType.COMPLEX);
+        target.setClassName("java.time.ZonedDateTime");
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
         validations.addAll(targetValidationService.validateMapping(mapping));
@@ -344,7 +344,7 @@ public class JavaValidationServiceTest {
         assertFalse(validationHelper.hasWarnings());
         assertTrue(validationHelper.hasInfos());
         assertThat(1, is(validationHelper.getCount()));
-        assertTrue(validations.stream().anyMatch(me -> me.getField().equals("Field.Input/Output.conversion")));
+        assertTrue(validations.stream().anyMatch(me -> me.getField().equals("Field.Source/Target.conversion")));
         Long errorCount = validations.stream()
                 .filter(atlasMappingError -> atlasMappingError.getStatus().compareTo(ValidationStatus.INFO) == 0)
                 .count();
@@ -359,13 +359,13 @@ public class JavaValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        JavaField in = (JavaField) fieldMapping.getInputField().get(0);
-        in.setFieldType(FieldType.DOUBLE);
-        in.setClassName("java.lang.Double");
+        JavaField source = (JavaField) fieldMapping.getSourceField().get(0);
+        source.setFieldType(FieldType.DOUBLE);
+        source.setClassName("java.lang.Double");
 
-        JavaField out = (JavaField) fieldMapping.getOutputField().get(0);
-        out.setFieldType(FieldType.LONG);
-        out.setClassName("java.lang.Long");
+        JavaField target = (JavaField) fieldMapping.getTargetField().get(0);
+        target.setFieldType(FieldType.LONG);
+        target.setClassName("java.lang.Long");
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
         validations.addAll(targetValidationService.validateMapping(mapping));
@@ -389,13 +389,13 @@ public class JavaValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        JavaField in = (JavaField) fieldMapping.getInputField().get(0);
-        in.setFieldType(FieldType.STRING);
-        in.setClassName("java.lang.String");
+        JavaField source = (JavaField) fieldMapping.getSourceField().get(0);
+        source.setFieldType(FieldType.STRING);
+        source.setClassName("java.lang.String");
 
-        JavaField out = (JavaField) fieldMapping.getOutputField().get(0);
-        out.setFieldType(FieldType.LONG);
-        out.setClassName("java.lang.Long");
+        JavaField target = (JavaField) fieldMapping.getTargetField().get(0);
+        target.setFieldType(FieldType.LONG);
+        target.setClassName("java.lang.Long");
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
         validations.addAll(targetValidationService.validateMapping(mapping));
@@ -421,13 +421,13 @@ public class JavaValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        JavaField in = (JavaField) fieldMapping.getInputField().get(0);
-        in.setFieldType(FieldType.STRING);
-        in.setClassName("java.lang.String");
+        JavaField source = (JavaField) fieldMapping.getSourceField().get(0);
+        source.setFieldType(FieldType.STRING);
+        source.setClassName("java.lang.String");
 
-        JavaField out = (JavaField) fieldMapping.getOutputField().get(0);
-        out.setFieldType(FieldType.BYTE);
-        out.setClassName("java.lang.Byte");
+        JavaField target = (JavaField) fieldMapping.getTargetField().get(0);
+        target.setFieldType(FieldType.BYTE);
+        target.setClassName("java.lang.Byte");
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
         validations.addAll(targetValidationService.validateMapping(mapping));
@@ -451,8 +451,8 @@ public class JavaValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        JavaField in = (JavaField) fieldMapping.getInputField().get(0);
-        in.setClassName("java.lang.String3");
+        JavaField source = (JavaField) fieldMapping.getSourceField().get(0);
+        source.setClassName("java.lang.String3");
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
         validations.addAll(targetValidationService.validateMapping(mapping));
@@ -479,8 +479,8 @@ public class JavaValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        JavaField in = (JavaField) fieldMapping.getInputField().get(0);
-        in.setPath(null);
+        JavaField source = (JavaField) fieldMapping.getSourceField().get(0);
+        source.setPath(null);
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
         validations.addAll(targetValidationService.validateMapping(mapping));

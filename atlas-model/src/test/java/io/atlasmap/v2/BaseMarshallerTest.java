@@ -159,54 +159,54 @@ public abstract class BaseMarshallerTest {
         validateProperties(mapping.getProperties());
     }
 
-    protected void addMapField(AtlasMapping mapping, String key, boolean outputActions) {
-        MockField inputMockField = new MockField();
-        inputMockField.setName(key + "-input");
-        inputMockField.setValue(key + "-input-value");
-        inputMockField.setFieldType(FieldType.STRING);
+    protected void addMapField(AtlasMapping mapping, String key, boolean targetActions) {
+        MockField sourceMockField = new MockField();
+        sourceMockField.setName(key + "-source");
+        sourceMockField.setValue(key + "-source-value");
+        sourceMockField.setFieldType(FieldType.STRING);
 
-        MockField outputMockField = new MockField();
-        outputMockField.setName(key + "-output");
-        outputMockField.setValue(key + "-output-value");
-        outputMockField.setFieldType(FieldType.STRING);
+        MockField targetMockField = new MockField();
+        targetMockField.setName(key + "-target");
+        targetMockField.setValue(key + "-target-value");
+        targetMockField.setFieldType(FieldType.STRING);
 
         Mapping fm = AtlasModelFactory.createMapping(MappingType.MAP);
         fm.setMappingType(MappingType.MAP);
-        fm.getInputField().add(inputMockField);
-        fm.getOutputField().add(outputMockField);
+        fm.getSourceField().add(sourceMockField);
+        fm.getTargetField().add(targetMockField);
 
         mapping.getMappings().getMapping().add(fm);
 
-        if (outputActions) {
-            outputMockField.setActions(new Actions());
-            outputMockField.getActions().getActions().add(new Uppercase());
-            outputMockField.getActions().getActions().add(new Lowercase());
+        if (targetActions) {
+            targetMockField.setActions(new Actions());
+            targetMockField.getActions().getActions().add(new Uppercase());
+            targetMockField.getActions().getActions().add(new Lowercase());
         }
     }
 
-    protected void validateMapField(Mapping fm, String key, boolean outputActions) {
+    protected void validateMapField(Mapping fm, String key, boolean targetActions) {
         assertNotNull(fm);
         assertNull(fm.getAlias());
 
         // assertTrue(m1.getFieldActions().getFieldAction().isEmpty());
-        assertNotNull(fm.getInputField());
-        Field f1 = fm.getInputField().get(0);
+        assertNotNull(fm.getSourceField());
+        Field f1 = fm.getSourceField().get(0);
         assertNull(f1.getActions());
 
         assertTrue(f1 instanceof MockField);
-        assertEquals(key + "-input", ((MockField) f1).getName());
-        assertEquals(key + "-input-value", f1.getValue());
+        assertEquals(key + "-source", ((MockField) f1).getName());
+        assertEquals(key + "-source-value", f1.getValue());
         assertEquals(FieldType.STRING, ((MockField) f1).getFieldType());
 
         // assertTrue(m2.getFieldActions().getFieldAction().isEmpty());
-        assertNotNull(fm.getOutputField());
-        Field f2 = fm.getOutputField().get(0);
+        assertNotNull(fm.getTargetField());
+        Field f2 = fm.getTargetField().get(0);
         assertTrue(f2 instanceof MockField);
-        assertEquals(key + "-output", ((MockField) f2).getName());
-        assertEquals(key + "-output-value", f2.getValue());
+        assertEquals(key + "-target", ((MockField) f2).getName());
+        assertEquals(key + "-target-value", f2.getValue());
         assertEquals(FieldType.STRING, ((MockField) f2).getFieldType());
 
-        if (outputActions) {
+        if (targetActions) {
             assertNotNull(f2.getActions());
 
             int i = 0;
@@ -262,18 +262,18 @@ public abstract class BaseMarshallerTest {
         table.getLookupEntry().add(l1);
         mapping.getLookupTables().getLookupTable().add(table);
 
-        MockField inputField = new MockField();
-        inputField.setName(key + "-input");
-        inputField.setValue(key + "-input-value");
+        MockField sourceField = new MockField();
+        sourceField.setName(key + "-source");
+        sourceField.setValue(key + "-source-value");
 
-        MockField outputField = new MockField();
-        outputField.setName(key + "-output");
-        outputField.setValue(key + "-output-value");
+        MockField targetField = new MockField();
+        targetField.setName(key + "-target");
+        targetField.setValue(key + "-target-value");
 
         Mapping fm = AtlasModelFactory.createMapping(MappingType.LOOKUP);
         fm.setMappingType(MappingType.LOOKUP);
-        fm.getInputField().add(inputField);
-        fm.getOutputField().add(outputField);
+        fm.getSourceField().add(sourceField);
+        fm.getTargetField().add(targetField);
 
         fm.setLookupTableName(key + "-lookupTable");
         mapping.getMappings().getMapping().add(fm);
@@ -284,20 +284,20 @@ public abstract class BaseMarshallerTest {
         assertNull(fm.getAlias());
         assertEquals(MappingType.LOOKUP, fm.getMappingType());
 
-        assertNotNull(fm.getInputField());
-        Field f1 = fm.getInputField().get(0);
+        assertNotNull(fm.getSourceField());
+        Field f1 = fm.getSourceField().get(0);
         assertNull(f1.getActions());
 
         assertTrue(f1 instanceof MockField);
-        assertEquals(key + "-input", ((MockField) f1).getName());
-        assertEquals(key + "-input-value", f1.getValue());
+        assertEquals(key + "-source", ((MockField) f1).getName());
+        assertEquals(key + "-source-value", f1.getValue());
         assertNull(((MockField) f1).getFieldType());
 
-        assertNotNull(fm.getOutputField());
-        Field f2 = fm.getOutputField().get(0);
+        assertNotNull(fm.getTargetField());
+        Field f2 = fm.getTargetField().get(0);
         assertTrue(f2 instanceof MockField);
-        assertEquals(key + "-output", ((MockField) f2).getName());
-        assertEquals(key + "-output-value", f2.getValue());
+        assertEquals(key + "-target", ((MockField) f2).getName());
+        assertEquals(key + "-target-value", f2.getValue());
         assertNull(((MockField) f2).getFieldType());
         assertNull(f2.getActions());
 
@@ -305,17 +305,17 @@ public abstract class BaseMarshallerTest {
     }
 
     protected void addMapPropertyField(AtlasMapping mapping, String key) {
-        MockField inputField = new MockField();
-        inputField.setName(key + "-input");
-        inputField.setValue(key + "-input-value");
+        MockField sourceField = new MockField();
+        sourceField.setName(key + "-source");
+        sourceField.setValue(key + "-source-value");
 
-        PropertyField outputField = new PropertyField();
-        outputField.setName("p7");
+        PropertyField targetField = new PropertyField();
+        targetField.setName("p7");
 
         Mapping fm = AtlasModelFactory.createMapping(MappingType.MAP);
         fm.setMappingType(MappingType.MAP);
-        fm.getInputField().add(inputField);
-        fm.getOutputField().add(outputField);
+        fm.getSourceField().add(sourceField);
+        fm.getTargetField().add(targetField);
 
         mapping.getMappings().getMapping().add(fm);
 
@@ -326,18 +326,18 @@ public abstract class BaseMarshallerTest {
         assertNull(fm.getAlias());
 
         // assertTrue(m1.getFieldActions().getFieldAction().isEmpty());
-        assertNotNull(fm.getInputField());
-        Field f1 = fm.getInputField().get(0);
+        assertNotNull(fm.getSourceField());
+        Field f1 = fm.getSourceField().get(0);
         assertNull(f1.getActions());
 
         assertTrue(f1 instanceof MockField);
-        assertEquals(key + "-input", ((MockField) f1).getName());
-        assertEquals(key + "-input-value", f1.getValue());
+        assertEquals(key + "-source", ((MockField) f1).getName());
+        assertEquals(key + "-source-value", f1.getValue());
         assertNull(((MockField) f1).getFieldType());
 
         // assertTrue(m2.getFieldActions().getFieldAction().isEmpty());
-        assertNotNull(fm.getOutputField());
-        Field f2 = fm.getOutputField().get(0);
+        assertNotNull(fm.getTargetField());
+        Field f2 = fm.getTargetField().get(0);
         assertTrue(f2 instanceof PropertyField);
         assertEquals("p7", ((PropertyField) f2).getName());
         assertNull(f2.getValue());
@@ -349,17 +349,17 @@ public abstract class BaseMarshallerTest {
         Mapping fm = AtlasModelFactory.createMapping(MappingType.COMBINE);
 
         for (int i = 0; i < 3; i++) {
-            MockField inputMockField = new MockField();
-            inputMockField.setName(key + "-input-" + i);
-            inputMockField.setValue(key + "-input-" + i + "-value");
-            inputMockField.setIndex(i);
-            fm.getInputField().add(inputMockField);
+            MockField sourceMockField = new MockField();
+            sourceMockField.setName(key + "-source-" + i);
+            sourceMockField.setValue(key + "-source-" + i + "-value");
+            sourceMockField.setIndex(i);
+            fm.getSourceField().add(sourceMockField);
         }
 
-        MockField outputMockField = new MockField();
-        outputMockField.setName(key + "-output");
-        outputMockField.setValue(key + "-output-value");
-        fm.getOutputField().add(outputMockField);
+        MockField targetMockField = new MockField();
+        targetMockField.setName(key + "-target");
+        targetMockField.setValue(key + "-target-value");
+        fm.getTargetField().add(targetMockField);
 
         fm.setDelimiterString(",");
         mapping.getMappings().getMapping().add(fm);
@@ -371,43 +371,43 @@ public abstract class BaseMarshallerTest {
         assertEquals(MappingType.COMBINE, fm.getMappingType());
         assertEquals(",", fm.getDelimiterString());
 
-        assertEquals(new Integer(3), new Integer(fm.getInputField().size()));
-        assertNotNull(fm.getInputField());
+        assertEquals(new Integer(3), new Integer(fm.getSourceField().size()));
+        assertNotNull(fm.getSourceField());
 
         for (int i = 0; i < 3; i++) {
-            Field in = fm.getInputField().get(i);
-            assertNull(in.getActions());
-            assertTrue(in instanceof MockField);
-            assertEquals(key + "-input-" + i, ((MockField) in).getName());
-            assertEquals(key + "-input-" + i + "-value", in.getValue());
-            assertEquals(new Integer(i), new Integer(in.getIndex()));
-            assertNull(((MockField) in).getFieldType());
+            Field source = fm.getSourceField().get(i);
+            assertNull(source.getActions());
+            assertTrue(source instanceof MockField);
+            assertEquals(key + "-source-" + i, ((MockField) source).getName());
+            assertEquals(key + "-source-" + i + "-value", source.getValue());
+            assertEquals(new Integer(i), new Integer(source.getIndex()));
+            assertNull(((MockField) source).getFieldType());
         }
 
         // assertTrue(m2.getFieldActions().getFieldAction().isEmpty());
-        assertNotNull(fm.getOutputField());
-        Field o1 = fm.getOutputField().get(0);
+        assertNotNull(fm.getTargetField());
+        Field o1 = fm.getTargetField().get(0);
         assertNull(o1.getActions());
         assertTrue(o1 instanceof MockField);
-        assertEquals(key + "-output", ((MockField) o1).getName());
-        assertEquals(key + "-output-value", o1.getValue());
+        assertEquals(key + "-target", ((MockField) o1).getName());
+        assertEquals(key + "-target-value", o1.getValue());
         assertNull(((MockField) o1).getFieldType());
     }
 
     protected void addSeparateField(AtlasMapping mapping, String key) {
         Mapping fm = AtlasModelFactory.createMapping(MappingType.SEPARATE);
 
-        MockField inputField = new MockField();
-        inputField.setName(key + "-input");
-        inputField.setValue(key + "-input-value");
-        fm.getInputField().add(inputField);
+        MockField sourceField = new MockField();
+        sourceField.setName(key + "-source");
+        sourceField.setValue(key + "-source-value");
+        fm.getSourceField().add(sourceField);
 
         for (int i = 0; i < 3; i++) {
-            MockField outputField = new MockField();
-            outputField.setName(key + "-output-" + i);
-            outputField.setValue(key + "-output-" + i + "-value");
-            outputField.setIndex(i);
-            fm.getOutputField().add(outputField);
+            MockField targetField = new MockField();
+            targetField.setName(key + "-target-" + i);
+            targetField.setValue(key + "-target-" + i + "-value");
+            targetField.setIndex(i);
+            fm.getTargetField().add(targetField);
         }
 
         fm.setDelimiterString(",");
@@ -420,26 +420,26 @@ public abstract class BaseMarshallerTest {
         assertEquals(MappingType.SEPARATE, fm.getMappingType());
         assertEquals((","), fm.getDelimiterString());
 
-        assertNotNull(fm.getOutputField());
-        assertEquals(new Integer(3), new Integer(fm.getOutputField().size()));
+        assertNotNull(fm.getTargetField());
+        assertEquals(new Integer(3), new Integer(fm.getTargetField().size()));
 
         // assertTrue(m2.getFieldActions().getFieldAction().isEmpty());
-        assertNotNull(fm.getInputField());
-        Field o1 = fm.getInputField().get(0);
+        assertNotNull(fm.getSourceField());
+        Field o1 = fm.getSourceField().get(0);
         assertNull(o1.getActions());
         assertTrue(o1 instanceof MockField);
-        assertEquals(key + "-input", ((MockField) o1).getName());
-        assertEquals(key + "-input-value", o1.getValue());
+        assertEquals(key + "-source", ((MockField) o1).getName());
+        assertEquals(key + "-source-value", o1.getValue());
         assertNull(((MockField) o1).getFieldType());
 
         for (int i = 0; i < 3; i++) {
-            Field in = fm.getOutputField().get(i);
-            assertNull(in.getActions());
-            assertTrue(in instanceof MockField);
-            assertEquals(key + "-output-" + i, ((MockField) in).getName());
-            assertEquals(key + "-output-" + i + "-value", in.getValue());
-            assertEquals(new Integer(i), new Integer(in.getIndex()));
-            assertNull(((MockField) in).getFieldType());
+            Field target = fm.getTargetField().get(i);
+            assertNull(target.getActions());
+            assertTrue(target instanceof MockField);
+            assertEquals(key + "-target-" + i, ((MockField) target).getName());
+            assertEquals(key + "-target-" + i + "-value", target.getValue());
+            assertEquals(new Integer(i), new Integer(target.getIndex()));
+            assertNull(((MockField) target).getFieldType());
         }
     }
 

@@ -56,8 +56,8 @@ public class JavaJavaFlatMappingTest extends AtlasMappingBaseTest {
         // Add fieldMappings
         for (String fieldName : FLAT_FIELDS) {
             Mapping mfm = AtlasModelFactory.createMapping(MappingType.MAP);
-            mfm.getInputField().add(generateJavaField(fieldName));
-            mfm.getOutputField().add(generateJavaField(fieldName));
+            mfm.getSourceField().add(generateJavaField(fieldName));
+            mfm.getTargetField().add(generateJavaField(fieldName));
             mappings.add(mfm);
         }
 
@@ -203,10 +203,10 @@ public class JavaJavaFlatMappingTest extends AtlasMappingBaseTest {
                 .createContext(new File("src/test/resources/javaToJava/atlasmapping-flatprimitive.xml").toURI());
         AtlasSession session = context.createSession();
         BaseFlatPrimitiveClass sourceClass = generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class);
-        session.setInput(sourceClass);
+        session.setSource(sourceClass);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof TargetFlatPrimitiveClass);
         validateFlatPrimitiveClassPrimitiveFields((TargetFlatPrimitiveClass) object);
@@ -219,10 +219,10 @@ public class JavaJavaFlatMappingTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         BaseFlatPrimitiveClass sourceClass = generateFlatPrimitiveClassPrimitiveFieldsBoxedValues(
                 SourceFlatPrimitiveClass.class);
-        session.setInput(sourceClass);
+        session.setSource(sourceClass);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof TargetFlatPrimitiveClass);
         validateFlatPrimitiveClassPrimitiveFields((TargetFlatPrimitiveClass) object);
@@ -240,10 +240,10 @@ public class JavaJavaFlatMappingTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         BaseFlatPrimitiveClass sourceClass = generateFlatPrimitiveClassBoxedPrimitiveFieldsBoxedValues(
                 SourceFlatPrimitiveClass.class);
-        session.setInput(sourceClass);
+        session.setSource(sourceClass);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof TargetFlatPrimitiveClass);
         validateFlatPrimitiveClassBoxedPrimitiveFields((TargetFlatPrimitiveClass) object);

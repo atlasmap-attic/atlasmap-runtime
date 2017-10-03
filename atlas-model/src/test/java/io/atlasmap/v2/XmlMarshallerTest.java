@@ -126,8 +126,8 @@ public class XmlMarshallerTest extends BaseMarshallerTest {
     // public void testFieldActions() throws Exception {
     // AtlasMapping atlasMapping = generateAtlasMapping();
     // Mapping fm = atlasMapping.getMappings().getMapping().get(0);
-    // ((Map)fm).getOutputField().setActions(new Actions());
-    // ((Map)fm).getOutputField().getActions().setUppercase(new Uppercase());
+    // ((Map)fm).getTargetField().setActions(new Actions());
+    // ((Map)fm).getTargetField().getActions().setUppercase(new Uppercase());
     //
     // marshaller.marshal(atlasMapping, new File("target/junit/" +
     // testName.getMethodName() + "/" + "atlasmapping.xml"));
@@ -141,8 +141,8 @@ public class XmlMarshallerTest extends BaseMarshallerTest {
     // public void testMulitSourceMapping() throws Exception {
     // AtlasMapping atlasMapping = generateMultiSourceMapping();
     // Mapping fm = atlasMapping.getMappings().getMapping().get(0);
-    // ((Map)fm).getOutputField().setActions(new Actions());
-    // ((Map)fm).getOutputField().getActions().setUppercase(new Uppercase());
+    // ((Map)fm).getTargetField().setActions(new Actions());
+    // ((Map)fm).getTargetField().getActions().setUppercase(new Uppercase());
     //
     // marshaller.marshal(atlasMapping, new File("target/junit/" +
     // testName.getMethodName() + "/" + "atlasmapping.xml"));

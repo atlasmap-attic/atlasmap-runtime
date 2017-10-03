@@ -13,37 +13,37 @@
     </DataSource>
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@intField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@intField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:charField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@shortField" />
-            <OutputField xsi:type="ns3:XmlField" path="/xt1:XmlFPE/xt1:intField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@shortField" />
+            <TargetField xsi:type="ns3:XmlField" path="/xt1:XmlFPE/xt1:intField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@longField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@longField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:shortField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@doubleField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@doubleField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:longField" fieldType="Long" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@floatField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@floatField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:doubleField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@booleanField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@booleanField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:floatField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@charField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@charField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:booleanField" />
         </Mapping>
     </Mappings>

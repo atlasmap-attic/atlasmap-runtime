@@ -61,17 +61,17 @@ public class JavaValidationService extends BaseModuleValidationService<JavaField
     public void init() {
         NonNullValidator javaFilePathNonNullValidator = new NonNullValidator("JavaField.Path",
                 "Field path must not be null nor empty");
-        NonNullValidator inputFieldTypeNonNullValidator = new NonNullValidator("Input.Field.Type",
+        NonNullValidator sourceFieldTypeNonNullValidator = new NonNullValidator("Source.Field.Type",
                 "FieldType should not be null nor empty");
-        NonNullValidator outputFieldTypeNonNullValidator = new NonNullValidator("Output.Field.Type",
+        NonNullValidator targetFieldTypeNonNullValidator = new NonNullValidator("Target.Field.Type",
                 "FieldType should not be null nor empty");
         NonNullValidator fieldTypeNonNullValidator = new NonNullValidator("Field.Type",
                 "Filed type should not be null nor empty");
 
         validatorMap.put("java.field.type.not.null", fieldTypeNonNullValidator);
         validatorMap.put("java.field.path.not.null", javaFilePathNonNullValidator);
-        validatorMap.put("input.field.type.not.null", inputFieldTypeNonNullValidator);
-        validatorMap.put("output.field.type.not.null", outputFieldTypeNonNullValidator);
+        validatorMap.put("source.field.type.not.null", sourceFieldTypeNonNullValidator);
+        validatorMap.put("target.field.type.not.null", targetFieldTypeNonNullValidator);
 
         versionMap.put("1.9", 53);
         versionMap.put("1.8", 52);
@@ -117,38 +117,38 @@ public class JavaValidationService extends BaseModuleValidationService<JavaField
         return buf.toString();
     }
 
-    protected void validateSourceAndTargetTypes(Field inputField, Field outField, List<Validation> validations) {
-        if ((inputField instanceof JavaField && outField instanceof JavaField)
-                && ((inputField.getFieldType() == null || outField.getFieldType() == null)
-                    || (inputField.getFieldType().compareTo(FieldType.COMPLEX) == 0
-                    || outField.getFieldType().compareTo(FieldType.COMPLEX) == 0))) {
+    protected void validateSourceAndTargetTypes(Field sourceField, Field targetField, List<Validation> validations) {
+        if ((sourceField instanceof JavaField && targetField instanceof JavaField)
+                && ((sourceField.getFieldType() == null || targetField.getFieldType() == null)
+                    || (sourceField.getFieldType().compareTo(FieldType.COMPLEX) == 0
+                    || targetField.getFieldType().compareTo(FieldType.COMPLEX) == 0))) {
             // making an assumption that anything marked as COMPLEX would require the use of
             // the class name to find a validator.
-            validateClassConversion((JavaField)inputField, (JavaField)outField, validations);
+            validateClassConversion((JavaField)sourceField, (JavaField)targetField, validations);
             return;
         }
 
-        if (inputField.getFieldType() != outField.getFieldType()) {
+        if (sourceField.getFieldType() != targetField.getFieldType()) {
             // is this check superseded by the further checks using the AtlasConversionInfo
             // annotations?
 
-            // errors.getAllErrors().add(new AtlasMappingError("Field.Input/Output",
-            // inputField.getType().value() + " --> " + outField.getType().value(), "Output
-            // field type does not match input field type, may require a converter.",
+            // errors.getAllErrors().add(new AtlasMappingError("Field.Source/Target",
+            // sourceField.getType().value() + " --> " + targetField.getType().value(), "Target
+            // field type does not match source field type, may require a converter.",
             // AtlasMappingError.Level.WARN));
-            validateFieldTypeConversion(inputField, outField, validations);
+            validateFieldTypeConversion(sourceField, targetField, validations);
         }
     }
 
-    private void validateClassConversion(JavaField inputField, JavaField outField, List<Validation> validations) {
+    private void validateClassConversion(JavaField sourceField, JavaField targetField, List<Validation> validations) {
         Optional<AtlasConverter> atlasConverter = getConversionService().findMatchingConverter(
-                inputField.getClassName(), outField.getClassName());
-        String rejectedValue = getFieldName(inputField) + " --> " + getFieldName(outField);
+                sourceField.getClassName(), targetField.getClassName());
+        String rejectedValue = getFieldName(sourceField) + " --> " + getFieldName(targetField);
         if (!atlasConverter.isPresent()) {
             Validation validation = new Validation();
-            validation.setField("Field.Input/Output.conversion");
+            validation.setField("Field.Source/Target.conversion");
             validation.setMessage(
-                    "A conversion between the input and output fields is required but no converter is available");
+                    "A conversion between the source and target fields is required but no converter is available");
             validation.setStatus(ValidationStatus.WARN);
             validation.setValue(rejectedValue);
             validations.add(validation);
@@ -159,8 +159,8 @@ public class JavaValidationService extends BaseModuleValidationService<JavaField
             conversionInfo = Arrays.stream(methods).map(method -> method.getAnnotation(AtlasConversionInfo.class))
                     .filter(atlasConversionInfo -> atlasConversionInfo != null)
                     .filter(atlasConversionInfo -> atlasConversionInfo.sourceClassName()
-                            .equals(inputField.getClassName())
-                            && atlasConversionInfo.targetClassName().equals(outField.getClassName()))
+                            .equals(sourceField.getClassName())
+                            && atlasConversionInfo.targetClassName().equals(targetField.getClassName()))
                     .findFirst().orElse(null);
             if (conversionInfo != null){
                 populateConversionConcerns(conversionInfo.concerns(), rejectedValue, validations);
@@ -171,11 +171,11 @@ public class JavaValidationService extends BaseModuleValidationService<JavaField
     @Override
     protected void validateModuleField(JavaField field, FieldDirection direction, List<Validation> validations) {
         validatorMap.get("java.field.type.not.null").validate(field, validations, ValidationStatus.WARN);
-        if (direction == FieldDirection.INPUT) {
-            validatorMap.get("input.field.type.not.null").validate(field.getFieldType(), validations,
+        if (direction == FieldDirection.SOURCE) {
+            validatorMap.get("source.field.type.not.null").validate(field.getFieldType(), validations,
                     ValidationStatus.WARN);
         } else {
-            validatorMap.get("output.field.type.not.null").validate(field.getFieldType(), validations,
+            validatorMap.get("target.field.type.not.null").validate(field.getFieldType(), validations,
                     ValidationStatus.WARN);
         }
         if (field.getPath() == null) {

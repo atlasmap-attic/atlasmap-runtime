@@ -40,10 +40,10 @@ public class JavaJsonCombineTest extends AtlasMappingBaseTest {
                 .createContext(new File("src/test/resources/javaToJson/atlasmapping-combine-simple.xml").toURI());
         AtlasSession session = context.createSession();
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
-        session.setInput(sourceContact);
+        session.setSource(sourceContact);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper mapper = new AtlasJsonTestUnrootedMapper();
@@ -62,10 +62,10 @@ public class JavaJsonCombineTest extends AtlasMappingBaseTest {
                 .createContext(new File("src/test/resources/javaToJson/atlasmapping-combine-skip.xml").toURI());
         AtlasSession session = context.createSession();
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
-        session.setInput(sourceContact);
+        session.setSource(sourceContact);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper mapper = new AtlasJsonTestUnrootedMapper();
@@ -84,10 +84,10 @@ public class JavaJsonCombineTest extends AtlasMappingBaseTest {
                 .createContext(new File("src/test/resources/javaToJson/atlasmapping-combine-outoforder.xml").toURI());
         AtlasSession session = context.createSession();
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
-        session.setInput(sourceContact);
+        session.setSource(sourceContact);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper mapper = new AtlasJsonTestUnrootedMapper();
@@ -108,10 +108,10 @@ public class JavaJsonCombineTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
         sourceContact.setLastName(null);
-        session.setInput(sourceContact);
+        session.setSource(sourceContact);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper mapper = new AtlasJsonTestUnrootedMapper();

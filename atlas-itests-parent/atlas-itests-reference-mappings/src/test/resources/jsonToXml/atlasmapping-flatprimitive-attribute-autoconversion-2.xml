@@ -12,38 +12,38 @@
     </DataSource>
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JsonField" path="/intField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns2:JsonField" path="/intField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:booleanField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JsonField" path="/shortField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns2:JsonField" path="/shortField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:charField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JsonField" path="/longField" />
-            <OutputField xsi:type="ns3:XmlField" path="/xt1:XmlFPE/xt1:intField" />
+            <SourceField xsi:type="ns2:JsonField" path="/longField" />
+            <TargetField xsi:type="ns3:XmlField" path="/xt1:XmlFPE/xt1:intField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JsonField" path="/doubleField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns2:JsonField" path="/doubleField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:shortField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JsonField" path="/floatField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns2:JsonField" path="/floatField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:longField" fieldType="Long" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JsonField" path="/booleanField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns2:JsonField" path="/booleanField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:doubleField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JsonField" path="/charField"
+            <SourceField xsi:type="ns2:JsonField" path="/charField"
                 fieldType="Char" />
-            <OutputField xsi:type="ns3:XmlField"
+            <TargetField xsi:type="ns3:XmlField"
                 path="/xt1:XmlFPE/xt1:floatField" fieldType="Float" />
         </Mapping>
     </Mappings>

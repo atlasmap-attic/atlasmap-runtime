@@ -23,7 +23,7 @@ AtlasMap terminology
 |Used to process Arrays and Lists
 
 |Data Source
-|The definition of an input or output data format within an AtlasMapping file
+|The definition of an source or target data format within an AtlasMapping file
 |atlas:java, atlas:json, atlas:xml, etc
 
 |Field
@@ -31,7 +31,7 @@ AtlasMap terminology
 |JavaField, JsonField, XmlField, etc
 
 |Field Action
-|A function to perform on a given value of an input or output field
+|A function to perform on a given value of an source or target field
 |CurrentDate, Trim, SubString, etc
 
 |Field Type
@@ -39,11 +39,11 @@ AtlasMap terminology
 |String, Integer, Long, Number, Date Time, etc
 
 |Lookup Table
-|A cross reference table used at runtime to define a data conversion that varies based on the value of the input field
+|A cross reference table used at runtime to define a data conversion that varies based on the value of the source field
 |Used for mapping enumerations
 
 |Mapping
-|A grouping of input Field(s), output Field(s) and optionally Field Action(s) that defines the conversion to be performed at runtime within an AtlasMapping file
+|A grouping of source Field(s), target Field(s) and optionally Field Action(s) that defines the conversion to be performed at runtime within an AtlasMapping file
 |JavaField -> JsonField, XmlField -> JsonField + Uppercase, etc
 
 |Mapping Type
@@ -51,7 +51,7 @@ AtlasMap terminology
 |Map, Combine, Separate, Collection or Lookup
 
 |Validation
-|A Validation is a syntax check of a provide mapping file to ensure execution may proceeed
+|A Validation is a syntax check of a provide mapping file to ensure execution may proceed
 |Useful during testing cycles, and at runtime to avoid complicated and misleading exception stack traces
 
 |===

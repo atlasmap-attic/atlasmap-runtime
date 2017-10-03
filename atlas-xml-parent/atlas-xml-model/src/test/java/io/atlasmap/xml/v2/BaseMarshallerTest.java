@@ -78,16 +78,16 @@ public abstract class BaseMarshallerTest {
         atlasMapping.setName("junit");
 
         Mapping mapping = AtlasModelFactory.createMapping(MappingType.MAP);
-        XmlField inputField = new XmlField();
-        inputField.setName("foo");
-        inputField.setValue("bar");
-        mapping.getInputField().add(inputField);
+        XmlField sourceField = new XmlField();
+        sourceField.setName("foo");
+        sourceField.setValue("bar");
+        mapping.getSourceField().add(sourceField);
 
-        XmlField outputField = new XmlField();
-        outputField.setName("woot");
-        outputField.setValue("blerg");
-        outputField.setUserCreated(true);
-        mapping.getOutputField().add(outputField);
+        XmlField targetField = new XmlField();
+        targetField.setName("woot");
+        targetField.setValue("blerg");
+        targetField.setUserCreated(true);
+        mapping.getTargetField().add(targetField);
 
         atlasMapping.getMappings().getMapping().add(mapping);
         return atlasMapping;
@@ -110,22 +110,22 @@ public abstract class BaseMarshallerTest {
 
     protected AtlasMapping generateCombineMapping() {
 
-        XmlField inputFieldA = new XmlField();
-        inputFieldA.setName("foo");
-        inputFieldA.setValue("bar");
+        XmlField sourceFieldA = new XmlField();
+        sourceFieldA.setName("foo");
+        sourceFieldA.setValue("bar");
 
-        XmlField inputFieldB = new XmlField();
-        inputFieldB.setName("foo3");
-        inputFieldB.setValue("bar3");
+        XmlField sourceFieldB = new XmlField();
+        sourceFieldB.setName("foo3");
+        sourceFieldB.setValue("bar3");
 
-        XmlField outputFieldA = new XmlField();
-        outputFieldA.setName("woot");
-        outputFieldA.setValue("blerg");
+        XmlField targetFieldA = new XmlField();
+        targetFieldA.setName("woot");
+        targetFieldA.setValue("blerg");
 
         Mapping fm = AtlasModelFactory.createMapping(MappingType.COMBINE);
-        fm.getInputField().add(inputFieldA);
-        fm.getInputField().add(inputFieldB);
-        fm.getOutputField().add(outputFieldA);
+        fm.getSourceField().add(sourceFieldA);
+        fm.getSourceField().add(sourceFieldB);
+        fm.getTargetField().add(targetFieldA);
 
         AtlasMapping mapping = generateAtlasMapping();
         mapping.getMappings().getMapping().clear();
@@ -136,11 +136,11 @@ public abstract class BaseMarshallerTest {
     protected AtlasMapping generatePropertyReferenceMapping() {
         AtlasMapping mapping = generateAtlasMapping();
 
-        PropertyField inputField = new PropertyField();
-        inputField.setName("foo");
+        PropertyField sourceField = new PropertyField();
+        sourceField.setName("foo");
 
         Mapping fm = (Mapping) mapping.getMappings().getMapping().get(0);
-        fm.getInputField().add(inputField);
+        fm.getSourceField().add(sourceField);
 
         Property p = new Property();
         p.setName("foo");
@@ -153,11 +153,11 @@ public abstract class BaseMarshallerTest {
     protected AtlasMapping generateConstantMapping() {
         AtlasMapping mapping = generateAtlasMapping();
 
-        ConstantField inputField = new ConstantField();
-        inputField.setValue("foo");
+        ConstantField sourceField = new ConstantField();
+        sourceField.setValue("foo");
 
         Mapping fm = (Mapping) mapping.getMappings().getMapping().get(0);
-        fm.getInputField().add(inputField);
+        fm.getSourceField().add(sourceField);
 
         return mapping;
     }
@@ -185,9 +185,9 @@ public abstract class BaseMarshallerTest {
         mapping.getDataSource().add(target);
 
         Mapping fm = (Mapping) mapping.getMappings().getMapping().get(0);
-        fm.getInputField().get(0).setDocId("xml1");
-        fm.getOutputField().get(0).setDocId("target1");
-        fm.getOutputField().get(1).setDocId("target1");
+        fm.getSourceField().get(0).setDocId("xml1");
+        fm.getTargetField().get(0).setDocId("target1");
+        fm.getTargetField().get(1).setDocId("target1");
 
         return mapping;
     }
@@ -204,16 +204,16 @@ public abstract class BaseMarshallerTest {
         assertNotNull(fm);
         assertNull(fm.getAlias());
 
-        assertTrue(fm.getInputField().get(0) instanceof XmlField);
-        XmlField m1 = (XmlField) fm.getInputField().get(0);
+        assertTrue(fm.getSourceField().get(0) instanceof XmlField);
+        XmlField m1 = (XmlField) fm.getSourceField().get(0);
         assertNotNull(m1);
         assertNull(m1.getActions());
         assertEquals("foo", ((XmlField) m1).getName());
         assertEquals("bar", m1.getValue());
         assertNull(((XmlField) m1).getFieldType());
 
-        assertTrue(fm.getOutputField().get(0) instanceof XmlField);
-        XmlField m2 = (XmlField) fm.getOutputField().get(0);
+        assertTrue(fm.getTargetField().get(0) instanceof XmlField);
+        XmlField m2 = (XmlField) fm.getTargetField().get(0);
         assertNotNull(m2);
         assertNull(m2.getActions());
         assertEquals("woot", ((XmlField) m2).getName());
@@ -229,23 +229,23 @@ public abstract class BaseMarshallerTest {
 
         Mapping mapping = AtlasModelFactory.createMapping(MappingType.SEPARATE);
 
-        XmlField inputField = new XmlField();
-        inputField.setName("foo");
-        inputField.setValue("bar");
+        XmlField sourceField = new XmlField();
+        sourceField.setName("foo");
+        sourceField.setValue("bar");
 
-        XmlField outputFieldA = new XmlField();
-        outputFieldA.setName("woot");
-        outputFieldA.setValue("blerg");
-        outputFieldA.setIndex(1);
+        XmlField targetFieldA = new XmlField();
+        targetFieldA.setName("woot");
+        targetFieldA.setValue("blerg");
+        targetFieldA.setIndex(1);
 
-        XmlField outputFieldB = new XmlField();
-        outputFieldB.setName("meow");
-        outputFieldB.setValue("ruff");
-        outputFieldB.setIndex(2);
+        XmlField targetFieldB = new XmlField();
+        targetFieldB.setName("meow");
+        targetFieldB.setValue("ruff");
+        targetFieldB.setIndex(2);
 
-        mapping.getInputField().add(inputField);
-        mapping.getOutputField().add(outputFieldA);
-        mapping.getOutputField().add(outputFieldB);
+        mapping.getSourceField().add(sourceField);
+        mapping.getTargetField().add(targetFieldA);
+        mapping.getTargetField().add(targetFieldB);
 
         atlasMapping.getMappings().getMapping().add(mapping);
         return atlasMapping;
@@ -264,14 +264,14 @@ public abstract class BaseMarshallerTest {
         assertEquals(MappingType.SEPARATE, fm.getMappingType());
         assertNull(fm.getAlias());
 
-        XmlField m1 = (XmlField) fm.getInputField().get(0);
+        XmlField m1 = (XmlField) fm.getSourceField().get(0);
         assertNotNull(m1);
         assertNull(m1.getActions());
         assertEquals("foo", ((XmlField) m1).getName());
         assertEquals("bar", m1.getValue());
         assertNull(((XmlField) m1).getFieldType());
 
-        XmlField m2 = (XmlField) fm.getOutputField().get(0);
+        XmlField m2 = (XmlField) fm.getTargetField().get(0);
         assertNotNull(m2);
         assertNull(m2.getActions());
         assertEquals("woot", ((XmlField) m2).getName());
@@ -279,7 +279,7 @@ public abstract class BaseMarshallerTest {
         assertNull(((XmlField) m2).getFieldType());
         assertEquals(new Integer(1), m2.getIndex());
 
-        XmlField m3 = (XmlField) fm.getOutputField().get(0);
+        XmlField m3 = (XmlField) fm.getTargetField().get(0);
         assertNotNull(m3);
         assertNull(m3.getActions());
         assertEquals("meow", ((XmlField) m3).getName());

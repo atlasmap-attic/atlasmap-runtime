@@ -11,14 +11,14 @@
         uri="atlas:java?className=io.atlasmap.java.test.TargetContact" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/firstName"
+            <SourceField xsi:type="ns2:JavaField" path="/firstName"
                 docId="con" />
-            <OutputField xsi:type="ns2:JavaField" path="/firstName" />
+            <TargetField xsi:type="ns2:JavaField" path="/firstName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/zipCode"
+            <SourceField xsi:type="ns2:JavaField" path="/zipCode"
                 docId="addr" />
-            <OutputField xsi:type="ns2:JavaField" path="/zipCode" />
+            <TargetField xsi:type="ns2:JavaField" path="/zipCode" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

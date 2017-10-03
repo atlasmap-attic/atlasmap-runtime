@@ -39,10 +39,10 @@ public class JavaJavaSeparateTest extends AtlasMappingBaseTest {
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
         sourceContact.setFirstName("Ozzie Smith");
         sourceContact.setLastName(null);
-        session.setInput(sourceContact);
+        session.setSource(sourceContact);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertEquals(TargetContact.class.getName(), object.getClass().getName());
         TargetContact targetContact = (TargetContact) object;
@@ -58,10 +58,10 @@ public class JavaJavaSeparateTest extends AtlasMappingBaseTest {
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
         sourceContact.setFirstName("Dr. Mr. Ozzie L. Smith Jr.");
         sourceContact.setLastName(null);
-        session.setInput(sourceContact);
+        session.setSource(sourceContact);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertEquals(TargetContact.class.getName(), object.getClass().getName());
         TargetContact targetContact = (TargetContact) object;
@@ -77,10 +77,10 @@ public class JavaJavaSeparateTest extends AtlasMappingBaseTest {
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
         sourceContact.setFirstName("Dr. Mr. Ozzie L. Smith Jr.");
         sourceContact.setLastName(null);
-        session.setInput(sourceContact);
+        session.setSource(sourceContact);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertEquals(TargetContact.class.getName(), object.getClass().getName());
         TargetContact targetContact = (TargetContact) object;
@@ -96,10 +96,10 @@ public class JavaJavaSeparateTest extends AtlasMappingBaseTest {
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
         sourceContact.setFirstName("Dr. Mr. Ozzie");
         sourceContact.setLastName(null);
-        session.setInput(sourceContact);
+        session.setSource(sourceContact);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertEquals(TargetContact.class.getName(), object.getClass().getName());
         TargetContact targetContact = (TargetContact) object;
@@ -107,7 +107,7 @@ public class JavaJavaSeparateTest extends AtlasMappingBaseTest {
         assertEquals("Ozzie", targetContact.getFirstName());
         assertEquals(null, targetContact.getLastName());
         assertTrue(session.hasErrors());
-        assertEquals("Separate returned fewer segements count=3 when outputField.path=/lastName requested index=4",
+        assertEquals("Separate returned fewer segements count=3 when targetField.path=/lastName requested index=4",
                 session.getAudits().getAudit().get(0).getMessage());
     }
 
@@ -119,10 +119,10 @@ public class JavaJavaSeparateTest extends AtlasMappingBaseTest {
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
         sourceContact.setFirstName(null);
         sourceContact.setLastName(null);
-        session.setInput(sourceContact);
+        session.setSource(sourceContact);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertEquals(TargetContact.class.getName(), object.getClass().getName());
         TargetContact targetContact = (TargetContact) object;

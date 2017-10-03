@@ -36,17 +36,17 @@ public class JsonValidationService extends BaseModuleValidationService<JsonField
     public void init() {
         NonNullValidator javaFilePathNonNullValidator = new NonNullValidator("JsonField.Path",
                 "The path element must not be null nor empty");
-        NonNullValidator inputFieldTypeNonNullValidator = new NonNullValidator("Input.Field.Type",
+        NonNullValidator sourceFieldTypeNonNullValidator = new NonNullValidator("Source.Field.Type",
                 "Field type should not be null nor empty");
-        NonNullValidator outputFieldTypeNonNullValidator = new NonNullValidator("Output.Field.Type",
+        NonNullValidator targetFieldTypeNonNullValidator = new NonNullValidator("Target.Field.Type",
                 "Field type should not be null nor empty");
         NonNullValidator fieldTypeNonNullValidator = new NonNullValidator("Field.Type",
                 "Filed type should not be null nor empty");
 
         validatorMap.put("json.field.type.not.null", fieldTypeNonNullValidator);
         validatorMap.put("json.field.path.not.null", javaFilePathNonNullValidator);
-        validatorMap.put("input.field.type.not.null", inputFieldTypeNonNullValidator);
-        validatorMap.put("output.field.type.not.null", outputFieldTypeNonNullValidator);
+        validatorMap.put("source.field.type.not.null", sourceFieldTypeNonNullValidator);
+        validatorMap.put("target.field.type.not.null", targetFieldTypeNonNullValidator);
     }
 
     public void destroy() {

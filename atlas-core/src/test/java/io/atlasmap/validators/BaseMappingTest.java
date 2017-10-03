@@ -50,32 +50,19 @@ public abstract class BaseMappingTest {
 
         Mapping mapFieldMapping = AtlasModelFactory.createMapping(MappingType.MAP);
 
-        MockField inputField = AtlasModelFactory.createMockField();
-        inputField.setFieldType(FieldType.STRING);
-        inputField.setCustom("java.lang.String");
-        inputField.setName("inputName");
-        mapFieldMapping.getInputField().add(inputField);
+        Field sourceField = createJavaField("sourceName");
+        mapFieldMapping.getSourceField().add(sourceField);
 
-        MockField outputField = AtlasModelFactory.createMockField();
-        outputField.setFieldType(FieldType.STRING);
-        outputField.setCustom("java.lang.String");
-        outputField.setName("outputName");
-        mapFieldMapping.getOutputField().add(outputField);
+        Field targetField = createJavaField("targetName");
+        mapFieldMapping.getTargetField().add(targetField);
 
         Mapping separateMapping = AtlasModelFactory.createMapping(MappingType.SEPARATE);
 
-        MockField sIJavaField = AtlasModelFactory.createMockField();
-        sIJavaField.setFieldType(FieldType.STRING);
-        sIJavaField.setCustom("java.lang.String");
-        sIJavaField.setName("inputName");
-        separateMapping.getInputField().add(sIJavaField);
+        Field sIJavaField = createJavaField("sourceName");
+        separateMapping.getSourceField().add(sIJavaField);
 
-        MockField sOJavaField = AtlasModelFactory.createMockField();
-        sOJavaField.setFieldType(FieldType.STRING);
-        sOJavaField.setCustom("java.lang.String");
-        sOJavaField.setName("outputName");
-        sOJavaField.setIndex(0);
-        separateMapping.getOutputField().add(sOJavaField);
+        Field sOJavaField = createJavaField("targetName");
+        separateMapping.getTargetField().add(sOJavaField);
 
         mapping.getMappings().getMapping().add(mapFieldMapping);
         mapping.getMappings().getMapping().add(separateMapping);
@@ -84,13 +71,13 @@ public abstract class BaseMappingTest {
 
     protected void createMockMappedFields(AtlasMapping mapping, Mapping mapFieldMapping) {
         // Mock MappedField
-        MockField inputField = new MockField();
-        inputField.setName("input.name");
-        MockField outputField = new MockField();
-        outputField.setName("out.name");
+        MockField sourceField = new MockField();
+        sourceField.setName("source.name");
+        MockField targetField = new MockField();
+        targetField.setName("target.name");
 
-        mapFieldMapping.getInputField().add(inputField);
-        mapFieldMapping.getOutputField().add(outputField);
+        mapFieldMapping.getSourceField().add(sourceField);
+        mapFieldMapping.getTargetField().add(targetField);
 
         mapping.getMappings().getMapping().add(mapFieldMapping);
     }
@@ -109,23 +96,23 @@ public abstract class BaseMappingTest {
             lookupFieldMapping.setDescription("field_desc_".concat(name));
             lookupFieldMapping.setLookupTableName(name);
 
-            Field inputField = createInputJavaField("inputName");
-            Field outputField = createInputJavaField("outputName");
+            Field sourceField = createJavaField("sourceName");
+            Field targetField = createJavaField("targetName");
 
-            lookupFieldMapping.getInputField().add(inputField);
-            lookupFieldMapping.getOutputField().add(outputField);
+            lookupFieldMapping.getSourceField().add(sourceField);
+            lookupFieldMapping.getTargetField().add(targetField);
             mapping.getMappings().getMapping().add(lookupFieldMapping);
         }
 
         return mapping;
     }
 
-    protected Field createInputJavaField(String inputName) {
-        MockField inputJavaField = AtlasModelFactory.createMockField();
-        inputJavaField.setFieldType(FieldType.STRING);
-        inputJavaField.setCustom("java.lang.String");
-        inputJavaField.setName(inputName);
-        return inputJavaField;
+    protected Field createJavaField(String name) {
+        MockField javaField = AtlasModelFactory.createMockField();
+        javaField.setFieldType(FieldType.STRING);
+        javaField.setCustom("java.lang.String");
+        javaField.setName(name);
+        return javaField;
     }
 
     protected void debugErrors(Validations validations) {

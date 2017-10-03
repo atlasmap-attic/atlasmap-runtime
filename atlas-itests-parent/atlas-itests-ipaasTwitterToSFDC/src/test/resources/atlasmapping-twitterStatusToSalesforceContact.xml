@@ -23,12 +23,12 @@
     <FieldMappings>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="SeparateFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field xsi:type="ns2:JavaField" name="Name" path="/User/name"
                     type="String" getMethod="getName" />
                 <FieldActions />
-            </InputField>
-            <OutputFields>
+            </SourceField>
+            <TargetFields>
                 <MappedField>
                     <Field xsi:type="ns2:JavaField" name="FirstName"
                         path="/FirstName" type="String" setMethod="setFirstName" />
@@ -45,33 +45,33 @@
                             index="1" />
                     </FieldActions>
                 </MappedField>
-            </OutputFields>
+            </TargetFields>
         </FieldMapping>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field xsi:type="ns2:JavaField" name="Text" path="/Text"
                     type="String" getMethod="getText" />
                 <FieldActions />
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field xsi:type="ns2:JavaField" name="Description"
                     path="/description" type="String" setMethod="setDescription" />
                 <FieldActions />
-            </OutputField>
+            </TargetField>
         </FieldMapping>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field xsi:type="ns2:JavaField" name="ScreenName"
                     path="/User/screenName" type="String" getMethod="getScreenName" />
                 <FieldActions />
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field xsi:type="ns2:JavaField" name="Title" path="/Title"
                     type="String" setMethod="setTitle" />
                 <FieldActions />
-            </OutputField>
+            </TargetField>
         </FieldMapping>
     </FieldMappings>
 </AtlasMapping>

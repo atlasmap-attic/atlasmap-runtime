@@ -26,10 +26,10 @@ public class JsonJsonCollectionConversionTest extends AtlasMappingBaseTest {
         input += "] }";
 
         AtlasSession session = context.createSession();
-        session.setInput(input);
+        session.setSource(input);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
 
@@ -57,10 +57,10 @@ public class JsonJsonCollectionConversionTest extends AtlasMappingBaseTest {
         input += "] }";
 
         AtlasSession session = context.createSession();
-        session.setInput(input);
+        session.setSource(input);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
 
@@ -88,10 +88,10 @@ public class JsonJsonCollectionConversionTest extends AtlasMappingBaseTest {
         input += "] }";
 
         AtlasSession session = context.createSession();
-        session.setInput(input);
+        session.setSource(input);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
 
@@ -108,10 +108,10 @@ public class JsonJsonCollectionConversionTest extends AtlasMappingBaseTest {
 
         String input = "{ \"contact\": [ { \"firstName\": \"name9\" } ] }";
         AtlasSession session = context.createSession();
-        session.setInput(input);
+        session.setSource(input);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
 

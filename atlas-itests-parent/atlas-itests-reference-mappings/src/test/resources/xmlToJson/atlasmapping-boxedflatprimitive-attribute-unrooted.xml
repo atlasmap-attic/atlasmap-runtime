@@ -7,41 +7,41 @@
     <DataSource dataSourceType="Target" uri="atlas:json" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedIntField" />
-            <OutputField xsi:type="ns2:JsonField" path="/boxedIntField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedIntField" />
+            <TargetField xsi:type="ns2:JsonField" path="/boxedIntField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedShortField" />
-            <OutputField xsi:type="ns2:JsonField" path="/boxedShortField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedShortField" />
+            <TargetField xsi:type="ns2:JsonField" path="/boxedShortField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedLongField" />
-            <OutputField xsi:type="ns2:JsonField" path="/boxedLongField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedLongField" />
+            <TargetField xsi:type="ns2:JsonField" path="/boxedLongField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedDoubleField" />
-            <OutputField xsi:type="ns2:JsonField" path="/boxedDoubleField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedDoubleField" />
+            <TargetField xsi:type="ns2:JsonField" path="/boxedDoubleField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedFloatField" />
-            <OutputField xsi:type="ns2:JsonField" path="/boxedFloatField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedFloatField" />
+            <TargetField xsi:type="ns2:JsonField" path="/boxedFloatField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/XmlFBPA/@boxedBooleanField" />
-            <OutputField xsi:type="ns2:JsonField" path="/boxedBooleanField" />
+            <TargetField xsi:type="ns2:JsonField" path="/boxedBooleanField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedCharField" />
-            <OutputField xsi:type="ns2:JsonField" path="/boxedCharField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedCharField" />
+            <TargetField xsi:type="ns2:JsonField" path="/boxedCharField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedByteField" />
-            <OutputField xsi:type="ns2:JsonField" path="/boxedByteField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedByteField" />
+            <TargetField xsi:type="ns2:JsonField" path="/boxedByteField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedStringField" />
-            <OutputField xsi:type="ns2:JsonField" path="/boxedStringField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedStringField" />
+            <TargetField xsi:type="ns2:JsonField" path="/boxedStringField" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

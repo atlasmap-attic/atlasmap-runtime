@@ -60,10 +60,10 @@ public class AtlasModelFactoryTest {
         assertEquals(type, fm.getMappingType());
         assertNull(fm.getAlias());
         assertNull(fm.getDescription());
-        assertNotNull(fm.getOutputField());
-        assertNotNull(fm.getInputField());
-        assertEquals(new Integer(0), new Integer(fm.getOutputField().size()));
-        assertEquals(new Integer(0), new Integer(fm.getOutputField().size()));
+        assertNotNull(fm.getTargetField());
+        assertNotNull(fm.getSourceField());
+        assertEquals(new Integer(0), new Integer(fm.getTargetField().size()));
+        assertEquals(new Integer(0), new Integer(fm.getSourceField().size()));
     }
 
     @Test

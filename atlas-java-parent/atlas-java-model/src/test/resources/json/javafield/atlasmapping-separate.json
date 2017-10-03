@@ -5,7 +5,7 @@
             "fieldMapping": [
                 {
                     "jsonType": "io.atlasmap.v2.SeparateFieldMapping",
-                    "inputField": {
+                    "sourceField": {
                         "jsonType": "io.atlasmap.v2.MappedField",
                         "field": {
                             "jsonType": "io.atlasmap.java.v2.JavaField",
@@ -14,7 +14,7 @@
                         },
                         "fieldActions": []
                     },
-                    "outputFields": {
+                    "targetFields": {
                         "mappedField": [
                             {
                                 "jsonType": "io.atlasmap.v2.MappedField",

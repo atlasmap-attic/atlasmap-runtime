@@ -8,32 +8,32 @@
         uri="atlas:java?className=io.atlasmap.java.test.TargetFlatPrimitiveClass" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/intField" />
-            <OutputField xsi:type="ns2:JavaField" path="/longField" />
+            <SourceField xsi:type="ns2:JavaField" path="/intField" />
+            <TargetField xsi:type="ns2:JavaField" path="/longField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/shortField" />
-            <OutputField xsi:type="ns2:JavaField" path="/doubleField" />
+            <SourceField xsi:type="ns2:JavaField" path="/shortField" />
+            <TargetField xsi:type="ns2:JavaField" path="/doubleField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/longField" />
-            <OutputField xsi:type="ns2:JavaField" path="/floatField" />
+            <SourceField xsi:type="ns2:JavaField" path="/longField" />
+            <TargetField xsi:type="ns2:JavaField" path="/floatField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/doubleField" />
-            <OutputField xsi:type="ns2:JavaField" path="/booleanField" />
+            <SourceField xsi:type="ns2:JavaField" path="/doubleField" />
+            <TargetField xsi:type="ns2:JavaField" path="/booleanField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/floatField" />
-            <OutputField xsi:type="ns2:JavaField" path="/charField" />
+            <SourceField xsi:type="ns2:JavaField" path="/floatField" />
+            <TargetField xsi:type="ns2:JavaField" path="/charField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/booleanField" />
-            <OutputField xsi:type="ns2:JavaField" path="/intField" />
+            <SourceField xsi:type="ns2:JavaField" path="/booleanField" />
+            <TargetField xsi:type="ns2:JavaField" path="/intField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/charField" />
-            <OutputField xsi:type="ns2:JavaField" path="/shortField" />
+            <SourceField xsi:type="ns2:JavaField" path="/charField" />
+            <TargetField xsi:type="ns2:JavaField" path="/shortField" />
         </Mapping>
     </Mappings>
     <LookupTables />

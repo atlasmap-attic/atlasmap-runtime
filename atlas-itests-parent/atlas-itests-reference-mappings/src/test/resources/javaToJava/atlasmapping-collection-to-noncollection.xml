@@ -13,18 +13,18 @@
             xsi:type="Collection" mappingType="Collection">
             <Mappings>
                 <Mapping xsi:type="Mapping" mappingType="Map">
-                    <InputField xsi:type="ns2:JavaField"
+                    <SourceField xsi:type="ns2:JavaField"
                         name="firstName" docId="io.atlasmap.java.test.TargetTestClass"
                         path="/contactList&lt;&gt;/firstName" fieldType="String" />
-                    <OutputField xsi:type="ns2:JavaField"
+                    <TargetField xsi:type="ns2:JavaField"
                         name="firstName" docId="io.atlasmap.java.test.TargetTestClass"
                         path="/contact/firstName" fieldType="String" />
                 </Mapping>
                 <Mapping xsi:type="Mapping" mappingType="Map">
-                    <InputField xsi:type="ns2:JavaField"
+                    <SourceField xsi:type="ns2:JavaField"
                         name="lastName" docId="io.atlasmap.java.test.TargetTestClass"
                         path="/contactList&lt;&gt;/lastName" fieldType="String" />
-                    <OutputField xsi:type="ns2:JavaField"
+                    <TargetField xsi:type="ns2:JavaField"
                         name="lastName" docId="io.atlasmap.java.test.TargetTestClass"
                         path="/contact/lastName" fieldType="String" />
                 </Mapping>

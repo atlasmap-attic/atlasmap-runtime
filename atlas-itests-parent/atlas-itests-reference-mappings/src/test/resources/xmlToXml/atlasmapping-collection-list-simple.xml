@@ -10,10 +10,10 @@
             xsi:type="Collection" mappingType="Collection">
             <Mappings>
                 <Mapping xsi:type="Mapping" mappingType="Map">
-                    <InputField xsi:type="ns3:XmlField" name="firstName"
+                    <SourceField xsi:type="ns3:XmlField" name="firstName"
                         path="/XmlOA/contact&lt;&gt;/firstName"
                         fieldType="String" />
-                    <OutputField xsi:type="ns3:XmlField"
+                    <TargetField xsi:type="ns3:XmlField"
                         name="firstName" path="/XmlOA/contact&lt;&gt;/name"
                         fieldType="String" />
                 </Mapping>

@@ -37,10 +37,10 @@ public class JavaJsonAutoConversionTest extends AtlasMappingBaseTest {
                         .toURI());
         AtlasSession session = context.createSession();
         BaseFlatPrimitiveClass source = AtlasTestUtil.generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class);
-        session.setInput(source);
+        session.setSource(source);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();
@@ -55,10 +55,10 @@ public class JavaJsonAutoConversionTest extends AtlasMappingBaseTest {
                         .toURI());
         AtlasSession session = context.createSession();
         BaseFlatPrimitiveClass source = AtlasTestUtil.generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class);
-        session.setInput(source);
+        session.setSource(source);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();
@@ -73,10 +73,10 @@ public class JavaJsonAutoConversionTest extends AtlasMappingBaseTest {
                         .toURI());
         AtlasSession session = context.createSession();
         BaseFlatPrimitiveClass source = AtlasTestUtil.generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class);
-        session.setInput(source);
+        session.setSource(source);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();
@@ -91,10 +91,10 @@ public class JavaJsonAutoConversionTest extends AtlasMappingBaseTest {
                         .toURI());
         AtlasSession session = context.createSession();
         BaseFlatPrimitiveClass source = AtlasTestUtil.generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class);
-        session.setInput(source);
+        session.setSource(source);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();
@@ -109,10 +109,10 @@ public class JavaJsonAutoConversionTest extends AtlasMappingBaseTest {
                         .toURI());
         AtlasSession session = context.createSession();
         BaseFlatPrimitiveClass source = AtlasTestUtil.generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class);
-        session.setInput(source);
+        session.setSource(source);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();
@@ -127,10 +127,10 @@ public class JavaJsonAutoConversionTest extends AtlasMappingBaseTest {
                         .toURI());
         AtlasSession session = context.createSession();
         BaseFlatPrimitiveClass source = AtlasTestUtil.generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class);
-        session.setInput(source);
+        session.setSource(source);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();

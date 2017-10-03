@@ -40,11 +40,11 @@ public class JavaJavaMultiSourceTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
         BaseAddress sourceAddress = AtlasTestUtil.generateAddress(SourceAddress.class);
-        session.setInput(sourceContact, "con");
-        session.setInput(sourceAddress, "addr");
+        session.setSource(sourceContact, "con");
+        session.setSource(sourceAddress, "addr");
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertEquals(TargetContact.class.getName(), object.getClass().getName());
         TargetContact targetContact = (TargetContact) object;
@@ -61,11 +61,11 @@ public class JavaJavaMultiSourceTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         BaseContact sourceContact = AtlasTestUtil.generateContact(SourceContact.class);
         BaseAddress sourceAddress = AtlasTestUtil.generateAddress(SourceAddress.class);
-        session.setInput(sourceContact, "con");
-        session.setInput(sourceAddress, "addr");
+        session.setSource(sourceContact, "con");
+        session.setSource(sourceAddress, "addr");
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertEquals(TargetOrder.class.getName(), object.getClass().getName());
         TargetOrder targetOrder = (TargetOrder) object;

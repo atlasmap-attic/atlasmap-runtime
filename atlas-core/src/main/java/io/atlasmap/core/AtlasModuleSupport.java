@@ -29,7 +29,7 @@ public class AtlasModuleSupport {
 
         for (BaseMapping fm : mappings) {
             if (fm instanceof Mapping) {
-                for (Field f : ((Mapping) fm).getOutputField()) {
+                for (Field f : ((Mapping) fm).getTargetField()) {
                     targetPaths.add(f.getPath());
                 }
             } else if (fm instanceof Collection) {

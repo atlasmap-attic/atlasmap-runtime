@@ -7,50 +7,50 @@
         dataSourceType="Target" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlOA/@orderId" />
-            <OutputField xsi:type="ns3:XmlField" path="/XmlOE/orderId" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlOA/@orderId" />
+            <TargetField xsi:type="ns3:XmlField" path="/XmlOE/orderId" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlOA/Contact/@firstName" />
-            <OutputField xsi:type="ns3:XmlField" path="/XmlOE/Contact/firstName" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlOA/Contact/@firstName" />
+            <TargetField xsi:type="ns3:XmlField" path="/XmlOE/Contact/firstName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlOA/Contact/@lastName" />
-            <OutputField xsi:type="ns3:XmlField" path="/XmlOE/Contact/lastName" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlOA/Contact/@lastName" />
+            <TargetField xsi:type="ns3:XmlField" path="/XmlOE/Contact/lastName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/XmlOA/Contact/@phoneNumber" />
-            <OutputField xsi:type="ns3:XmlField"
+            <TargetField xsi:type="ns3:XmlField"
                 path="/XmlOE/Contact/phoneNumber" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlOA/Contact/@zipCode" />
-            <OutputField xsi:type="ns3:XmlField" path="/XmlOE/Contact/zipCode" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlOA/Contact/@zipCode" />
+            <TargetField xsi:type="ns3:XmlField" path="/XmlOE/Contact/zipCode" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/XmlOA/Address/@addressLine1" />
-            <OutputField xsi:type="ns3:XmlField"
+            <TargetField xsi:type="ns3:XmlField"
                 path="/XmlOE/Address/addressLine1" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/XmlOA/Address/@addressLine2" />
-            <OutputField xsi:type="ns3:XmlField"
+            <TargetField xsi:type="ns3:XmlField"
                 path="/XmlOE/Address/addressLine2" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlOA/Address/@city" />
-            <OutputField xsi:type="ns3:XmlField" path="/XmlOE/Address/city" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlOA/Address/@city" />
+            <TargetField xsi:type="ns3:XmlField" path="/XmlOE/Address/city" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlOA/Address/@state" />
-            <OutputField xsi:type="ns3:XmlField" path="/XmlOE/Address/state" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlOA/Address/@state" />
+            <TargetField xsi:type="ns3:XmlField" path="/XmlOE/Address/state" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlOA/Address/@zipCode" />
-            <OutputField xsi:type="ns3:XmlField" path="/XmlOE/Address/zipCode" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlOA/Address/@zipCode" />
+            <TargetField xsi:type="ns3:XmlField" path="/XmlOE/Address/zipCode" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

@@ -62,7 +62,7 @@ public class ConcurrencyChaosMonkeyTest {
                         try {
                             AtlasContext context = atlasContextFactory.createContext(mappingURI);
                             AtlasSession session = context.createSession();
-                            session.setInput(twitterStatus);
+                            session.setSource(twitterStatus);
                             context.process(session);
 
                             Random rand = new Random(System.currentTimeMillis() % 13);
@@ -110,7 +110,7 @@ public class ConcurrencyChaosMonkeyTest {
                         try {
 
                             AtlasSession session = context.createSession();
-                            session.setInput(twitterStatus);
+                            session.setSource(twitterStatus);
                             context.process(session);
 
                             Random rand = new Random(System.currentTimeMillis() % 13);
@@ -179,9 +179,9 @@ public class ConcurrencyChaosMonkeyTest {
         jLastNameField.setFieldType(FieldType.STRING);
         jLastNameField.setIndex(1);
 
-        sepMapping.getInputField().add(jNameField);
-        sepMapping.getOutputField().add(jFirstNameField);
-        sepMapping.getOutputField().add(jLastNameField);
+        sepMapping.getSourceField().add(jNameField);
+        sepMapping.getTargetField().add(jFirstNameField);
+        sepMapping.getTargetField().add(jLastNameField);
         mapping.getMappings().getMapping().add(sepMapping);
 
         Mapping textDescMapping = AtlasModelFactory.createMapping(MappingType.MAP);
@@ -197,8 +197,8 @@ public class ConcurrencyChaosMonkeyTest {
         jDescField.setSetMethod("setDescription");
         jDescField.setFieldType(FieldType.STRING);
 
-        textDescMapping.getInputField().add(jTextField);
-        textDescMapping.getOutputField().add(jDescField);
+        textDescMapping.getSourceField().add(jTextField);
+        textDescMapping.getTargetField().add(jDescField);
         mapping.getMappings().getMapping().add(textDescMapping);
 
         Mapping screenTitleMapping = AtlasModelFactory.createMapping(MappingType.MAP);
@@ -214,8 +214,8 @@ public class ConcurrencyChaosMonkeyTest {
         jTitleField.setSetMethod("setTitle");
         jTitleField.setFieldType(FieldType.STRING);
 
-        screenTitleMapping.getInputField().add(jScreenField);
-        screenTitleMapping.getOutputField().add(jTitleField);
+        screenTitleMapping.getSourceField().add(jScreenField);
+        screenTitleMapping.getTargetField().add(jTitleField);
         mapping.getMappings().getMapping().add(screenTitleMapping);
 
         File mappingFile = new File("target/junit-atlasmapping.xml");

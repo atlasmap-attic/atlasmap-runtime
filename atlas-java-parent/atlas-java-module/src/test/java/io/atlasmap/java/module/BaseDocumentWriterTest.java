@@ -34,8 +34,8 @@ public abstract class BaseDocumentWriterTest {
 
     protected JavaFieldWriterValueConverter valueConverter = new JavaFieldWriterValueConverter() {
         @Override
-        public Object convertValue(Object parentObject, Field outputField) throws AtlasException {
-            return outputField.getValue();
+        public Object convertValue(Object parentObject, Field targetField) throws AtlasException {
+            return targetField.getValue();
         }
     };
 

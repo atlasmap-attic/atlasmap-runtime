@@ -7,19 +7,19 @@
         uri="atlas:java?className=io.atlasmap.java.test.TargetContact" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Separate">
-            <InputField xsi:type="ns2:JavaField" path="/firstName" />
-            <OutputField xsi:type="ns2:JavaField" path="/firstName"
+            <SourceField xsi:type="ns2:JavaField" path="/firstName" />
+            <TargetField xsi:type="ns2:JavaField" path="/firstName"
                 index="0" />
-            <OutputField xsi:type="ns2:JavaField" path="/lastName"
+            <TargetField xsi:type="ns2:JavaField" path="/lastName"
                 index="1" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/phoneNumber" />
-            <OutputField xsi:type="ns2:JavaField" path="/phoneNumber" />
+            <SourceField xsi:type="ns2:JavaField" path="/phoneNumber" />
+            <TargetField xsi:type="ns2:JavaField" path="/phoneNumber" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/zipCode" />
-            <OutputField xsi:type="ns2:JavaField" path="/zipCode" />
+            <SourceField xsi:type="ns2:JavaField" path="/zipCode" />
+            <TargetField xsi:type="ns2:JavaField" path="/zipCode" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

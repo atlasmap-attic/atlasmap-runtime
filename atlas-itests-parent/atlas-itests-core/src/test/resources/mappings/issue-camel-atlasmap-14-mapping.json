@@ -20,7 +20,7 @@
         {
           "jsonType": "io.atlasmap.v2.Mapping",
           "mappingType": "MAP",
-          "inputField": [
+          "sourceField": [
             {
               "jsonType": "io.atlasmap.java.v2.JavaField",
               "name": "screenName",
@@ -29,7 +29,7 @@
               "docId": "twitter4j.Status"
             }
           ],
-          "outputField": [
+          "targetField": [
             {
               "jsonType": "io.atlasmap.java.v2.JavaField",
               "name": "TwitterScreenName__c",

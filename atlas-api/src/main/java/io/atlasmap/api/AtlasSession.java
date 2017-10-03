@@ -30,29 +30,29 @@ public interface AtlasSession {
 
     AtlasMapping getMapping();
 
-    Object getInput();
+    Object getSource();
 
-    void setInput(Object inputObject);
+    void setSource(Object sourceObject);
 
-    Object getInput(String docId);
+    Object getSource(String docId);
 
-    void setInput(Object inputObject, String docId);
+    void setSource(Object sourceObject, String docId);
 
-    boolean hasInput(String docId);
+    boolean hasSource(String docId);
 
-    Map<String, Object> getInputMap();
+    Map<String, Object> getSourceMap();
 
-    Object getOutput();
+    Object getTarget();
 
-    void setOutput(Object outputObject);
+    void setTarget(Object targetObject);
 
-    Object getOutput(String docId);
+    Object getTarget(String docId);
 
-    void setOutput(Object outputObject, String docId);
+    void setTarget(Object targetObject, String docId);
 
-    boolean hasOutput(String docId);
+    boolean hasTarget(String docId);
 
-    Map<String, Object> getOutputMap();
+    Map<String, Object> getTargetMap();
 
     Validations getValidations();
 

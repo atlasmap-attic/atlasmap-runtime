@@ -40,11 +40,11 @@ public class JsonJsonMultiSourceTest extends AtlasMappingBaseTest {
                 .loadFileAsString("src/test/resources/jsonToJson/atlas-json-contact-unrooted.json");
         String sourceAddress = AtlasTestUtil
                 .loadFileAsString("src/test/resources/jsonToJson/atlas-json-address-unrooted.json");
-        session.setInput(sourceContact, "con");
-        session.setInput(sourceAddress, "addr");
+        session.setSource(sourceContact, "con");
+        session.setSource(sourceAddress, "addr");
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();
@@ -64,11 +64,11 @@ public class JsonJsonMultiSourceTest extends AtlasMappingBaseTest {
                 .loadFileAsString("src/test/resources/jsonToJson/atlas-json-contact-unrooted.json");
         String sourceAddress = AtlasTestUtil
                 .loadFileAsString("src/test/resources/jsonToJson/atlas-json-address-unrooted.json");
-        session.setInput(sourceContact, "con");
-        session.setInput(sourceAddress, "addr");
+        session.setSource(sourceContact, "con");
+        session.setSource(sourceAddress, "addr");
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();

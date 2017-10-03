@@ -33,11 +33,11 @@ public class CamelAtlasmap14Test {
         AtlasMapping mapping = mappingService.loadMapping(url, AtlasMappingFormat.JSON);
         AtlasContext context = DefaultAtlasContextFactory.getInstance().createContext(mapping);
         AtlasSession session = context.createSession();
-        session.setInput(generateTwitterStatus());
+        session.setSource(generateTwitterStatus());
         context.process(session);
-        Object output = session.getOutput();
-        Assert.assertEquals(Contact.class, output.getClass());
-        Contact contact = (Contact)output;
+        Object target = session.getTarget();
+        Assert.assertEquals(Contact.class, target.getClass());
+        Contact contact = (Contact)target;
         Assert.assertEquals("bobvila1982", contact.getTwitterScreenName__c());
     }
     

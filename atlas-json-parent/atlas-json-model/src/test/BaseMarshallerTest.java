@@ -81,17 +81,17 @@ public abstract class BaseMarshallerTest {
         AtlasMapping mapping = AtlasModelFactory.createAtlasMapping();
         mapping.setName("junit");
 
-        JsonField inputJsonField = new JsonField();
-        inputJsonField.setName("foo");
-        inputJsonField.setValue("bar");
+        JsonField sourceJsonField = new JsonField();
+        sourceJsonField.setName("foo");
+        sourceJsonField.setValue("bar");
 
-        JsonField outputJsonField = new JsonField();
-        outputJsonField.setName("woot");
-        outputJsonField.setValue("blerg");
+        JsonField targetJsonField = new JsonField();
+        targetJsonField.setName("woot");
+        targetJsonField.setValue("blerg");
 
         Mapping fm = AtlasModelFactory.createMapping(MappingType.MAP);
-        fm.getInputField().add(inputJsonField);
-        fm.getOutputField().add(outputJsonField);
+        fm.getSourceField().add(sourceJsonField);
+        fm.getTargetField().add(targetJsonField);
 
         mapping.getMappings().getMapping().add(fm);
         return mapping;
@@ -114,24 +114,24 @@ public abstract class BaseMarshallerTest {
 
     protected AtlasMapping generateCombineMapping() {
 
-        JsonField inputJsonField = new JsonField();
-        inputJsonField.setName("foo");
-        inputJsonField.setValue("bar");
-        inputJsonField.setIndex(0);
+        JsonField sourceJsonField = new JsonField();
+        sourceJsonField.setName("foo");
+        sourceJsonField.setValue("bar");
+        sourceJsonField.setIndex(0);
 
-        JsonField inputJsonFieldB = new JsonField();
-        inputJsonFieldB.setName("foo3");
-        inputJsonFieldB.setValue("bar3");
-        inputJsonFieldB.setIndex(1);
+        JsonField sourceJsonFieldB = new JsonField();
+        sourceJsonFieldB.setName("foo3");
+        sourceJsonFieldB.setValue("bar3");
+        sourceJsonFieldB.setIndex(1);
 
-        JsonField outputJsonFieldA = new JsonField();
-        outputJsonFieldA.setName("woot");
-        outputJsonFieldA.setValue("blerg");
+        JsonField targetJsonFieldA = new JsonField();
+        targetJsonFieldA.setName("woot");
+        targetJsonFieldA.setValue("blerg");
 
         Mapping fm = AtlasModelFactory.createMapping(MappingType.COMBINE);
-        fm.getInputField().add(inputJsonField);
-        fm.getInputField().add(inputJsonFieldB);
-        fm.getOutputField().add(outputJsonFieldA);
+        fm.getSourceField().add(sourceJsonField);
+        fm.getSourceField().add(sourceJsonFieldB);
+        fm.getTargetField().add(targetJsonFieldA);
 
         AtlasMapping mapping = generateAtlasMapping();
         mapping.getMappings().getMapping().clear();
@@ -142,13 +142,13 @@ public abstract class BaseMarshallerTest {
     protected AtlasMapping generatePropertyReferenceMapping() {
         AtlasMapping mapping = generateAtlasMapping();
 
-        MappedField inputField = new MappedField();
-        PropertyField inputPropertyField = new PropertyField();
-        inputPropertyField.setName("foo");
-        inputField.setField(inputPropertyField);
+        MappedField sourceField = new MappedField();
+        PropertyField sourcePropertyField = new PropertyField();
+        sourcePropertyField.setName("foo");
+        sourceField.setField(sourcePropertyField);
 
         MapFieldMapping fm = (MapFieldMapping) mapping.getFieldMappings().getFieldMapping().get(0);
-        fm.setInputField(inputField);
+        fm.setSourceField(sourceField);
 
         Property p = new Property();
         p.setName("foo");
@@ -161,13 +161,13 @@ public abstract class BaseMarshallerTest {
     protected AtlasMapping generateConstantMapping() {
         AtlasMapping mapping = generateAtlasMapping();
 
-        MappedField inputField = new MappedField();
-        ConstantField inputPropertyField = new ConstantField();
-        inputPropertyField.setValue("foo");
-        inputField.setField(inputPropertyField);
+        MappedField sourceField = new MappedField();
+        ConstantField sourcePropertyField = new ConstantField();
+        sourcePropertyField.setValue("foo");
+        sourceField.setField(sourcePropertyField);
 
         MapFieldMapping fm = (MapFieldMapping) mapping.getFieldMappings().getFieldMapping().get(0);
-        fm.setInputField(inputField);
+        fm.setSourceField(sourceField);
 
         return mapping;
     }
@@ -196,9 +196,9 @@ public abstract class BaseMarshallerTest {
         mapping.getTargets().getDataSource().add(targetB);
 
         SeparateFieldMapping fm = (SeparateFieldMapping) mapping.getFieldMappings().getFieldMapping().get(0);
-        fm.getInputField().getField().setDocId("sourceA");
-        fm.getOutputFields().getMappedField().get(0).getField().setDocId("targetA");
-        fm.getOutputFields().getMappedField().get(1).getField().setDocId("targetB");
+        fm.getSourceField().getField().setDocId("sourceA");
+        fm.getTargetFields().getMappedField().get(0).getField().setDocId("targetA");
+        fm.getTargetFields().getMappedField().get(1).getField().setDocId("targetB");
 
         return mapping;
     }
@@ -215,7 +215,7 @@ public abstract class BaseMarshallerTest {
         assertNotNull(fm);
         assertNull(fm.getAlias());
 
-        MappedField m1 = fm.getInputField();
+        MappedField m1 = fm.getSourceField();
         assertNotNull(m1);
         assertNull(m1.getFieldActions());
         // assertTrue(m1.getFieldActions().isEmpty());
@@ -226,7 +226,7 @@ public abstract class BaseMarshallerTest {
         assertEquals("bar", f1.getValue());
         assertNull(((JsonField) f1).getType());
 
-        MappedField m2 = fm.getOutputField();
+        MappedField m2 = fm.getTargetField();
         assertNotNull(m2);
         assertNull(m2.getFieldActions());
         // assertTrue(m2.getFieldActions().isEmpty());
@@ -244,38 +244,38 @@ public abstract class BaseMarshallerTest {
         mapping.setName("junit");
         mapping.setFieldMappings(new FieldMappings());
 
-        MappedField inputField = new MappedField();
-        JsonField inputJsonField = new JsonField();
-        inputJsonField.setName("foo");
-        inputJsonField.setValue("bar");
-        inputField.setField(inputJsonField);
+        MappedField sourceField = new MappedField();
+        JsonField sourceJsonField = new JsonField();
+        sourceJsonField.setName("foo");
+        sourceJsonField.setValue("bar");
+        sourceField.setField(sourceJsonField);
 
-        MappedField outputFieldA = new MappedField();
-        JsonField outputJsonFieldA = new JsonField();
-        outputJsonFieldA.setName("woot");
-        outputJsonFieldA.setValue("blerg");
-        outputFieldA.setField(outputJsonFieldA);
+        MappedField targetFieldA = new MappedField();
+        JsonField targetJsonFieldA = new JsonField();
+        targetJsonFieldA.setName("woot");
+        targetJsonFieldA.setValue("blerg");
+        targetFieldA.setField(targetJsonFieldA);
 
-        MapAction outputActionA = new MapAction();
-        outputActionA.setIndex(new Integer(1));
-        outputFieldA.setFieldActions(new FieldActions());
-        // outputFieldA.getFieldActions().getFieldAction().add(outputActionA);
+        MapAction targetActionA = new MapAction();
+        targetActionA.setIndex(new Integer(1));
+        targetFieldA.setFieldActions(new FieldActions());
+        // targetFieldA.getFieldActions().getFieldAction().add(targetActionA);
 
-        MappedField outputFieldB = new MappedField();
-        JsonField outputJsonFieldB = new JsonField();
-        outputJsonFieldB.setName("meow");
-        outputJsonFieldB.setValue("ruff");
-        outputFieldB.setField(outputJsonFieldB);
+        MappedField targetFieldB = new MappedField();
+        JsonField targetJsonFieldB = new JsonField();
+        targetJsonFieldB.setName("meow");
+        targetJsonFieldB.setValue("ruff");
+        targetFieldB.setField(targetJsonFieldB);
 
-        MapAction outputActionB = new MapAction();
-        outputActionB.setIndex(new Integer(2));
-        outputFieldB.setFieldActions(new FieldActions());
-        // outputFieldB.getFieldActions().getFieldAction().add(outputActionB);
+        MapAction targetActionB = new MapAction();
+        targetActionB.setIndex(new Integer(2));
+        targetFieldB.setFieldActions(new FieldActions());
+        // targetFieldB.getFieldActions().getFieldAction().add(targetActionB);
 
         SeparateFieldMapping fm = AtlasModelFactory.createFieldMapping(SeparateFieldMapping.class);
-        fm.setInputField(inputField);
-        fm.getOutputFields().getMappedField().add(outputFieldA);
-        fm.getOutputFields().getMappedField().add(outputFieldB);
+        fm.setSourceField(sourceField);
+        fm.getTargetFields().getMappedField().add(targetFieldA);
+        fm.getTargetFields().getMappedField().add(targetFieldB);
 
         mapping.getFieldMappings().getFieldMapping().add(fm);
         return mapping;
@@ -295,7 +295,7 @@ public abstract class BaseMarshallerTest {
         assertNull(fm.getAlias());
 
         SeparateFieldMapping sfm = (SeparateFieldMapping) fm;
-        MappedField m1 = sfm.getInputField();
+        MappedField m1 = sfm.getSourceField();
         assertNotNull(m1);
         assertNull(m1.getFieldActions());
         // assertEquals(new Integer(0), new
@@ -307,7 +307,7 @@ public abstract class BaseMarshallerTest {
         assertEquals("bar", f1.getValue());
         assertNull(((JsonField) f1).getType());
 
-        MappedFields mFields = sfm.getOutputFields();
+        MappedFields mFields = sfm.getTargetFields();
         MappedField m2 = mFields.getMappedField().get(0);
         assertNotNull(m2);
         assertNotNull(m2.getFieldActions());

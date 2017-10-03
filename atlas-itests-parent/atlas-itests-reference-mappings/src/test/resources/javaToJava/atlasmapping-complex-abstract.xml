@@ -7,18 +7,18 @@
         uri="atlas:java?className=io.atlasmap.java.test.TargetOrder" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/orderId" />
-            <OutputField xsi:type="ns2:JavaField" path="/orderId" />
+            <SourceField xsi:type="ns2:JavaField" path="/orderId" />
+            <TargetField xsi:type="ns2:JavaField" path="/orderId" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/contact" />
-            <OutputField xsi:type="ns2:JavaField" path="/contact"
+            <SourceField xsi:type="ns2:JavaField" path="/contact" />
+            <TargetField xsi:type="ns2:JavaField" path="/contact"
                 className="io.atlasmap.java.test.TargetContact"
                 fieldType="Complex" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/contact/firstName" />
-            <OutputField xsi:type="ns2:JavaField" path="/contact/firstName" />
+            <SourceField xsi:type="ns2:JavaField" path="/contact/firstName" />
+            <TargetField xsi:type="ns2:JavaField" path="/contact/firstName" />
         </Mapping>
     </Mappings>
     <LookupTables />

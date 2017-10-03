@@ -43,9 +43,9 @@ public class XmlValidationService extends BaseModuleValidationService<XmlField> 
                 "The name element must not be null nor empty");
         NonNullValidator javaFilePathNonNullValidator = new NonNullValidator("XmlField.Path",
                 "The path element must not be null nor empty");
-        NonNullValidator inputFieldTypeNonNullValidator = new NonNullValidator("Input.Field.Type",
+        NonNullValidator sourceFieldTypeNonNullValidator = new NonNullValidator("Source.Field.Type",
                 "Field type should not be null nor empty");
-        NonNullValidator outputFieldTypeNonNullValidator = new NonNullValidator("Output.Field.Type",
+        NonNullValidator targetFieldTypeNonNullValidator = new NonNullValidator("Target.Field.Type",
                 "Field type should not be null nor empty");
         NonNullValidator fieldTypeNonNullValidator = new NonNullValidator("Field.Type",
                 "Filed type should not be null nor empty");
@@ -53,8 +53,8 @@ public class XmlValidationService extends BaseModuleValidationService<XmlField> 
         validatorMap.put("xml.field.type.not.null", fieldTypeNonNullValidator);
         validatorMap.put("xml.field.name.not.null", javaFileNameNonNullValidator);
         validatorMap.put("xml.field.path.not.null", javaFilePathNonNullValidator);
-        validatorMap.put("input.field.type.not.null", inputFieldTypeNonNullValidator);
-        validatorMap.put("output.field.type.not.null", outputFieldTypeNonNullValidator);
+        validatorMap.put("source.field.type.not.null", sourceFieldTypeNonNullValidator);
+        validatorMap.put("target.field.type.not.null", targetFieldTypeNonNullValidator);
     }
 
     public void destroy() {
@@ -88,14 +88,14 @@ public class XmlValidationService extends BaseModuleValidationService<XmlField> 
         // TODO check that it is a valid type on the AtlasContext
 
         validatorMap.get("xml.field.type.not.null").validate(field, validations, ValidationStatus.WARN);
-        if (direction == FieldDirection.INPUT) {
+        if (direction == FieldDirection.SOURCE) {
             if (field != null) {
-                validatorMap.get("input.field.type.not.null").validate(field.getFieldType(), validations,
+                validatorMap.get("source.field.type.not.null").validate(field.getFieldType(), validations,
                         ValidationStatus.WARN);
             }
         } else {
             if (field != null) {
-                validatorMap.get("output.field.type.not.null").validate(field.getFieldType(), validations,
+                validatorMap.get("target.field.type.not.null").validate(field.getFieldType(), validations,
                         ValidationStatus.WARN);
             }
         }

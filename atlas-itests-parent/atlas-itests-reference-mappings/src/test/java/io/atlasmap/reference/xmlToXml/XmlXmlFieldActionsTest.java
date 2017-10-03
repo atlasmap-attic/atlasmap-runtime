@@ -8,8 +8,8 @@ import io.atlasmap.xml.v2.XmlField;
 public class XmlXmlFieldActionsTest extends AtlasBaseActionsTest {
 
     public XmlXmlFieldActionsTest() {
-        this.inputField = createField("/contact/firstName");
-        this.outputField = createField("/contact/firstName");
+        this.sourceField = createField("/contact/firstName");
+        this.targetField = createField("/contact/firstName");
         this.docURI = "atlas:xml?complexType=xmlInputContact";
     }
 

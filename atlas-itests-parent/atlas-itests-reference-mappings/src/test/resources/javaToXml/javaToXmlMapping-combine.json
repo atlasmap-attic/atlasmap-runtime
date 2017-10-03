@@ -29,7 +29,7 @@
                 {
                     "jsonType": "io.atlasmap.v2.Mapping",
                     "mappingType": "SEPARATE",
-                    "inputField": [
+                    "sourceField": [
                         {
                             "jsonType": "io.atlasmap.java.v2.JavaField",
                             "name": "lastName",
@@ -38,7 +38,7 @@
                             "docId": "io.atlasmap.java.test.SourceContact"
                         }
                     ],
-                    "outputField": [
+                    "targetField": [
                         {
                             "jsonType": "io.atlasmap.xml.v2.XmlField",
                             "name": "orderid",

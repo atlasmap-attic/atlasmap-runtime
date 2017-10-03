@@ -7,19 +7,19 @@
     <DataSource dataSourceType="Target" uri="atlas:json" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Separate">
-            <InputField xsi:type="ns2:JavaField" path="/firstName" />
-            <OutputField xsi:type="ns3:JsonField" path="/firstName"
+            <SourceField xsi:type="ns2:JavaField" path="/firstName" />
+            <TargetField xsi:type="ns3:JsonField" path="/firstName"
                 index="0" />
-            <OutputField xsi:type="ns3:JsonField" path="/lastName"
+            <TargetField xsi:type="ns3:JsonField" path="/lastName"
                 index="1" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/phoneNumber" />
-            <OutputField xsi:type="ns3:JsonField" path="/phoneNumber" />
+            <SourceField xsi:type="ns2:JavaField" path="/phoneNumber" />
+            <TargetField xsi:type="ns3:JsonField" path="/phoneNumber" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/zipCode" />
-            <OutputField xsi:type="ns3:JsonField" path="/zipCode" />
+            <SourceField xsi:type="ns2:JavaField" path="/zipCode" />
+            <TargetField xsi:type="ns3:JsonField" path="/zipCode" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

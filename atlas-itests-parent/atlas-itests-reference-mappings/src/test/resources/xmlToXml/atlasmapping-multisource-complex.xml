@@ -9,58 +9,58 @@
     <DataSource dataSourceType="Target" uri="atlas:xml" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ConstantField" fieldType="Integer">
+            <SourceField xsi:type="ConstantField" fieldType="Integer">
                 <value xsi:type="xs:int">8765309</value>
-            </InputField>
-            <OutputField xsi:type="ns2:XmlField" path="/XOA/@orderId" />
+            </SourceField>
+            <TargetField xsi:type="ns2:XmlField" path="/XOA/@orderId" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Contact/@firstName"
+            <SourceField xsi:type="ns2:XmlField" path="/Contact/@firstName"
                 docId="con" />
-            <OutputField xsi:type="ns2:XmlField" path="/XOA/Contact/@firstName" />
+            <TargetField xsi:type="ns2:XmlField" path="/XOA/Contact/@firstName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Contact/@lastName"
+            <SourceField xsi:type="ns2:XmlField" path="/Contact/@lastName"
                 docId="con" />
-            <OutputField xsi:type="ns2:XmlField" path="/XOA/Contact/@lastName" />
+            <TargetField xsi:type="ns2:XmlField" path="/XOA/Contact/@lastName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Contact/@phoneNumber"
+            <SourceField xsi:type="ns2:XmlField" path="/Contact/@phoneNumber"
                 docId="con" />
-            <OutputField xsi:type="ns2:XmlField"
+            <TargetField xsi:type="ns2:XmlField"
                 path="/XOA/Contact/@phoneNumber" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Contact/@zipCode"
+            <SourceField xsi:type="ns2:XmlField" path="/Contact/@zipCode"
                 docId="con" />
-            <OutputField xsi:type="ns2:XmlField" path="/XOA/Contact/@zipCode" />
+            <TargetField xsi:type="ns2:XmlField" path="/XOA/Contact/@zipCode" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Address/@addressLine1"
+            <SourceField xsi:type="ns2:XmlField" path="/Address/@addressLine1"
                 docId="addr" />
-            <OutputField xsi:type="ns2:XmlField"
+            <TargetField xsi:type="ns2:XmlField"
                 path="/XOA/Address/@addressLine1" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Address/@addressLine2"
+            <SourceField xsi:type="ns2:XmlField" path="/Address/@addressLine2"
                 docId="addr" />
-            <OutputField xsi:type="ns2:XmlField"
+            <TargetField xsi:type="ns2:XmlField"
                 path="/XOA/Address/@addressLine2" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Address/@city"
+            <SourceField xsi:type="ns2:XmlField" path="/Address/@city"
                 docId="addr" />
-            <OutputField xsi:type="ns2:XmlField" path="/XOA/Address/@city" />
+            <TargetField xsi:type="ns2:XmlField" path="/XOA/Address/@city" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Address/@state"
+            <SourceField xsi:type="ns2:XmlField" path="/Address/@state"
                 docId="addr" />
-            <OutputField xsi:type="ns2:XmlField" path="/XOA/Address/@state" />
+            <TargetField xsi:type="ns2:XmlField" path="/XOA/Address/@state" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Address/@zipCode"
+            <SourceField xsi:type="ns2:XmlField" path="/Address/@zipCode"
                 docId="addr" />
-            <OutputField xsi:type="ns2:XmlField" path="/XOA/Address/@zipCode" />
+            <TargetField xsi:type="ns2:XmlField" path="/XOA/Address/@zipCode" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

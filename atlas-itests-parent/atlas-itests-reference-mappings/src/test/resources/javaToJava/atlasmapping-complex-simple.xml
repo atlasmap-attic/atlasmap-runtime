@@ -7,8 +7,8 @@
         uri="atlas:java?className=io.atlasmap.java.test.TargetTestClass" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/contact/firstName" />
-            <OutputField xsi:type="ns2:JavaField" path="/contact/firstName" />
+            <SourceField xsi:type="ns2:JavaField" path="/contact/firstName" />
+            <TargetField xsi:type="ns2:JavaField" path="/contact/firstName" />
         </Mapping>
     </Mappings>
     <LookupTables />
