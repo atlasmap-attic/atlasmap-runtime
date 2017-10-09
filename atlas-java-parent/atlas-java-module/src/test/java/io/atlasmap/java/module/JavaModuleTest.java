@@ -43,11 +43,11 @@ public class JavaModuleTest {
     }
 
     @Test
-    public void testResolveInputSetMethod() throws AtlasException {
+    public void testResolveSourceSetMethod() throws AtlasException {
         Object sourceObject = new SourceContact();
         JavaField field = new JavaField();
         field.setPath("/firstName");
-        Method setter = module.resolveInputSetMethod(sourceObject, field, String.class);
+        Method setter = module.resolveSourceSetMethod(sourceObject, field, String.class);
         assertNotNull(setter);
         assertEquals(setter.getName(), "setFirstName");
     }

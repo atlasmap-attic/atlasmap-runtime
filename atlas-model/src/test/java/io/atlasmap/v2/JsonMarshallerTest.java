@@ -104,18 +104,18 @@ public class JsonMarshallerTest extends BaseMarshallerTest {
     public void testFieldActions() throws Exception {
         AtlasMapping atlasMapping = generateReferenceAtlasMapping();
         BaseMapping fm = atlasMapping.getMappings().getMapping().get(0);
-        ((Mapping) fm).getOutputField().get(0).setActions(new Actions());
+        ((Mapping) fm).getTargetField().get(0).setActions(new Actions());
 
         List<Action> actionsList = generateReferenceFieldActions();
-        ((Mapping) fm).getOutputField().get(0).getActions().getActions().addAll(actionsList);
+        ((Mapping) fm).getTargetField().get(0).getActions().getActions().addAll(actionsList);
 
-        for (Action a : ((Mapping) fm).getOutputField().get(0).getActions().getActions()) {
+        for (Action a : ((Mapping) fm).getTargetField().get(0).getActions().getActions()) {
             if (a instanceof CustomAction) {
                 CustomAction customAction = (CustomAction) a;
                 customAction.setClassName("io.foo.Bar");
                 customAction.setMethodName("doStuff");
-                customAction.setInputFieldType(FieldType.STRING);
-                customAction.setOutputFieldType(FieldType.STRING);
+                customAction.setSourceFieldType(FieldType.STRING);
+                customAction.setTargetFieldType(FieldType.STRING);
             }
             if (a instanceof Replace) {
                 Replace replace = (Replace) a;
@@ -174,11 +174,8 @@ public class JsonMarshallerTest extends BaseMarshallerTest {
                 su.setNumberType(NumberType.DECIMAL);
             }
         }
-        mapper.writeValue(new File("target/junit/" + testName.getMethodName() + "/" + "atlasmapping.json"),
-                atlasMapping);
-
-        AtlasMapping rereadMapping = mapper.readValue(
-                new File("target/junit/" + testName.getMethodName() + "/" + "atlasmapping.json"), AtlasMapping.class);
+        mapper.writeValue(new File("target/junit/" + testName.getMethodName() + "/" + "atlasmapping.json"), atlasMapping);
+        mapper.readValue(new File("target/junit/" + testName.getMethodName() + "/" + "atlasmapping.json"), AtlasMapping.class);
     }
 
     //
@@ -186,8 +183,8 @@ public class JsonMarshallerTest extends BaseMarshallerTest {
     // public void testMulitSourceMapping() throws Exception {
     // AtlasMapping atlasMapping = generateMultiSourceMapping();
     // Mapping fm = atlasMapping.getMappings().getMapping().get(0);
-    // ((Map) fm).getOutputField().setActions(new Actions());
-    // ((Map) fm).getOutputField().getActions().setUppercase(new Uppercase());
+    // ((Map) fm).getTargetField().setActions(new Actions());
+    // ((Map) fm).getTargetField().getActions().setUppercase(new Uppercase());
     //
     // mapper.writeValue(new File("target/junit/" + testName.getMethodName() + "/" +
     // "atlasmapping.json"),atlasMapping);

@@ -108,11 +108,11 @@ public class DefaultAtlasValidationServiceTest extends BaseValidatorTest {
         Mapping lookupFieldMapping = AtlasModelFactory.createMapping(MappingType.LOOKUP);
         lookupFieldMapping.setLookupTableName("table3");
 
-        Field inputField = createInputJavaField("inputName");
-        Field outputField = createInputJavaField("outputName");
+        Field sourceField = createJavaField("sourceName");
+        Field targetField = createJavaField("targetName");
 
-        lookupFieldMapping.getInputField().add(inputField);
-        lookupFieldMapping.getOutputField().add(outputField);
+        lookupFieldMapping.getSourceField().add(sourceField);
+        lookupFieldMapping.getTargetField().add(targetField);
 
         mapping.getMappings().getMapping().add(lookupFieldMapping);
 
@@ -143,11 +143,11 @@ public class DefaultAtlasValidationServiceTest extends BaseValidatorTest {
         Mapping lookupFieldMapping = AtlasModelFactory.createMapping(MappingType.LOOKUP);
         lookupFieldMapping.setLookupTableName("table1");
 
-        Field inputField = createInputJavaField("inputName");
-        Field outputField = createInputJavaField("outputName");
+        Field sourceField = createJavaField("sourceName");
+        Field targetField = createJavaField("targetName");
 
-        lookupFieldMapping.getInputField().add(inputField);
-        lookupFieldMapping.getOutputField().add(outputField);
+        lookupFieldMapping.getSourceField().add(sourceField);
+        lookupFieldMapping.getTargetField().add(targetField);
 
         mapping.getMappings().getMapping().add(lookupFieldMapping);
 

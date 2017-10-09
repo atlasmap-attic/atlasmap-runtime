@@ -8,33 +8,33 @@
         uri="atlas:java?className=io.atlasmap.java.test.TargetFlatPrimitiveClass" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@intField" />
-            <OutputField xsi:type="ns2:JavaField" path="/booleanField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@intField" />
+            <TargetField xsi:type="ns2:JavaField" path="/booleanField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@shortField" />
-            <OutputField xsi:type="ns2:JavaField" path="/charField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@shortField" />
+            <TargetField xsi:type="ns2:JavaField" path="/charField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@longField" />
-            <OutputField xsi:type="ns2:JavaField" path="/intField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@longField" />
+            <TargetField xsi:type="ns2:JavaField" path="/intField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@doubleField" />
-            <OutputField xsi:type="ns2:JavaField" path="/shortField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@doubleField" />
+            <TargetField xsi:type="ns2:JavaField" path="/shortField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@floatField" />
-            <OutputField xsi:type="ns2:JavaField" path="/longField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@floatField" />
+            <TargetField xsi:type="ns2:JavaField" path="/longField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@booleanField" />
-            <OutputField xsi:type="ns2:JavaField" path="/doubleField" />
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@booleanField" />
+            <TargetField xsi:type="ns2:JavaField" path="/doubleField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFPA/@charField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFPA/@charField"
                 fieldType="Char" />
-            <OutputField xsi:type="ns2:JavaField" path="/floatField" />
+            <TargetField xsi:type="ns2:JavaField" path="/floatField" />
         </Mapping>
     </Mappings>
     <LookupTables />

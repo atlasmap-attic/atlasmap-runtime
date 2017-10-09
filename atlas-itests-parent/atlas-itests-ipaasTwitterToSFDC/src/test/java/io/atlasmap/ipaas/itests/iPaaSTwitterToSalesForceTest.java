@@ -108,9 +108,9 @@ public class iPaaSTwitterToSalesForceTest {
         lnAction.setIndex(1);
         lnField.getFieldActions().getFieldAction().add(lnAction);
 
-        sepMapping.setInputField(nameField);
-        sepMapping.getOutputFields().getMappedField().add(fnField);
-        sepMapping.getOutputFields().getMappedField().add(lnField);
+        sepMapping.setSourceField(nameField);
+        sepMapping.getTargetFields().getMappedField().add(fnField);
+        sepMapping.getTargetFields().getMappedField().add(lnField);
         mapping.getFieldMappings().getFieldMapping().add(sepMapping);
 
         MapFieldMapping textDescMapping = AtlasModelFactory.createFieldMapping(MapFieldMapping.class);
@@ -130,8 +130,8 @@ public class iPaaSTwitterToSalesForceTest {
         jDescField.setType(FieldType.STRING);
         descField.setField(jDescField);
 
-        textDescMapping.setInputField(textField);
-        textDescMapping.setOutputField(descField);
+        textDescMapping.setSourceField(textField);
+        textDescMapping.setTargetField(descField);
         mapping.getFieldMappings().getFieldMapping().add(textDescMapping);
 
         MapFieldMapping screenTitleMapping = AtlasModelFactory.createFieldMapping(MapFieldMapping.class);
@@ -151,8 +151,8 @@ public class iPaaSTwitterToSalesForceTest {
         jTitleField.setType(FieldType.STRING);
         titleField.setField(jTitleField);
 
-        screenTitleMapping.setInputField(screenField);
-        screenTitleMapping.setOutputField(titleField);
+        screenTitleMapping.setSourceField(screenField);
+        screenTitleMapping.setTargetField(titleField);
         mapping.getFieldMappings().getFieldMapping().add(screenTitleMapping);
 
         return mapping;
@@ -174,7 +174,7 @@ public class iPaaSTwitterToSalesForceTest {
         AtlasContext context = atlasContextFactory.createContext(mapping);
         AtlasSession session = context.createSession();
         Status twitterStatus = generateTwitterStatus();
-        session.setInput(twitterStatus);
+        session.setSource(twitterStatus);
 
         System.out.println("Twitter.Status");
         System.out.println("\tUser.name: " + twitterStatus.getUser().getName());
@@ -184,7 +184,7 @@ public class iPaaSTwitterToSalesForceTest {
         context.process(session);
 
         assertNotNull(session);
-        Object target = session.getOutput();
+        Object target = session.getTarget();
         assertNotNull(target);
         assertTrue("com.redhat.ipaas.connector.salesforce.Contact".equals(target.getClass().getCanonicalName()));
 

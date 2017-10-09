@@ -7,8 +7,8 @@
         uri="atlas:java?className=io.atlasmap.java.test.TargetOrder" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="orderId" />
-            <OutputField xsi:type="ns2:JavaField" path="orderId" />
+            <SourceField xsi:type="ns2:JavaField" path="orderId" />
+            <TargetField xsi:type="ns2:JavaField" path="orderId" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

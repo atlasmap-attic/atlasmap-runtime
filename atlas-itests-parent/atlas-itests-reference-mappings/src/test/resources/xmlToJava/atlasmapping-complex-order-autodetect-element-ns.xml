@@ -8,65 +8,65 @@
         uri="atlas:java?className=io.atlasmap.java.test.TargetOrder" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/ns:XmlOE/ns:orderId" />
-            <OutputField xsi:type="ns2:JavaField" path="/orderId" />
+            <SourceField xsi:type="ns3:XmlField" path="/ns:XmlOE/ns:orderId" />
+            <TargetField xsi:type="ns2:JavaField" path="/orderId" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/ns:XmlOE/ns:Contact" />
-            <OutputField xsi:type="ns2:JavaField" path="/contact"
+            <SourceField xsi:type="ns3:XmlField" path="/ns:XmlOE/ns:Contact" />
+            <TargetField xsi:type="ns2:JavaField" path="/contact"
                 className="io.atlasmap.java.test.TargetContact"
                 fieldType="Complex" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOE/ns:Contact/ns:firstName" />
-            <OutputField xsi:type="ns2:JavaField" path="/contact/firstName" />
+            <TargetField xsi:type="ns2:JavaField" path="/contact/firstName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOE/ns:Contact/ns:lastName" />
-            <OutputField xsi:type="ns2:JavaField" path="/contact/lastName" />
+            <TargetField xsi:type="ns2:JavaField" path="/contact/lastName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOE/ns:Contact/ns:phoneNumber" />
-            <OutputField xsi:type="ns2:JavaField" path="/contact/phoneNumber" />
+            <TargetField xsi:type="ns2:JavaField" path="/contact/phoneNumber" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOE/ns:Contact/ns:zipCode" />
-            <OutputField xsi:type="ns2:JavaField" path="/contact/zipCode" />
+            <TargetField xsi:type="ns2:JavaField" path="/contact/zipCode" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/ns:XmlOE/ns:Address" />
-            <OutputField xsi:type="ns2:JavaField" path="/address"
+            <SourceField xsi:type="ns3:XmlField" path="/ns:XmlOE/ns:Address" />
+            <TargetField xsi:type="ns2:JavaField" path="/address"
                 className="io.atlasmap.java.test.TargetAddress"
                 fieldType="Complex" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOE/ns:Address/ns:addressLine1" />
-            <OutputField xsi:type="ns2:JavaField" path="/address/addressLine1" />
+            <TargetField xsi:type="ns2:JavaField" path="/address/addressLine1" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOE/ns:Address/ns:addressLine2" />
-            <OutputField xsi:type="ns2:JavaField" path="/address/addressLine2" />
+            <TargetField xsi:type="ns2:JavaField" path="/address/addressLine2" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOE/ns:Address/ns:city" />
-            <OutputField xsi:type="ns2:JavaField" path="/address/city" />
+            <TargetField xsi:type="ns2:JavaField" path="/address/city" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOE/ns:Address/ns:state" />
-            <OutputField xsi:type="ns2:JavaField" path="/address/state" />
+            <TargetField xsi:type="ns2:JavaField" path="/address/state" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOE/ns:Address/ns:zipCode" />
-            <OutputField xsi:type="ns2:JavaField" path="/address/zipCode" />
+            <TargetField xsi:type="ns2:JavaField" path="/address/zipCode" />
         </Mapping>
     </Mappings>
     <LookupTables />

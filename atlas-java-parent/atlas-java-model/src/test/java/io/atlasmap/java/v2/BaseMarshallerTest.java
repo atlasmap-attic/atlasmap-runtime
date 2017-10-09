@@ -99,17 +99,17 @@ public abstract class BaseMarshallerTest {
         AtlasMapping atlasMapping = AtlasModelFactory.createAtlasMapping();
         atlasMapping.setName("junit");
 
-        JavaField inputField = new JavaField();
-        inputField.setName("foo");
-        inputField.setValue("bar");
+        JavaField sourceField = new JavaField();
+        sourceField.setName("foo");
+        sourceField.setValue("bar");
 
-        JavaField outputField = new JavaField();
-        outputField.setName("woot");
-        outputField.setValue("blerg");
+        JavaField targetField = new JavaField();
+        targetField.setName("woot");
+        targetField.setValue("blerg");
 
         Mapping fm = AtlasModelFactory.createMapping(MappingType.MAP);
-        fm.getInputField().add(inputField);
-        fm.getOutputField().add(outputField);
+        fm.getSourceField().add(sourceField);
+        fm.getTargetField().add(targetField);
 
         atlasMapping.getMappings().getMapping().add(fm);
         return atlasMapping;
@@ -117,7 +117,7 @@ public abstract class BaseMarshallerTest {
 
     protected AtlasMapping generateActionMapping() {
         AtlasMapping mapping = generateAtlasMapping();
-        JavaField outputField = (JavaField) ((Mapping) mapping.getMappings().getMapping().get(0)).getOutputField()
+        JavaField targetField = (JavaField) ((Mapping) mapping.getMappings().getMapping().get(0)).getTargetField()
                 .get(0);
 
         Actions actions = new Actions();
@@ -131,18 +131,18 @@ public abstract class BaseMarshallerTest {
         actions.getActions().add(new TrimLeft());
         actions.getActions().add(new TrimRight());
         actions.getActions().add(new Uppercase());
-        outputField.setActions(actions);
+        targetField.setActions(actions);
         return mapping;
     }
 
     protected AtlasMapping generatePropertyReferenceMapping() {
         AtlasMapping mapping = generateAtlasMapping();
 
-        PropertyField inputField = new PropertyField();
-        inputField.setName("foo");
+        PropertyField sourceField = new PropertyField();
+        sourceField.setName("foo");
 
         Mapping fm = (Mapping) mapping.getMappings().getMapping().get(0);
-        fm.getInputField().add(inputField);
+        fm.getSourceField().add(sourceField);
 
         Property p = new Property();
         p.setName("foo");
@@ -155,11 +155,11 @@ public abstract class BaseMarshallerTest {
     protected AtlasMapping generateConstantMapping() {
         AtlasMapping mapping = generateAtlasMapping();
 
-        ConstantField inputField = new ConstantField();
-        inputField.setValue("foo");
+        ConstantField sourceField = new ConstantField();
+        sourceField.setValue("foo");
 
         Mapping fm = (Mapping) mapping.getMappings().getMapping().get(0);
-        fm.getInputField().add(inputField);
+        fm.getSourceField().add(sourceField);
 
         return mapping;
     }
@@ -182,26 +182,26 @@ public abstract class BaseMarshallerTest {
     }
 
     protected AtlasMapping generateCombineMapping() {
-        JavaField inputJavaField = new JavaField();
-        inputJavaField.setName("foo");
-        inputJavaField.setValue("bar");
-        inputJavaField.setIndex(4);
+        JavaField sourceJavaField = new JavaField();
+        sourceJavaField.setName("foo");
+        sourceJavaField.setValue("bar");
+        sourceJavaField.setIndex(4);
 
-        JavaField inputJavaFieldB = new JavaField();
-        inputJavaFieldB.setName("foo3");
-        inputJavaFieldB.setValue("bar3");
-        inputJavaFieldB.setIndex(3);
+        JavaField sourceJavaFieldB = new JavaField();
+        sourceJavaFieldB.setName("foo3");
+        sourceJavaFieldB.setValue("bar3");
+        sourceJavaFieldB.setIndex(3);
 
-        JavaField outputJavaFieldA = new JavaField();
-        outputJavaFieldA.setName("woot");
-        outputJavaFieldA.setValue("blerg");
+        JavaField targetJavaFieldA = new JavaField();
+        targetJavaFieldA.setName("woot");
+        targetJavaFieldA.setValue("blerg");
 
         Mapping fm = (Mapping) AtlasModelFactory.createMapping(MappingType.COMBINE);
         fm.setStrategy("SPACE");
 
-        fm.getInputField().add(inputJavaField);
-        fm.getInputField().add(inputJavaFieldB);
-        fm.getOutputField().add(outputJavaFieldA);
+        fm.getSourceField().add(sourceJavaField);
+        fm.getSourceField().add(sourceJavaFieldB);
+        fm.getTargetField().add(targetJavaFieldA);
 
         AtlasMapping mapping = generateAtlasMapping();
         mapping.getMappings().getMapping().clear();
@@ -228,33 +228,33 @@ public abstract class BaseMarshallerTest {
         mapping.getDataSource().add(targetB);
 
         Mapping fm = (Mapping) mapping.getMappings().getMapping().get(0);
-        fm.getInputField().get(0).setDocId("sourceA");
-        fm.getOutputField().get(0).setDocId("targetA");
-        fm.getOutputField().get(1).setDocId("targetB");
+        fm.getSourceField().get(0).setDocId("sourceA");
+        fm.getTargetField().get(0).setDocId("targetA");
+        fm.getTargetField().get(1).setDocId("targetB");
 
         return mapping;
     }
 
     protected AtlasMapping generateSeparateAtlasMapping() {
-        JavaField inputJavaField = new JavaField();
-        inputJavaField.setName("foo");
-        inputJavaField.setValue("bar");
+        JavaField sourceJavaField = new JavaField();
+        sourceJavaField.setName("foo");
+        sourceJavaField.setValue("bar");
 
-        JavaField outputJavaFieldA = new JavaField();
-        outputJavaFieldA.setIndex(4);
-        outputJavaFieldA.setName("woot");
-        outputJavaFieldA.setValue("blerg");
+        JavaField targetJavaFieldA = new JavaField();
+        targetJavaFieldA.setIndex(4);
+        targetJavaFieldA.setName("woot");
+        targetJavaFieldA.setValue("blerg");
 
-        JavaField outputJavaFieldB = new JavaField();
-        outputJavaFieldA.setIndex(5);
-        outputJavaFieldA.setName("woot2");
-        outputJavaFieldA.setValue("blerg2");
+        JavaField targetJavaFieldB = new JavaField();
+        targetJavaFieldA.setIndex(5);
+        targetJavaFieldA.setName("woot2");
+        targetJavaFieldA.setValue("blerg2");
 
         Mapping fm = (Mapping) AtlasModelFactory.createMapping(MappingType.SEPARATE);
 
-        fm.getInputField().add(inputJavaField);
-        fm.getOutputField().add(outputJavaFieldA);
-        fm.getOutputField().add(outputJavaFieldB);
+        fm.getSourceField().add(sourceJavaField);
+        fm.getTargetField().add(targetJavaFieldA);
+        fm.getTargetField().add(targetJavaFieldB);
 
         AtlasMapping mapping = generateAtlasMapping();
         mapping.getMappings().getMapping().clear();

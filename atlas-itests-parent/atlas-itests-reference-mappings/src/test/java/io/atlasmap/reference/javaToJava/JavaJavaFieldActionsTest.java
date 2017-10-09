@@ -12,8 +12,8 @@ import io.atlasmap.v2.StringLength;
 public class JavaJavaFieldActionsTest extends AtlasBaseActionsTest {
 
     public JavaJavaFieldActionsTest() {
-        this.inputField = createField("/boxedStringField");
-        this.outputField = createField("/boxedStringField");
+        this.sourceField = createField("/boxedStringField");
+        this.targetField = createField("/boxedStringField");
         this.docURI = "atlas:java?className=io.atlasmap.java.test.TargetFlatPrimitiveClass";
     }
 
@@ -26,16 +26,16 @@ public class JavaJavaFieldActionsTest extends AtlasBaseActionsTest {
 
     @Override
     public void runStringLengthTest() throws Exception {
-        this.outputField = createField("/boxedIntField");
+        this.targetField = createField("/boxedIntField");
         this.runActionTest(new StringLength(), "fname", new Integer(5));
-        this.outputField = createField("/boxedStringField");
+        this.targetField = createField("/boxedStringField");
     }
 
     @Test
     public void runNoConversionTest() throws Exception {
-        this.outputField = createField("/boxedIntField");
+        this.targetField = createField("/boxedIntField");
         this.runActionTestList(null, "fname", null);
-        this.outputField = createField("/boxedStringField");
+        this.targetField = createField("/boxedStringField");
     }
 
     @Override
@@ -49,7 +49,7 @@ public class JavaJavaFieldActionsTest extends AtlasBaseActionsTest {
         System.out.println("Extracting output value from: " + output);
         TargetFlatPrimitiveClass c = (TargetFlatPrimitiveClass) output;
         Object result = c.getBoxedStringField();
-        if (this.outputField.getPath().equals("/boxedIntField")) {
+        if (this.targetField.getPath().equals("/boxedIntField")) {
             result = c.getBoxedIntField();
         }
         System.out.println("Output value extracted: " + result);

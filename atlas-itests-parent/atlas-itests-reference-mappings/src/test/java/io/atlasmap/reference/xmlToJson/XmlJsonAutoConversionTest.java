@@ -75,10 +75,10 @@ public class XmlJsonAutoConversionTest extends AtlasMappingBaseTest {
         AtlasContext context = atlasContextFactory.createContext(new File(mappingFile).toURI());
         AtlasSession session = context.createSession();
         String source = AtlasTestUtil.loadFileAsString(inputFile);
-        session.setInput(source);
+        session.setSource(source);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();

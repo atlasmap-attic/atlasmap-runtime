@@ -20,14 +20,14 @@
     <FieldMappings>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:type="MockField" name="foo" value="bar" />
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:type="MockField" name="woot" value="blerg" />
-            </OutputField>
+            </TargetField>
         </FieldMapping>
     </FieldMappings>
 </AtlasMapping>

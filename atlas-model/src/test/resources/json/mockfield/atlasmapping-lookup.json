@@ -8,7 +8,7 @@
             "fieldMapping": [
                 {
                     "jsonType": "io.atlasmap.v2.MapFieldMapping",
-                    "inputField": {
+                    "sourceField": {
                         "jsonType": "io.atlasmap.v2.MappedField",
                         "field": {
                             "jsonType": "io.atlasmap.v2.MockField",
@@ -16,7 +16,7 @@
                             "name": "foo"
                         }
                     },
-                    "outputField": {
+                    "targetField": {
                         "jsonType": "io.atlasmap.v2.MappedField",
                         "field": {
                             "jsonType": "io.atlasmap.v2.MockField",

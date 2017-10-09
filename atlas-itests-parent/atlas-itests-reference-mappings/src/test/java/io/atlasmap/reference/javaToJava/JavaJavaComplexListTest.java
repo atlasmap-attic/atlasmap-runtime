@@ -68,12 +68,12 @@ public class JavaJavaComplexListTest extends AtlasMappingBaseTest {
         f2.setModifiers(null);
 
         Mapping m1 = AtlasModelFactory.createMapping(MappingType.MAP);
-        m1.getInputField().add(f1);
-        m1.getOutputField().add(f1);
+        m1.getSourceField().add(f1);
+        m1.getTargetField().add(f1);
 
         Mapping m2 = AtlasModelFactory.createMapping(MappingType.MAP);
-        m2.getInputField().add(f2);
-        m2.getOutputField().add(f2);
+        m2.getSourceField().add(f2);
+        m2.getTargetField().add(f2);
 
         JavaCollection cm = new JavaCollection();
         cm.setMappingType(MappingType.COLLECTION);
@@ -84,8 +84,8 @@ public class JavaJavaComplexListTest extends AtlasMappingBaseTest {
         f3.setModifiers(null);
 
         Mapping m3 = AtlasModelFactory.createMapping(MappingType.MAP);
-        m3.getInputField().add(f3);
-        m3.getOutputField().add(f3);
+        m3.getSourceField().add(f3);
+        m3.getTargetField().add(f3);
 
         if (cm.getMappings() == null) {
             cm.setMappings(new Mappings());
@@ -109,10 +109,10 @@ public class JavaJavaComplexListTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         BaseOrderList sourceOrderList = AtlasTestUtil.generateOrderListClass(SourceOrderList.class, SourceOrder.class,
                 SourceAddress.class, SourceContact.class);
-        session.setInput(sourceOrderList);
+        session.setSource(sourceOrderList);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof TargetOrderList);
         AtlasTestUtil.validateOrderList((TargetOrderList) object);
@@ -125,10 +125,10 @@ public class JavaJavaComplexListTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         BaseOrderList sourceOrderList = AtlasTestUtil.generateOrderListClass(SourceOrderList.class, SourceOrder.class,
                 SourceAddress.class, SourceContact.class);
-        session.setInput(sourceOrderList);
+        session.setSource(sourceOrderList);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof TargetOrderList);
         AtlasTestUtil.validateOrderList((TargetOrderList) object);

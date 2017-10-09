@@ -6,18 +6,18 @@
     <Mappings>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="MockField" name="input.name" />
-            <OutputField xsi:type="MockField" name="out.name" />
+            <SourceField xsi:type="MockField" name="source.name" />
+            <TargetField xsi:type="MockField" name="target.name" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="MockField" name="input.name" />
-            <OutputField xsi:type="MockField" name="out.name" />
+            <SourceField xsi:type="MockField" name="source.name" />
+            <TargetField xsi:type="MockField" name="target.name" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Separate">
-            <InputField xsi:type="MockField" />
-            <OutputField xsi:type="MockField" index="0" />
+            <SourceField xsi:type="MockField" />
+            <TargetField xsi:type="MockField" index="0" />
         </Mapping>
     </Mappings>
     <LookupTables />

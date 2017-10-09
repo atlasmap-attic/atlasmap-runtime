@@ -7,44 +7,44 @@
     <DataSource dataSourceType="Target" uri="atlas:json" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/orderId" />
-            <OutputField xsi:type="ns3:JsonField" path="/orderId" />
+            <SourceField xsi:type="ns2:JavaField" path="/orderId" />
+            <TargetField xsi:type="ns3:JsonField" path="/orderId" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/contact/firstName" />
-            <OutputField xsi:type="ns3:JsonField" path="/contact/firstName" />
+            <SourceField xsi:type="ns2:JavaField" path="/contact/firstName" />
+            <TargetField xsi:type="ns3:JsonField" path="/contact/firstName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/contact/lastName" />
-            <OutputField xsi:type="ns3:JsonField" path="/contact/lastName" />
+            <SourceField xsi:type="ns2:JavaField" path="/contact/lastName" />
+            <TargetField xsi:type="ns3:JsonField" path="/contact/lastName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/contact/phoneNumber" />
-            <OutputField xsi:type="ns3:JsonField" path="/contact/phoneNumber" />
+            <SourceField xsi:type="ns2:JavaField" path="/contact/phoneNumber" />
+            <TargetField xsi:type="ns3:JsonField" path="/contact/phoneNumber" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/contact/zipCode" />
-            <OutputField xsi:type="ns3:JsonField" path="/contact/zipCode" />
+            <SourceField xsi:type="ns2:JavaField" path="/contact/zipCode" />
+            <TargetField xsi:type="ns3:JsonField" path="/contact/zipCode" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/address/addressLine1" />
-            <OutputField xsi:type="ns3:JsonField" path="/address/addressLine1" />
+            <SourceField xsi:type="ns2:JavaField" path="/address/addressLine1" />
+            <TargetField xsi:type="ns3:JsonField" path="/address/addressLine1" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/address/addressLine2" />
-            <OutputField xsi:type="ns3:JsonField" path="/address/addressLine2" />
+            <SourceField xsi:type="ns2:JavaField" path="/address/addressLine2" />
+            <TargetField xsi:type="ns3:JsonField" path="/address/addressLine2" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/address/city" />
-            <OutputField xsi:type="ns3:JsonField" path="/address/city" />
+            <SourceField xsi:type="ns2:JavaField" path="/address/city" />
+            <TargetField xsi:type="ns3:JsonField" path="/address/city" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/address/state" />
-            <OutputField xsi:type="ns3:JsonField" path="/address/state" />
+            <SourceField xsi:type="ns2:JavaField" path="/address/state" />
+            <TargetField xsi:type="ns3:JsonField" path="/address/state" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/address/zipCode" />
-            <OutputField xsi:type="ns3:JsonField" path="/address/zipCode" />
+            <SourceField xsi:type="ns2:JavaField" path="/address/zipCode" />
+            <TargetField xsi:type="ns3:JsonField" path="/address/zipCode" />
         </Mapping>
     </Mappings>
     <LookupTables />

@@ -8,155 +8,155 @@
     <FieldMappings>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field name="inIntField" xsi:type="ns2:JavaField"
                     path="/intField">
                     <value>123456</value>
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field name="outIntField" xsi:type="ns2:JavaField"
                     path="/intField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </OutputField>
+            </TargetField>
         </FieldMapping>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field name="inShortField" xsi:type="ns2:JavaField"
                     path="/shortField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field name="outShortField" xsi:type="ns2:JavaField"
                     path="/shortField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </OutputField>
+            </TargetField>
         </FieldMapping>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field name="inLongField" xsi:type="ns2:JavaField"
                     path="/longField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field name="outLongField" xsi:type="ns2:JavaField"
                     path="/longField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </OutputField>
+            </TargetField>
         </FieldMapping>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field name="inDoubleField" xsi:type="ns2:JavaField"
                     path="/doubleField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field name="outDoubleField" xsi:type="ns2:JavaField"
                     path="/doubleField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </OutputField>
+            </TargetField>
         </FieldMapping>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field name="inFloatField" xsi:type="ns2:JavaField"
                     path="/floatField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field name="outFloatField" xsi:type="ns2:JavaField"
                     path="/floatField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </OutputField>
+            </TargetField>
         </FieldMapping>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field name="inBooleanField" xsi:type="ns2:JavaField"
                     path="/booleanField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field name="outBooleanField" xsi:type="ns2:JavaField"
                     path="/booleanField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </OutputField>
+            </TargetField>
         </FieldMapping>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field name="inCharField" xsi:type="ns2:JavaField"
                     path="/charField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field name="outCharField" xsi:type="ns2:JavaField"
                     path="/charField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </OutputField>
+            </TargetField>
         </FieldMapping>
         <FieldMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
-            <InputField>
+            <SourceField>
                 <Field name="inByteField" xsi:type="ns2:JavaField"
                     path="/byteField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </InputField>
-            <OutputField>
+            </SourceField>
+            <TargetField>
                 <Field name="outByteField" xsi:type="ns2:JavaField"
                     path="/byteField">
                     <value />
                     <ns2:Annotations />
                     <ns2:Modifiers />
                 </Field>
-            </OutputField>
+            </TargetField>
         </FieldMapping>
     </FieldMappings>
     <LookupTables />

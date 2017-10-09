@@ -36,8 +36,8 @@ public class DefaultAtlasSessionTest {
         assertNotNull(session.getAudits());
         assertNotNull(session.getProperties());
         assertNotNull(session.getValidations());
-        assertNull(session.getInput());
-        assertNull(session.getOutput());
+        assertNull(session.getSource());
+        assertNull(session.getTarget());
     }
 
     @Test
@@ -93,57 +93,57 @@ public class DefaultAtlasSessionTest {
     }
 
     @Test
-    public void testGetSetInput() {
-        session.setInput(new String("defaultInput"));
-        assertNotNull(session.getInput());
-        assertTrue(session.getInput() instanceof String);
-        assertEquals("defaultInput", (String) session.getInput());
+    public void testGetSetSource() {
+        session.setSource(new String("defaultSource"));
+        assertNotNull(session.getSource());
+        assertTrue(session.getSource() instanceof String);
+        assertEquals("defaultSource", (String) session.getSource());
     }
 
     @Test
-    public void testGetSetInputDocId() {
-        session.setInput(new String("defaultInput"));
-        assertNotNull(session.getInput());
-        assertTrue(session.getInput() instanceof String);
-        assertEquals("defaultInput", (String) session.getInput());
+    public void testGetSetSourceDocId() {
+        session.setSource(new String("defaultSource"));
+        assertNotNull(session.getSource());
+        assertTrue(session.getSource() instanceof String);
+        assertEquals("defaultSource", (String) session.getSource());
 
-        session.setInput(new String("secondInput"), "second");
-        assertNotNull(session.getInput());
-        assertTrue(session.getInput() instanceof String);
-        assertEquals("defaultInput", (String) session.getInput());
+        session.setSource(new String("secondSource"), "second");
+        assertNotNull(session.getSource());
+        assertTrue(session.getSource() instanceof String);
+        assertEquals("defaultSource", (String) session.getSource());
 
-        assertTrue(session.hasInput("second"));
-        assertFalse(session.hasInput("third"));
-        assertNotNull(session.getInput("second"));
-        assertTrue(session.getInput("second") instanceof String);
-        assertEquals("secondInput", (String) session.getInput("second"));
+        assertTrue(session.hasSource("second"));
+        assertFalse(session.hasSource("third"));
+        assertNotNull(session.getSource("second"));
+        assertTrue(session.getSource("second") instanceof String);
+        assertEquals("secondSource", (String) session.getSource("second"));
     }
 
     @Test
-    public void testGetSetOutput() {
-        session.setOutput(new String("defaultOutput"));
-        assertNotNull(session.getOutput());
-        assertTrue(session.getOutput() instanceof String);
-        assertEquals("defaultOutput", (String) session.getOutput());
+    public void testGetSetTarget() {
+        session.setTarget(new String("defaultTarget"));
+        assertNotNull(session.getTarget());
+        assertTrue(session.getTarget() instanceof String);
+        assertEquals("defaultTarget", (String) session.getTarget());
     }
 
     @Test
-    public void testGetSetOutputDocId() {
-        session.setOutput(new String("defaultOutput"));
-        assertNotNull(session.getOutput());
-        assertTrue(session.getOutput() instanceof String);
-        assertEquals("defaultOutput", (String) session.getOutput());
+    public void testGetSetTargetDocId() {
+        session.setTarget(new String("defaultTarget"));
+        assertNotNull(session.getTarget());
+        assertTrue(session.getTarget() instanceof String);
+        assertEquals("defaultTarget", (String) session.getTarget());
 
-        session.setOutput(new String("secondOutput"), "second");
-        assertNotNull(session.getOutput());
-        assertTrue(session.getOutput() instanceof String);
-        assertEquals("defaultOutput", (String) session.getOutput());
+        session.setTarget(new String("secondTarget"), "second");
+        assertNotNull(session.getTarget());
+        assertTrue(session.getTarget() instanceof String);
+        assertEquals("defaultTarget", (String) session.getTarget());
 
-        assertTrue(session.hasOutput("second"));
-        assertFalse(session.hasOutput("third"));
-        assertNotNull(session.getOutput("second"));
-        assertTrue(session.getOutput("second") instanceof String);
-        assertEquals("secondOutput", (String) session.getOutput("second"));
+        assertTrue(session.hasTarget("second"));
+        assertFalse(session.hasTarget("third"));
+        assertNotNull(session.getTarget("second"));
+        assertTrue(session.getTarget("second") instanceof String);
+        assertEquals("secondTarget", (String) session.getTarget("second"));
     }
 
     @Test

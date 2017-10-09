@@ -23,24 +23,24 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="MapFieldMapping">
             <MapFieldMapping>
-                <InputField>
+                <SourceField>
                     <Field xsi:type="ns2:JavaField" name="foo"
                         value="bar" />
-                </InputField>
-                <OutputField>
+                </SourceField>
+                <TargetField>
                     <Field xsi:type="ns2:JavaField" name="woot"
                         value="blerg" />
-                </OutputField>
+                </TargetField>
             </MapFieldMapping>
             <MapFieldMapping>
-                <InputField>
+                <SourceField>
                     <Field xsi:type="ns2:JavaField" name="subclass.foo"
                         value="bar" />
-                </InputField>
-                <OutputField>
+                </SourceField>
+                <TargetField>
                     <Field xsi:type="ns2:JavaField" name="othersubclass.bleh"
                         value="blerg" />
-                </OutputField>
+                </TargetField>
             </MapFieldMapping>
         </CollectionFieldMapping>
     </FieldMappings>

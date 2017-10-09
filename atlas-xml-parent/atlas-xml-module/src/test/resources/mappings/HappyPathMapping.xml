@@ -5,20 +5,20 @@
     <DataSource uri="atlas:xml:MockXml" dataSourceType="Target" />
     <Mappings>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="firstName" fieldType="String">
+            <SourceField xsi:type="ns2:XmlField" path="firstName" fieldType="String">
                 <ns2:Modifiers />
-            </InputField>
-            <OutputField xsi:type="ns2:XmlField" path="firstName" fieldType="String">
+            </SourceField>
+            <TargetField xsi:type="ns2:XmlField" path="firstName" fieldType="String">
                 <ns2:Modifiers />
-            </OutputField>
+            </TargetField>
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Mapping" mappingType="Separate">
-            <InputField xsi:type="ns2:XmlField" path="displayName" fieldType="String">
+            <SourceField xsi:type="ns2:XmlField" path="displayName" fieldType="String">
                 <ns2:Modifiers />
-            </InputField>
-            <OutputField xsi:type="ns2:XmlField" index="1" path="lastName" fieldType="String">
+            </SourceField>
+            <TargetField xsi:type="ns2:XmlField" index="1" path="lastName" fieldType="String">
                 <ns2:Modifiers />
-            </OutputField>
+            </TargetField>
         </Mapping>
     </Mappings>
     <LookupTables />

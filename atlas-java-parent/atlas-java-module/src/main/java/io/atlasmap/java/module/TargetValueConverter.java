@@ -22,104 +22,104 @@ import io.atlasmap.v2.LookupEntry;
 import io.atlasmap.v2.LookupTable;
 import io.atlasmap.v2.Mapping;
 
-public class OutputValueConverter implements JavaFieldWriterValueConverter {
-    private static final Logger logger = LoggerFactory.getLogger(OutputValueConverter.class);
+public class TargetValueConverter implements JavaFieldWriterValueConverter {
+    private static final Logger logger = LoggerFactory.getLogger(TargetValueConverter.class);
 
-    private Field inputField = null;
+    private Field sourceField = null;
     private AtlasSession session = null;
     private AtlasConversionService conversionService = null;
     private Mapping mapping = null;
 
-    public OutputValueConverter(Field inputField, AtlasSession session, Mapping mapping,
+    public TargetValueConverter(Field sourceField, AtlasSession session, Mapping mapping,
             AtlasConversionService conversionService) {
         super();
-        this.inputField = inputField;
+        this.sourceField = sourceField;
         this.session = session;
         this.mapping = mapping;
         this.conversionService = conversionService;
     }
 
     @Override
-    public Object convertValue(Object parentObject, Field outputField) throws AtlasException {
+    public Object convertValue(Object parentObject, Field targetField) throws AtlasException {
         // FIXME: this javafield cast is going to break for enum values.
-        return populateOutputValue(parentObject, inputField, outputField);
+        return populateTargetValue(parentObject, sourceField, targetField);
     }
 
-    protected Object populateOutputValue(Object parentObject, Field inputField, Field outputField)
+    protected Object populateTargetValue(Object parentObject, Field sourceField, Field targetField)
             throws AtlasException {
-        FieldType inputType = inputField.getFieldType();
-        Object inputValue = inputField.getValue();
+        FieldType sourceType = sourceField.getFieldType();
+        Object sourceValue = sourceField.getValue();
 
-        Object outputValue = null;
-        FieldType outputType = outputField.getFieldType();
+        Object targetValue = null;
+        FieldType targetType = targetField.getFieldType();
 
         if (logger.isDebugEnabled()) {
-            logger.debug("processOutputMapping iPath=" + inputField.getPath() + " iV=" + inputValue + " iT=" + inputType
-                    + " oPath=" + outputField.getPath() + " docId: " + outputField.getDocId());
+            logger.debug("processTargetMapping iPath=" + sourceField.getPath() + " iV=" + sourceValue + " iT=" + sourceType
+                    + " oPath=" + targetField.getPath() + " docId: " + targetField.getDocId());
         }
 
-        if (inputValue == null) {
+        if (sourceValue == null) {
             // TODO: Finish targetValue = null processing
-            logger.warn("Null sourceValue for field: " + outputField.getPath() + " docId: " + outputField.getDocId());
+            logger.warn("Null sourceValue for field: " + targetField.getPath() + " docId: " + targetField.getDocId());
             return null;
         }
 
-        String outputClassName = (outputField instanceof JavaField) ? ((JavaField) outputField).getClassName() : null;
-        outputClassName = (outputField instanceof JavaEnumField) ? ((JavaEnumField) outputField).getClassName()
-                : outputClassName;
-        if (outputType == null || outputClassName == null) {
+        String targetClassName = (targetField instanceof JavaField) ? ((JavaField) targetField).getClassName() : null;
+        targetClassName = (targetField instanceof JavaEnumField) ? ((JavaEnumField) targetField).getClassName()
+                : targetClassName;
+        if (targetType == null || targetClassName == null) {
             try {
-                Method setter = resolveOutputSetMethod(parentObject, outputField, null);
+                Method setter = resolveTargetSetMethod(parentObject, targetField, null);
                 if (setter != null && setter.getParameterCount() == 1) {
-                    if (outputField instanceof JavaField) {
-                        ((JavaField) outputField).setClassName(setter.getParameterTypes()[0].getName());
-                    } else if (outputField instanceof JavaEnumField) {
-                        ((JavaEnumField) outputField).setClassName(setter.getParameterTypes()[0].getName());
+                    if (targetField instanceof JavaField) {
+                        ((JavaField) targetField).setClassName(setter.getParameterTypes()[0].getName());
+                    } else if (targetField instanceof JavaEnumField) {
+                        ((JavaEnumField) targetField).setClassName(setter.getParameterTypes()[0].getName());
                     }
 
-                    outputType = conversionService.fieldTypeFromClass(setter.getParameterTypes()[0]);
-                    outputField.setFieldType(outputType);
+                    targetType = conversionService.fieldTypeFromClass(setter.getParameterTypes()[0]);
+                    targetField.setFieldType(targetType);
                     if (logger.isTraceEnabled()) {
-                        logger.trace("Auto-detected targetType as {} for class={} path={}", outputType,
-                                parentObject.toString(), outputField.getPath());
+                        logger.trace("Auto-detected targetType as {} for class={} path={}", targetType,
+                                parentObject.toString(), targetField.getPath());
                     }
                 }
             } catch (Exception e) {
                 logger.debug("Unable to auto-detect targetType for class={} path={}", parentObject.toString(),
-                        outputField.getPath());
+                        targetField.getPath());
             }
         }
 
-        if (inputField instanceof JavaEnumField || outputField instanceof JavaEnumField) {
-            if (!(inputField instanceof JavaEnumField) || !(outputField instanceof JavaEnumField)) {
+        if (sourceField instanceof JavaEnumField || targetField instanceof JavaEnumField) {
+            if (!(sourceField instanceof JavaEnumField) || !(targetField instanceof JavaEnumField)) {
                 throw new AtlasException(
                         "Value conversion between enum fields and non-enum fields is not yet supported.");
             }
-            return populateEnumValue((JavaEnumField) inputField, (JavaEnumField) outputField);
+            return populateEnumValue((JavaEnumField) sourceField, (JavaEnumField) targetField);
         }
 
         AtlasFieldActionService fieldActionService = session.getAtlasContext().getContextFactory()
                 .getFieldActionService();
         try {
-            outputValue = fieldActionService.processActions(outputField.getActions(), inputValue, outputType);
-            if (outputValue != null) {
-                FieldType conversionInputType = conversionService.fieldTypeFromClass(outputValue.getClass());
-                outputValue = conversionService.convertType(outputValue, conversionInputType, outputType);
+            targetValue = fieldActionService.processActions(targetField.getActions(), sourceValue, targetType);
+            if (targetValue != null) {
+                FieldType conversionSourceType = conversionService.fieldTypeFromClass(targetValue.getClass());
+                targetValue = conversionService.convertType(targetValue, conversionSourceType, targetType);
             }
         } catch (AtlasConversionException e) {
-            logger.error(String.format("Unable to auto-convert for sT=%s tT=%s tF=%s msg=%s", inputType, outputType,
-                    outputField.getPath(), e.getMessage()), e);
+            logger.error(String.format("Unable to auto-convert for sT=%s tT=%s tF=%s msg=%s", sourceType, targetType,
+                    targetField.getPath(), e.getMessage()), e);
             return null;
         }
 
-        return outputValue;
+        return targetValue;
     }
 
     @SuppressWarnings("unchecked")
-    private Object populateEnumValue(JavaEnumField inputField, JavaEnumField outputField) throws AtlasException {
-        if (inputField == null || inputField.getValue() == null) {
+    private Object populateEnumValue(JavaEnumField sourceField, JavaEnumField targetField) throws AtlasException {
+        if (sourceField == null || sourceField.getValue() == null) {
             if (logger.isDebugEnabled()) {
-                logger.debug("Input enum field or value is null, field: " + inputField);
+                logger.debug("Source enum field or value is null, field: " + sourceField);
             }
             return null;
         }
@@ -137,36 +137,36 @@ public class OutputValueConverter implements JavaFieldWriterValueConverter {
                     "Could not find lookup table with name '" + lookupTableName + "' for mapping: " + mapping);
         }
 
-        String inputValue = ((Enum<?>) inputField.getValue()).name();
-        String outputValue = null;
+        String sourceValue = ((Enum<?>) sourceField.getValue()).name();
+        String targetValue = null;
         for (LookupEntry e : table.getLookupEntry()) {
-            if (e.getSourceValue().equals(inputValue)) {
-                outputValue = e.getTargetValue();
+            if (e.getSourceValue().equals(sourceValue)) {
+                targetValue = e.getTargetValue();
                 break;
             }
         }
         if (logger.isDebugEnabled()) {
-            logger.debug("Mapped input enum value '" + inputValue + "' to output enum value '" + outputValue + "'.");
+            logger.debug("Mapped source enum value '" + sourceValue + "' to target enum value '" + targetValue + "'.");
         }
 
-        if (outputValue == null) {
+        if (targetValue == null) {
             return null;
         }
 
         @SuppressWarnings("rawtypes")
         Class enumClass = null;
         try {
-            enumClass = Class.forName(outputField.getClassName());
+            enumClass = Class.forName(targetField.getClassName());
         } catch (Exception e) {
             throw new AtlasException(
-                    "Could not find class for output field class '" + outputField.getClassName() + "'.", e);
+                    "Could not find class for target field class '" + targetField.getClassName() + "'.", e);
         }
 
-        return Enum.valueOf(enumClass, outputValue);
+        return Enum.valueOf(enumClass, targetValue);
 
     }
 
-    protected Method resolveOutputSetMethod(Object sourceObject, Field field, Class<?> targetType)
+    protected Method resolveTargetSetMethod(Object sourceObject, Field field, Class<?> targetType)
             throws AtlasException {
 
         PathUtil pathUtil = new PathUtil(field.getPath());

@@ -8,14 +8,14 @@
     <DataSource dataSourceType="Target" uri="atlas:json" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JsonField" path="/firstName"
+            <SourceField xsi:type="ns2:JsonField" path="/firstName"
                 docId="con" />
-            <OutputField xsi:type="ns2:JsonField" path="/firstName" />
+            <TargetField xsi:type="ns2:JsonField" path="/firstName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JsonField" path="/zipCode"
+            <SourceField xsi:type="ns2:JsonField" path="/zipCode"
                 docId="addr" />
-            <OutputField xsi:type="ns2:JsonField" path="/zipCode" />
+            <TargetField xsi:type="ns2:JsonField" path="/zipCode" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

@@ -41,10 +41,10 @@ public class XmlXmlCollectionConverstionTest extends AtlasMappingBaseTest {
         input += "</XmlOA>";
 
         AtlasSession session = context.createSession();
-        session.setInput(input);
+        session.setSource(input);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         String output = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>";
@@ -71,10 +71,10 @@ public class XmlXmlCollectionConverstionTest extends AtlasMappingBaseTest {
         input += "</XmlOA>";
 
         AtlasSession session = context.createSession();
-        session.setInput(input);
+        session.setSource(input);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
 
@@ -103,10 +103,10 @@ public class XmlXmlCollectionConverstionTest extends AtlasMappingBaseTest {
         input += "</XmlOA>";
 
         AtlasSession session = context.createSession();
-        session.setInput(input);
+        session.setSource(input);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         String output = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>";
@@ -129,7 +129,7 @@ public class XmlXmlCollectionConverstionTest extends AtlasMappingBaseTest {
         input += "</XmlOA>";
 
         AtlasSession session = context.createSession();
-        session.setInput(input);
+        session.setSource(input);
         context.process(session);
 
         String output = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>";
@@ -137,7 +137,7 @@ public class XmlXmlCollectionConverstionTest extends AtlasMappingBaseTest {
         output += "<contact><name>name76</name></contact>";
         output += "</XmlOA>";
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         assertEquals(output, (String) object);

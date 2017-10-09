@@ -94,27 +94,27 @@ public class XmlValidationServiceTest {
         Mapping sepMapping = AtlasModelFactory.createMapping(MappingType.SEPARATE);
 
         // MappedField
-        XmlField inputField = AtlasXmlModelFactory.createXmlField();
-        inputField.setFieldType(FieldType.STRING);
-        inputField.setPath("firstName");
+        XmlField sourceField = AtlasXmlModelFactory.createXmlField();
+        sourceField.setFieldType(FieldType.STRING);
+        sourceField.setPath("firstName");
 
-        XmlField outputField = AtlasXmlModelFactory.createXmlField();
-        outputField.setFieldType(FieldType.STRING);
-        outputField.setPath("firstName");
+        XmlField targetField = AtlasXmlModelFactory.createXmlField();
+        targetField.setFieldType(FieldType.STRING);
+        targetField.setPath("firstName");
 
-        mapMapping.getInputField().add(inputField);
-        mapMapping.getOutputField().add(outputField);
+        mapMapping.getSourceField().add(sourceField);
+        mapMapping.getTargetField().add(targetField);
 
         XmlField sIJavaField = AtlasXmlModelFactory.createXmlField();
         sIJavaField.setFieldType(FieldType.STRING);
         sIJavaField.setPath("displayName");
-        sepMapping.getInputField().add(sIJavaField);
+        sepMapping.getSourceField().add(sIJavaField);
 
         XmlField sOJavaField = AtlasXmlModelFactory.createXmlField();
         sOJavaField.setFieldType(FieldType.STRING);
         sOJavaField.setPath("lastName");
         sOJavaField.setIndex(1);
-        sepMapping.getOutputField().add(sOJavaField);
+        sepMapping.getTargetField().add(sOJavaField);
 
         mapping.getMappings().getMapping().add(mapMapping);
         mapping.getMappings().getMapping().add(sepMapping);
@@ -130,15 +130,15 @@ public class XmlValidationServiceTest {
 
     protected Mapping createMockMapping() {
         // Mock MappedField
-        MockField inputField = new MockField();
-        inputField.setName("input.name");
-        MockField outputField = new MockField();
-        outputField.setName("out.name");
+        MockField sourceField = new MockField();
+        sourceField.setName("source.name");
+        MockField targetField = new MockField();
+        targetField.setName("target.name");
 
         Mapping mapping = new Mapping();
         mapping.setMappingType(MappingType.MAP);
-        mapping.getInputField().add(inputField);
-        mapping.getOutputField().add(inputField);
+        mapping.getSourceField().add(sourceField);
+        mapping.getTargetField().add(sourceField);
         return mapping;
     }
 
@@ -224,7 +224,7 @@ public class XmlValidationServiceTest {
     }
 
     @Test
-    public void testValidateMappingInvalidSeparateInputFieldType() throws Exception {
+    public void testValidateMappingInvalidSeparateSourceFieldType() throws Exception {
         AtlasMapping atlasMapping = getAtlasMappingFullValid();
 
         Mapping separateFieldMapping = AtlasModelFactory.createMapping(MappingType.SEPARATE);
@@ -234,13 +234,13 @@ public class XmlValidationServiceTest {
         bIJavaField.setValue(Boolean.TRUE);
         bIJavaField.setPath("firstName");
 
-        separateFieldMapping.getInputField().add(bIJavaField);
+        separateFieldMapping.getSourceField().add(bIJavaField);
 
         XmlField sOJavaField = xmlModelFactory.createXmlField();
         sOJavaField.setFieldType(FieldType.STRING);
         sOJavaField.setPath("lastName");
         sOJavaField.setIndex(0);
-        separateFieldMapping.getOutputField().add(sOJavaField);
+        separateFieldMapping.getTargetField().add(sOJavaField);
 
         atlasMapping.getMappings().getMapping().add(separateFieldMapping);
 
@@ -255,13 +255,13 @@ public class XmlValidationServiceTest {
 
         Validation validation = validations.get(0);
         assertNotNull(validation);
-        assertEquals("Input.Field", validation.getField());
+        assertEquals("Source.Field", validation.getField());
         assertEquals("(BOOLEAN)", validation.getValue().toString());
-        assertEquals("Input field must be of type STRING for a Separate Mapping", validation.getMessage());
+        assertEquals("Source field must be of type STRING for a Separate Mapping", validation.getMessage());
         assertEquals(ValidationStatus.ERROR, validation.getStatus());
         validation = validations.get(1);
         assertNotNull(validation);
-        assertEquals("Field.Input/Output.conversion", validation.getField());
+        assertEquals("Field.Source/Target.conversion", validation.getField());
         assertEquals("(BOOLEAN) --> (STRING)", validation.getValue().toString());
         assertEquals("Conversion between source and target types is supported", validation.getMessage());
         assertEquals(ValidationStatus.INFO, validation.getStatus());
@@ -274,7 +274,7 @@ public class XmlValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        XmlField in = (XmlField) fieldMapping.getInputField().get(0);
+        XmlField in = (XmlField) fieldMapping.getSourceField().get(0);
         in.setFieldType(FieldType.CHAR);
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
@@ -297,15 +297,15 @@ public class XmlValidationServiceTest {
 
         XmlComplexType complex = xmlModelFactory.createXmlComplexType();
         complex.setFieldType(FieldType.COMPLEX);
-        XmlField in = (XmlField) fieldMapping.getInputField().get(0);
+        XmlField in = (XmlField) fieldMapping.getSourceField().get(0);
         complex.setXmlFields(new XmlFields());
         complex.setPath("/nest");
         complex.setName("nest");
         in.setPath("/nest/" + in.getPath());
         complex.getXmlFields().getXmlField().add(in);
-        fieldMapping.getInputField().set(0, complex);
+        fieldMapping.getSourceField().set(0, complex);
 
-        XmlField out = (XmlField) fieldMapping.getOutputField().get(0);
+        XmlField out = (XmlField) fieldMapping.getTargetField().get(0);
         out.setFieldType(FieldType.STRING);
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
@@ -315,7 +315,7 @@ public class XmlValidationServiceTest {
         assertTrue(validationHelper.hasWarnings());
         assertFalse(validationHelper.hasInfos());
         assertThat(1, is(validationHelper.getCount()));
-        assertTrue(validations.stream().anyMatch(me -> me.getField().equals("Field.Input/Output.conversion")));
+        assertTrue(validations.stream().anyMatch(me -> me.getField().equals("Field.Source/Target.conversion")));
 
         Long errorCount = validations.stream()
                 .filter(atlasMappingError -> atlasMappingError.getStatus().compareTo(ValidationStatus.WARN) == 0)
@@ -331,10 +331,10 @@ public class XmlValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        XmlField in = (XmlField) fieldMapping.getInputField().get(0);
+        XmlField in = (XmlField) fieldMapping.getSourceField().get(0);
         in.setFieldType(FieldType.DOUBLE);
 
-        XmlField out = (XmlField) fieldMapping.getOutputField().get(0);
+        XmlField out = (XmlField) fieldMapping.getTargetField().get(0);
         out.setFieldType(FieldType.LONG);
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
@@ -359,10 +359,10 @@ public class XmlValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        XmlField in = (XmlField) fieldMapping.getInputField().get(0);
+        XmlField in = (XmlField) fieldMapping.getSourceField().get(0);
         in.setFieldType(FieldType.STRING);
 
-        XmlField out = (XmlField) fieldMapping.getOutputField().get(0);
+        XmlField out = (XmlField) fieldMapping.getTargetField().get(0);
         out.setFieldType(FieldType.LONG);
 
         validations.addAll(sourceValidationService.validateMapping(mapping));
@@ -389,7 +389,7 @@ public class XmlValidationServiceTest {
 
         Mapping fieldMapping = (Mapping) mapping.getMappings().getMapping().get(0);
 
-        XmlField in = (XmlField) fieldMapping.getInputField().get(0);
+        XmlField in = (XmlField) fieldMapping.getSourceField().get(0);
         in.setPath(null);
 
         validations.addAll(sourceValidationService.validateMapping(mapping));

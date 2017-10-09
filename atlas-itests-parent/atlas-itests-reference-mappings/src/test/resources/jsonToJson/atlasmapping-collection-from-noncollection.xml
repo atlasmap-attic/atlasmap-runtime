@@ -8,10 +8,10 @@
             xsi:type="Collection" mappingType="Collection">
             <Mappings>
                 <Mapping xsi:type="Mapping" mappingType="Map">
-                    <InputField xsi:type="ns3:JsonField"
+                    <SourceField xsi:type="ns3:JsonField"
                         name="firstName" path="/contact/firstName"
                         fieldType="String" />
-                    <OutputField xsi:type="ns3:JsonField"
+                    <TargetField xsi:type="ns3:JsonField"
                         name="firstName" path="/contact&lt;&gt;/name"
                         fieldType="String" />
                 </Mapping>

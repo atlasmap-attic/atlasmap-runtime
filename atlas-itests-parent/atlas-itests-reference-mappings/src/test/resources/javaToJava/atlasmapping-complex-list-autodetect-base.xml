@@ -8,22 +8,22 @@
     <Mappings>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/numberOrders" />
-            <OutputField xsi:type="ns2:JavaField" path="/numberOrders" />
+            <SourceField xsi:type="ns2:JavaField" path="/numberOrders" />
+            <TargetField xsi:type="ns2:JavaField" path="/numberOrders" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/orderBatchNumber" />
-            <OutputField xsi:type="ns2:JavaField" path="/orderBatchNumber" />
+            <SourceField xsi:type="ns2:JavaField" path="/orderBatchNumber" />
+            <TargetField xsi:type="ns2:JavaField" path="/orderBatchNumber" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="ns2:JavaCollection" collectionType="List"
             mappingType="Collection">
             <Mappings>
                 <Mapping xsi:type="Mapping" mappingType="Map">
-                    <InputField xsi:type="ns2:JavaField"
+                    <SourceField xsi:type="ns2:JavaField"
                         path="/orders&lt;&gt;/orderId" />
-                    <OutputField xsi:type="ns2:JavaField"
+                    <TargetField xsi:type="ns2:JavaField"
                         path="/orders&lt;&gt;/orderId" />
                 </Mapping>
             </Mappings>

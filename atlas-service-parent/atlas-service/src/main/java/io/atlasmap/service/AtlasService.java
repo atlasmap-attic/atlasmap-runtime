@@ -328,15 +328,15 @@ public class AtlasService extends Application {
         AtlasConversionService conversionService = atlasContextFactory.getConversionService();
 
         Validations validations = new Validations();
-        List<Field> inputFields = new ArrayList<Field>();
-        List<Field> outputFields = new ArrayList<Field>();
+        List<Field> sourceFields = new ArrayList<Field>();
+        List<Field> targetFields = new ArrayList<Field>();
 
-        for (Field f : mapping.getInputField()) {
-            inputFields.add(f);
+        for (Field f : mapping.getSourceField()) {
+            sourceFields.add(f);
         }
 
-        for (Field f : mapping.getOutputField()) {
-            inputFields.add(f);
+        for (Field f : mapping.getTargetField()) {
+            sourceFields.add(f);
         }
 
         // if(mapping.get)
@@ -344,27 +344,27 @@ public class AtlasService extends Application {
         // mapping.getClass().getName());
         // }
 
-        if (inputFields == null || inputFields.isEmpty() || outputFields == null || outputFields.isEmpty()) {
+        if (sourceFields == null || sourceFields.isEmpty() || targetFields == null || targetFields.isEmpty()) {
             throw new WebApplicationException(
-                    "Must have one of inputField(s) and outputField(s) in order to check for available converter",
+                    "Must have one of sourceField(s) and targetField(s) in order to check for available converter",
                     Status.BAD_REQUEST);
         }
 
-        FieldType inputType = null;
-        FieldType outputType = null;
+        FieldType sourceType = null;
+        FieldType targetType = null;
 
-        for (Field inputField : inputFields) {
-            if (inputField instanceof JavaField) {
-                inputType = ((JavaField) inputField).getFieldType();
+        for (Field sourceField : sourceFields) {
+            if (sourceField instanceof JavaField) {
+                sourceType = ((JavaField) sourceField).getFieldType();
             }
 
-            for (Field outputField : outputFields) {
-                if (outputField instanceof JavaField) {
-                    outputType = ((JavaField) outputField).getFieldType();
+            for (Field targetField : targetFields) {
+                if (targetField instanceof JavaField) {
+                    targetType = ((JavaField) targetField).getFieldType();
                 }
 
-                Optional<AtlasConverter> optionalConverter = conversionService.findMatchingConverter(inputType,
-                        outputType);
+                Optional<AtlasConverter> optionalConverter = conversionService.findMatchingConverter(sourceType,
+                        targetType);
                 if (optionalConverter.isPresent()) {
                     AtlasConverter converter = optionalConverter.get();
                     // TODO: return "ok"

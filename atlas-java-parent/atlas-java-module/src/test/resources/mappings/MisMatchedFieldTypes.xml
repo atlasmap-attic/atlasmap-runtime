@@ -10,8 +10,8 @@
     <Mappings>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="MockField" name="input.name" />
-            <OutputField xsi:type="MockField" name="input.name" />
+            <SourceField xsi:type="MockField" name="source.name" />
+            <TargetField xsi:type="MockField" name="target.name" />
         </Mapping>
     </Mappings>
     <LookupTables />

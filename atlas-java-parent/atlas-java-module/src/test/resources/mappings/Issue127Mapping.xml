@@ -4,8 +4,8 @@
     <DataSource id="io.atlasmap.java.test.TargetTestClass" uri="atlas:java?className=io.atlasmap.java.module.MockJavaClass" dataSourceType="Target"/>
     <Mappings>        
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" name="firstName" docId="io.atlasmap.java.module.MockJavaClass" path="/firstName" fieldType="String"/>
-            <OutputField xsi:type="ns2:JavaField" name="id" docId="io.atlasmap.java.module.MockJavaClass" path="/id" fieldType="Integer"/>
+            <SourceField xsi:type="ns2:JavaField" name="firstName" docId="io.atlasmap.java.module.MockJavaClass" path="/firstName" fieldType="String"/>
+            <TargetField xsi:type="ns2:JavaField" name="id" docId="io.atlasmap.java.module.MockJavaClass" path="/id" fieldType="Integer"/>
         </Mapping>
     </Mappings>
     <LookupTables/>

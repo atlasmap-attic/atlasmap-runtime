@@ -10,25 +10,25 @@
     <Mappings>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="firstName"
+            <SourceField xsi:type="ns2:JavaField" path="firstName"
                 fieldType="String">
                 <ns2:Modifiers />
-            </InputField>
-            <OutputField xsi:type="ns2:JavaField" path="firstName"
+            </SourceField>
+            <TargetField xsi:type="ns2:JavaField" path="firstName"
                 fieldType="String">
                 <ns2:Modifiers />
-            </OutputField>
+            </TargetField>
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Separate">
-            <InputField xsi:type="ns2:JavaField" path="displayName"
+            <SourceField xsi:type="ns2:JavaField" path="displayName"
                 fieldType="String">
                 <ns2:Modifiers />
-            </InputField>
-            <OutputField xsi:type="ns2:JavaField" index="1"
+            </SourceField>
+            <TargetField xsi:type="ns2:JavaField" index="1"
                 path="lastName" fieldType="String">
                 <ns2:Modifiers />
-            </OutputField>
+            </TargetField>
         </Mapping>
     </Mappings>
     <LookupTables />

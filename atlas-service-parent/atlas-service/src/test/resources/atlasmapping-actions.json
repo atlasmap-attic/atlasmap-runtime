@@ -102,7 +102,7 @@
                 {
                     "jsonType": "io.atlasmap.v2.Mapping",
                     "mappingType": "MAP",
-                    "inputField": [
+                    "sourceField": [
                         {
                             "jsonType": "io.atlasmap.java.v2.JavaField",
                             "name": "firstName",
@@ -111,7 +111,7 @@
                             "docId": "DOC.SourceContact.918547"
                         }
                     ],
-                    "outputField": [
+                    "targetField": [
                         {
                             "jsonType": "io.atlasmap.java.v2.JavaField",
                             "name": "name",

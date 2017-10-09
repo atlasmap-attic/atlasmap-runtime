@@ -12,10 +12,10 @@
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" lookupTableName="1501135445385-589143"
             mappingType="Lookup">
-            <InputField xsi:type="ns2:JavaEnumField" name="statesLong"
+            <SourceField xsi:type="ns2:JavaEnumField" name="statesLong"
                 docId="io.atlasmap.java.test.TargetTestClass" path="/statesLong"
                 fieldType="Complex" />
-            <OutputField xsi:type="ns2:JavaEnumField" name="statesShort"
+            <TargetField xsi:type="ns2:JavaEnumField" name="statesShort"
                 docId="io.atlasmap.java.test.TargetTestClass" path="/statesShort"
                 fieldType="Complex" />
         </Mapping>

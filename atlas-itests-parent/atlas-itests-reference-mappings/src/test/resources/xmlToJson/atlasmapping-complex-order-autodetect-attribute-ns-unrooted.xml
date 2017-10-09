@@ -7,52 +7,52 @@
     <DataSource dataSourceType="Target" uri="atlas:json" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/ns:XmlOA/@orderId" />
-            <OutputField xsi:type="ns2:JsonField" path="/orderId" />
+            <SourceField xsi:type="ns3:XmlField" path="/ns:XmlOA/@orderId" />
+            <TargetField xsi:type="ns2:JsonField" path="/orderId" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOA/ns:Contact/@firstName" />
-            <OutputField xsi:type="ns2:JsonField" path="/contact/firstName" />
+            <TargetField xsi:type="ns2:JsonField" path="/contact/firstName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOA/ns:Contact/@lastName" />
-            <OutputField xsi:type="ns2:JsonField" path="/contact/lastName" />
+            <TargetField xsi:type="ns2:JsonField" path="/contact/lastName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOA/ns:Contact/@phoneNumber" />
-            <OutputField xsi:type="ns2:JsonField" path="/contact/phoneNumber" />
+            <TargetField xsi:type="ns2:JsonField" path="/contact/phoneNumber" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOA/ns:Contact/@zipCode" />
-            <OutputField xsi:type="ns2:JsonField" path="/contact/zipCode" />
+            <TargetField xsi:type="ns2:JsonField" path="/contact/zipCode" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOA/ns:Address/@addressLine1" />
-            <OutputField xsi:type="ns2:JsonField" path="/address/addressLine1" />
+            <TargetField xsi:type="ns2:JsonField" path="/address/addressLine1" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOA/ns:Address/@addressLine2" />
-            <OutputField xsi:type="ns2:JsonField" path="/address/addressLine2" />
+            <TargetField xsi:type="ns2:JsonField" path="/address/addressLine2" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/ns:XmlOA/ns:Address/@city" />
-            <OutputField xsi:type="ns2:JsonField" path="/address/city" />
+            <SourceField xsi:type="ns3:XmlField" path="/ns:XmlOA/ns:Address/@city" />
+            <TargetField xsi:type="ns2:JsonField" path="/address/city" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOA/ns:Address/@state" />
-            <OutputField xsi:type="ns2:JsonField" path="/address/state" />
+            <TargetField xsi:type="ns2:JsonField" path="/address/state" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/ns:XmlOA/ns:Address/@zipCode" />
-            <OutputField xsi:type="ns2:JsonField" path="/address/zipCode" />
+            <TargetField xsi:type="ns2:JsonField" path="/address/zipCode" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

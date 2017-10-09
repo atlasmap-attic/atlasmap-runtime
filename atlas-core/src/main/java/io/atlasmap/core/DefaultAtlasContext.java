@@ -169,8 +169,8 @@ public class DefaultAtlasContext implements AtlasContext, AtlasContextMXBean {
          * logger.error(String.format("Aborting processing due to %s errors",
          * session.errorCount())); return; }
          */
-        getSourceModule().processPreInputExecution(session);
-        getTargetModule().processPreOutputExecution(session);
+        getSourceModule().processPreSourceExecution(session);
+        getTargetModule().processPreTargetExecution(session);
 
         // TODO: Finish validations
         /*
@@ -180,9 +180,9 @@ public class DefaultAtlasContext implements AtlasContext, AtlasContextMXBean {
          */
 
         for (BaseMapping mapping : session.getMapping().getMappings().getMapping()) {
-            getSourceModule().processInputMapping(session, mapping);
-            getSourceModule().processInputActions(session, mapping);
-            getTargetModule().processOutputMapping(session, mapping);
+            getSourceModule().processSourceMapping(session, mapping);
+            getSourceModule().processSourceActions(session, mapping);
+            getTargetModule().processTargetMapping(session, mapping);
 
             if (session.hasErrors()) {
                 logger.error(String.format("Aborting processing due to %s errors", session.errorCount()));
@@ -200,8 +200,8 @@ public class DefaultAtlasContext implements AtlasContext, AtlasContextMXBean {
          * session.errorCount())); return; }
          */
 
-        getSourceModule().processPostInputExecution(session);
-        getTargetModule().processPostOutputExecution(session);
+        getSourceModule().processPostSourceExecution(session);
+        getTargetModule().processPostTargetExecution(session);
 
         if (logger.isDebugEnabled()) {
             logger.debug("End process " + (session == null ? null : session.toString()));

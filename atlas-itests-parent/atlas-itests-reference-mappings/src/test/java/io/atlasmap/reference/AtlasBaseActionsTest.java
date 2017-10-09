@@ -46,8 +46,8 @@ import io.atlasmap.v2.Uppercase;
 
 public abstract class AtlasBaseActionsTest extends AtlasMappingBaseTest {
 
-    protected Field inputField = null;
-    protected Field outputField = null;
+    protected Field sourceField = null;
+    protected Field targetField = null;
     protected String docURI = null;
     protected boolean stringLengthTestResultIsInteger = false;
 
@@ -124,11 +124,11 @@ public abstract class AtlasBaseActionsTest extends AtlasMappingBaseTest {
 
         Mapping m = new Mapping();
         m.setMappingType(MappingType.MAP);
-        m.getInputField().add(this.inputField);
-        m.getOutputField().add(this.outputField);
+        m.getSourceField().add(this.sourceField);
+        m.getTargetField().add(this.targetField);
         if (actions != null) {
-            m.getOutputField().get(0).setActions(new Actions());
-            m.getOutputField().get(0).getActions().getActions().addAll(actions);
+            m.getTargetField().get(0).setActions(new Actions());
+            m.getTargetField().get(0).getActions().getActions().addAll(actions);
         }
 
         DataSource src = new DataSource();
@@ -152,10 +152,10 @@ public abstract class AtlasBaseActionsTest extends AtlasMappingBaseTest {
 
         AtlasContext context = atlasContextFactory.createContext(new File(tmpFile).toURI());
         AtlasSession session = context.createSession();
-        session.setInput(createInput(inputFirstName));
+        session.setSource(createInput(inputFirstName));
         context.process(session);
 
-        Object outputActual = session.getOutput();
+        Object outputActual = session.getTarget();
         assertNotNull(outputActual);
         outputActual = getOutputValue(outputActual);
         if (outputExpected != null) {
@@ -170,7 +170,7 @@ public abstract class AtlasBaseActionsTest extends AtlasMappingBaseTest {
         this.runActionTest(new StringLength(), "fname", stringLengthTestResultIsInteger ? 5 : "5");
     }
 
-    public abstract Object createInput(String inputFirstName);
+    public abstract Object createInput(String sourceFirstName);
 
     public abstract Object getOutputValue(Object output);
 }

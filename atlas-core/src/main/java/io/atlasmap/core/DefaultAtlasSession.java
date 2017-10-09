@@ -36,8 +36,8 @@ public class DefaultAtlasSession implements AtlasSession {
     private Audits audits;
     private Validations validations;
     private Map<String, Object> properties;
-    private Map<String, Object> inputMap = new HashMap<String, Object>();
-    private Map<String, Object> outputMap = new HashMap<String, Object>();
+    private Map<String, Object> sourceMap = new HashMap<String, Object>();
+    private Map<String, Object> targetMap = new HashMap<String, Object>();
 
     public DefaultAtlasSession(AtlasMapping mapping) {
         initialize();
@@ -86,63 +86,63 @@ public class DefaultAtlasSession implements AtlasSession {
     }
 
     @Override
-    public Object getInput() {
-        return inputMap.get(AtlasConstants.DEFAULT_SOURCE_DOC_ID);
+    public Object getSource() {
+        return sourceMap.get(AtlasConstants.DEFAULT_SOURCE_DOC_ID);
     }
 
     @Override
-    public Object getInput(String docId) {
-        return inputMap.get(docId);
+    public Object getSource(String docId) {
+        return sourceMap.get(docId);
     }
 
     @Override
-    public boolean hasInput(String docId) {
-        return inputMap.containsKey(docId);
+    public boolean hasSource(String docId) {
+        return sourceMap.containsKey(docId);
     }
 
     @Override
-    public Map<String, Object> getInputMap() {
-        return Collections.unmodifiableMap(inputMap);
+    public Map<String, Object> getSourceMap() {
+        return Collections.unmodifiableMap(sourceMap);
     }
 
     @Override
-    public Object getOutput() {
-        return outputMap.get(AtlasConstants.DEFAULT_TARGET_DOC_ID);
+    public Object getTarget() {
+        return targetMap.get(AtlasConstants.DEFAULT_TARGET_DOC_ID);
     }
 
     @Override
-    public Object getOutput(String docId) {
-        return outputMap.get(docId);
+    public Object getTarget(String docId) {
+        return targetMap.get(docId);
     }
 
     @Override
-    public boolean hasOutput(String docId) {
-        return outputMap.containsKey(docId);
+    public boolean hasTarget(String docId) {
+        return targetMap.containsKey(docId);
     }
 
     @Override
-    public Map<String, Object> getOutputMap() {
-        return Collections.unmodifiableMap(outputMap);
+    public Map<String, Object> getTargetMap() {
+        return Collections.unmodifiableMap(targetMap);
     }
 
     @Override
-    public void setInput(Object input) {
-        this.inputMap.put(AtlasConstants.DEFAULT_SOURCE_DOC_ID, input);
+    public void setSource(Object source) {
+        this.sourceMap.put(AtlasConstants.DEFAULT_SOURCE_DOC_ID, source);
     }
 
     @Override
-    public void setInput(Object inputObject, String docId) {
-        this.inputMap.put(docId, inputObject);
+    public void setSource(Object source, String docId) {
+        this.sourceMap.put(docId, source);
     }
 
     @Override
-    public void setOutput(Object output) {
-        this.outputMap.put(AtlasConstants.DEFAULT_TARGET_DOC_ID, output);
+    public void setTarget(Object target) {
+        this.targetMap.put(AtlasConstants.DEFAULT_TARGET_DOC_ID, target);
     }
 
     @Override
-    public void setOutput(Object outputObject, String docId) {
-        this.outputMap.put(docId, outputObject);
+    public void setTarget(Object target, String docId) {
+        this.targetMap.put(docId, target);
     }
 
     @Override

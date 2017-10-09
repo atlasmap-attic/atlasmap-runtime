@@ -83,11 +83,11 @@ public class AtlasMappingServiceTest {
         BaseMapping m = mapping.getMappings().getMapping().get(0);
         Assert.assertEquals(MappingType.MAP, m.getMappingType());
         Assert.assertEquals(Mapping.class, m.getClass());
-        Assert.assertNotNull(((Mapping) m).getInputField());
-        Field input = ((Mapping) m).getInputField().get(0);
-        Assert.assertEquals("/orderId", input.getPath());
-        Assert.assertNotNull(((Mapping) m).getOutputField());
-        Field output = ((Mapping) m).getOutputField().get(0);
-        Assert.assertEquals("/orderId", output.getPath());
+        Assert.assertNotNull(((Mapping) m).getSourceField());
+        Field source = ((Mapping) m).getSourceField().get(0);
+        Assert.assertEquals("/orderId", source.getPath());
+        Assert.assertNotNull(((Mapping) m).getTargetField());
+        Field target = ((Mapping) m).getTargetField().get(0);
+        Assert.assertEquals("/orderId", target.getPath());
     }
 }

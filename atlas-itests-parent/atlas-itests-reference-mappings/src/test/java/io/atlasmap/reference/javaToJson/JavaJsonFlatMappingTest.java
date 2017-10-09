@@ -57,8 +57,8 @@ public class JavaJsonFlatMappingTest extends AtlasMappingBaseTest {
         // Add fieldMappings
         for (String fieldName : FLAT_FIELDS) {
             Mapping mfm = AtlasModelFactory.createMapping(MappingType.MAP);
-            mfm.getInputField().add(generateJavaField("/" + fieldName));
-            mfm.getOutputField().add(generateJsonField("/" + fieldName));
+            mfm.getSourceField().add(generateJavaField("/" + fieldName));
+            mfm.getTargetField().add(generateJsonField("/" + fieldName));
             mappings.add(mfm);
         }
 
@@ -155,10 +155,10 @@ public class JavaJsonFlatMappingTest extends AtlasMappingBaseTest {
                 .createContext(new File("src/test/resources/javaToJson/atlasmapping-flatprimitive-unrooted.xml"));
 
         AtlasSession session = context.createSession();
-        session.setInput(generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class));
+        session.setSource(generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class));
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();
@@ -172,10 +172,10 @@ public class JavaJsonFlatMappingTest extends AtlasMappingBaseTest {
                 .createContext(new File("src/test/resources/javaToJson/atlasmapping-flatprimitive-rooted.xml"));
 
         AtlasSession session = context.createSession();
-        session.setInput(generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class));
+        session.setSource(generateFlatPrimitiveClass(SourceFlatPrimitiveClass.class));
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestRootedMapper testMapper = new AtlasJsonTestRootedMapper();
@@ -189,10 +189,10 @@ public class JavaJsonFlatMappingTest extends AtlasMappingBaseTest {
                 .createContext(new File("src/test/resources/javaToJson/atlasmapping-boxedflatprimitive-unrooted.xml"));
 
         AtlasSession session = context.createSession();
-        session.setInput(generateFlatPrimitiveClassBoxedPrimitiveFieldsBoxedValues(SourceFlatPrimitiveClass.class));
+        session.setSource(generateFlatPrimitiveClassBoxedPrimitiveFieldsBoxedValues(SourceFlatPrimitiveClass.class));
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestUnrootedMapper testMapper = new AtlasJsonTestUnrootedMapper();
@@ -206,10 +206,10 @@ public class JavaJsonFlatMappingTest extends AtlasMappingBaseTest {
                 .createContext(new File("src/test/resources/javaToJson/atlasmapping-boxedflatprimitive-rooted.xml"));
 
         AtlasSession session = context.createSession();
-        session.setInput(generateFlatPrimitiveClassBoxedPrimitiveFieldsBoxedValues(SourceFlatPrimitiveClass.class));
+        session.setSource(generateFlatPrimitiveClassBoxedPrimitiveFieldsBoxedValues(SourceFlatPrimitiveClass.class));
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         AtlasJsonTestRootedMapper testMapper = new AtlasJsonTestRootedMapper();

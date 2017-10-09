@@ -8,8 +8,8 @@ import io.atlasmap.v2.FieldType;
 public class JsonJsonFieldActionsTest extends AtlasBaseActionsTest {
 
     public JsonJsonFieldActionsTest() {
-        this.inputField = createField("/contact/firstName");
-        this.outputField = createField("/contact/firstName");
+        this.sourceField = createField("/contact/firstName");
+        this.targetField = createField("/contact/firstName");
         this.docURI = "atlas:json";
     }
 

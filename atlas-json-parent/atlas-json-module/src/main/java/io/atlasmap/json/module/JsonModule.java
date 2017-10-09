@@ -60,12 +60,12 @@ public class JsonModule extends BaseAtlasModule {
     private static final Logger logger = LoggerFactory.getLogger(JsonModule.class);
 
     @Override
-    public void processPreOutputExecution(AtlasSession session) throws AtlasException {
+    public void processPreTargetExecution(AtlasSession session) throws AtlasException {
         JsonFieldWriter writer = new JsonFieldWriter();
-        session.setOutput(writer);
+        session.setTarget(writer);
 
         if (logger.isDebugEnabled()) {
-            logger.debug("processPreOutputExcution completed");
+            logger.debug("processPreTargetExcution completed");
         }
     }
 
@@ -93,22 +93,22 @@ public class JsonModule extends BaseAtlasModule {
     }
 
     @Override
-    public void processInputMapping(AtlasSession session, BaseMapping baseMapping) throws AtlasException {
-        for (Mapping mapping : this.generateInputMappings(session, baseMapping)) {
-            if (mapping.getInputField() == null || mapping.getInputField().isEmpty()
-                    || mapping.getInputField().size() != 1) {
+    public void processSourceMapping(AtlasSession session, BaseMapping baseMapping) throws AtlasException {
+        for (Mapping mapping : this.generateSourceMappings(session, baseMapping)) {
+            if (mapping.getSourceField() == null || mapping.getSourceField().isEmpty()
+                    || mapping.getSourceField().size() != 1) {
                 addAudit(session, null,
-                        String.format("Mapping does not contain exactly one input field alias=%s desc=%s",
+                        String.format("Mapping does not contain exactly one source field alias=%s desc=%s",
                                 mapping.getAlias(), mapping.getDescription()),
                         null, AuditStatus.WARN, null);
                 return;
             }
 
-            Field field = mapping.getInputField().get(0);
+            Field field = mapping.getSourceField().get(0);
 
             if (!isSupportedField(field)) {
                 addAudit(session, field.getDocId(),
-                        String.format("Unsupported input field type=%s", field.getClass().getName()), field.getPath(),
+                        String.format("Unsupported source field type=%s", field.getClass().getName()), field.getPath(),
                         AuditStatus.ERROR, null);
                 return;
             }
@@ -116,7 +116,7 @@ public class JsonModule extends BaseAtlasModule {
             if (field instanceof ConstantField) {
                 processConstantField(session, mapping);
                 if (logger.isDebugEnabled()) {
-                    logger.debug("Processed input constantField sPath=" + field.getPath() + " sV=" + field.getValue()
+                    logger.debug("Processed source constantField sPath=" + field.getPath() + " sV=" + field.getValue()
                             + " sT=" + field.getFieldType() + " docId: " + field.getDocId());
                 }
                 continue;
@@ -126,131 +126,131 @@ public class JsonModule extends BaseAtlasModule {
                 processPropertyField(session, mapping,
                         session.getAtlasContext().getContextFactory().getPropertyStrategy());
                 if (logger.isDebugEnabled()) {
-                    logger.debug("Processed input propertyField sPath=" + field.getPath() + " sV=" + field.getValue()
+                    logger.debug("Processed source propertyField sPath=" + field.getPath() + " sV=" + field.getValue()
                             + " sT=" + field.getFieldType() + " docId: " + field.getDocId());
                 }
                 continue;
             }
 
-            JsonField inputField = (JsonField) field;
+            JsonField sourceField = (JsonField) field;
 
             Object sourceObject = null;
-            if (field.getDocId() != null && session.hasInput(field.getDocId())) {
-                // Use docId only when it exists, otherwise use default input
-                sourceObject = session.getInput(field.getDocId());
+            if (field.getDocId() != null && session.hasSource(field.getDocId())) {
+                // Use docId only when it exists, otherwise use default source
+                sourceObject = session.getSource(field.getDocId());
             } else {
-                sourceObject = session.getInput();
+                sourceObject = session.getSource();
             }
 
             if (sourceObject == null || !(sourceObject instanceof String)) {
                 addAudit(session, field.getDocId(),
-                        String.format("Unsupported input object type=%s", field.getClass().getName()), field.getPath(),
+                        String.format("Unsupported source object type=%s", field.getClass().getName()), field.getPath(),
                         AuditStatus.ERROR, null);
                 return;
             }
 
             String document = (String) sourceObject;
 
-            Map<String, String> sourceUriParams = AtlasUtil
-                    .getUriParameters(session.getMapping().getDataSource().get(0).getUri());
+//            Map<String, String> sourceUriParams = AtlasUtil
+//                    .getUriParameters(session.getMapping().getDataSource().get(0).getUri());
 
             JsonFieldReader djfr = new JsonFieldReader();
-            djfr.read(document, inputField);
+            djfr.read(document, sourceField);
 
             // NOTE: This shouldn't happen
-            if (inputField.getFieldType() == null) {
+            if (sourceField.getFieldType() == null) {
                 logger.warn(
                         String.format("FieldType detection was unsuccessful for p=%s falling back to type UNSUPPORTED",
-                                inputField.getPath()));
-                inputField.setFieldType(FieldType.UNSUPPORTED);
+                                sourceField.getPath()));
+                sourceField.setFieldType(FieldType.UNSUPPORTED);
             }
 
             if (logger.isDebugEnabled()) {
-                logger.debug("Processed input field sPath=" + field.getPath() + " sV=" + field.getValue() + " sT="
+                logger.debug("Processed source field sPath=" + field.getPath() + " sV=" + field.getValue() + " sT="
                         + field.getFieldType() + " docId: " + field.getDocId());
             }
         }
     }
 
     @Override
-    public void processOutputMapping(AtlasSession session, BaseMapping baseMapping) throws AtlasException {
+    public void processTargetMapping(AtlasSession session, BaseMapping baseMapping) throws AtlasException {
 
         JsonFieldWriter writer = null;
-        if (session.getOutput() == null) {
+        if (session.getTarget() == null) {
             writer = new JsonFieldWriter();
-            session.setOutput(writer);
-        } else if (session.getOutput() != null && session.getOutput() instanceof JsonFieldWriter) {
-            writer = (JsonFieldWriter) session.getOutput();
+            session.setTarget(writer);
+        } else if (session.getTarget() != null && session.getTarget() instanceof JsonFieldWriter) {
+            writer = (JsonFieldWriter) session.getTarget();
         } else {
             addAudit(session, null,
-                    String.format("Unsupported output object type=%s", session.getOutput().getClass().getName()), null,
+                    String.format("Unsupported target object type=%s", session.getTarget().getClass().getName()), null,
                     AuditStatus.ERROR, null);
             return;
         }
 
-        for (Mapping mapping : this.getOutputMappings(session, baseMapping)) {
-            if (mapping.getOutputField() == null || mapping.getOutputField().isEmpty()) {
+        for (Mapping mapping : this.getTargetMappings(session, baseMapping)) {
+            if (mapping.getTargetField() == null || mapping.getTargetField().isEmpty()) {
                 addAudit(session, null,
-                        String.format("Mapping does not contain at least one output field alias=%s desc=%s",
+                        String.format("Mapping does not contain at least one target field alias=%s desc=%s",
                                 mapping.getAlias(), mapping.getDescription()),
                         null, AuditStatus.ERROR, null);
                 return;
             }
 
-            Field outputField = mapping.getOutputField().get(0);
-            if (!(outputField instanceof JsonField)) {
-                addAudit(session, outputField.getDocId(),
-                        String.format("Unsupported output field type=%s", outputField.getClass().getName()),
-                        outputField.getPath(), AuditStatus.ERROR, null);
-                logger.error(String.format("Unsupported field type %s", outputField.getClass().getName()));
+            Field targetField = mapping.getTargetField().get(0);
+            if (!(targetField instanceof JsonField)) {
+                addAudit(session, targetField.getDocId(),
+                        String.format("Unsupported target field type=%s", targetField.getClass().getName()),
+                        targetField.getPath(), AuditStatus.ERROR, null);
+                logger.error(String.format("Unsupported field type %s", targetField.getClass().getName()));
                 return;
             }
 
             switch (mapping.getMappingType()) {
             case MAP:
-                Field inField = mapping.getInputField().get(0);
-                if (inField.getValue() == null) {
+                Field sourceField = mapping.getSourceField().get(0);
+                if (sourceField.getValue() == null) {
                     continue;
                 }
 
-                // Attempt to Auto-detect field type based on input value
-                if (outputField.getFieldType() == null && inField.getValue() != null) {
-                    outputField.setFieldType(getConversionService().fieldTypeFromClass(inField.getValue().getClass()));
+                // Attempt to Auto-detect field type based on source value
+                if (targetField.getFieldType() == null && sourceField.getValue() != null) {
+                    targetField.setFieldType(getConversionService().fieldTypeFromClass(sourceField.getValue().getClass()));
                 }
 
-                Object outputValue = null;
+                Object targetValue = null;
 
                 // Do auto-conversion
-                if (inField.getFieldType() != null && inField.getFieldType().equals(outputField.getFieldType())) {
-                    outputValue = inField.getValue();
+                if (sourceField.getFieldType() != null && sourceField.getFieldType().equals(targetField.getFieldType())) {
+                    targetValue = sourceField.getValue();
                 } else {
                     try {
-                        outputValue = getConversionService().convertType(inField.getValue(), inField.getFieldType(),
-                                outputField.getFieldType());
+                        targetValue = getConversionService().convertType(sourceField.getValue(), sourceField.getFieldType(),
+                                targetField.getFieldType());
                     } catch (AtlasConversionException e) {
                         logger.error(String.format("Unable to auto-convert for iT=%s oT=%s oF=%s msg=%s",
-                                inField.getFieldType(), outputField.getFieldType(), outputField.getPath(),
+                                sourceField.getFieldType(), targetField.getFieldType(), targetField.getPath(),
                                 e.getMessage()), e);
                         continue;
                     }
                 }
 
-                outputField.setValue(outputValue);
+                targetField.setValue(targetValue);
 
-                if (outputField.getActions() != null && outputField.getActions().getActions() != null
-                        && !outputField.getActions().getActions().isEmpty()) {
+                if (targetField.getActions() != null && targetField.getActions().getActions() != null
+                        && !targetField.getActions().getActions().isEmpty()) {
                     processFieldActions(session.getAtlasContext().getContextFactory().getFieldActionService(),
-                            outputField);
+                            targetField);
                 }
 
-                writer.write((JsonField) outputField);
+                writer.write((JsonField) targetField);
                 break;
             case COMBINE:
-                processCombineField(session, mapping, mapping.getInputField(), outputField);
+                processCombineField(session, mapping, mapping.getSourceField(), targetField);
                 SimpleField combinedField = new SimpleField();
                 combinedField.setFieldType(FieldType.STRING);
-                combinedField.setPath(outputField.getPath());
-                combinedField.setValue(outputField.getValue());
+                combinedField.setPath(targetField.getPath());
+                combinedField.setValue(targetField.getValue());
 
                 if (combinedField.getActions() != null && combinedField.getActions().getActions() != null
                         && !combinedField.getActions().getActions().isEmpty()) {
@@ -261,44 +261,44 @@ public class JsonModule extends BaseAtlasModule {
                 writer.write(combinedField);
                 break;
             case LOOKUP:
-                Field inputFieldlkp = mapping.getInputField().get(0);
-                if (inputFieldlkp.getValue() != null
-                        && inputFieldlkp.getValue().getClass().isAssignableFrom(String.class)) {
-                    processLookupField(session, mapping.getLookupTableName(), (String) inputFieldlkp.getValue(),
-                            outputField);
+                Field sourceFieldLkp = mapping.getSourceField().get(0);
+                if (sourceFieldLkp.getValue() != null
+                        && sourceFieldLkp.getValue().getClass().isAssignableFrom(String.class)) {
+                    processLookupField(session, mapping.getLookupTableName(), (String) sourceFieldLkp.getValue(),
+                            targetField);
                 } else {
                     processLookupField(session, mapping.getLookupTableName(), (String) getConversionService()
-                            .convertType(inputFieldlkp.getValue(), inputFieldlkp.getFieldType(), FieldType.STRING),
-                            outputField);
+                            .convertType(sourceFieldLkp.getValue(), sourceFieldLkp.getFieldType(), FieldType.STRING),
+                            targetField);
                 }
 
-                if (outputField.getActions() != null && outputField.getActions().getActions() != null
-                        && !outputField.getActions().getActions().isEmpty()) {
+                if (targetField.getActions() != null && targetField.getActions().getActions() != null
+                        && !targetField.getActions().getActions().isEmpty()) {
                     processFieldActions(session.getAtlasContext().getContextFactory().getFieldActionService(),
-                            outputField);
+                            targetField);
                 }
 
-                writer.write(outputField);
+                writer.write(targetField);
                 break;
             case SEPARATE:
-                Field inputFieldsep = mapping.getInputField().get(0);
-                for (Field outputFieldsep : mapping.getOutputField()) {
-                    Field separateField = processSeparateField(session, mapping, inputFieldsep, outputFieldsep);
+                Field sourceFieldSep = mapping.getSourceField().get(0);
+                for (Field targetFieldSep : mapping.getTargetField()) {
+                    Field separateField = processSeparateField(session, mapping, sourceFieldSep, targetFieldSep);
                     if (separateField == null) {
                         continue;
                     }
 
-                    outputFieldsep.setValue(separateField.getValue());
-                    if (outputFieldsep.getFieldType() == null) {
-                        outputFieldsep.setFieldType(separateField.getFieldType());
+                    targetFieldSep.setValue(separateField.getValue());
+                    if (targetFieldSep.getFieldType() == null) {
+                        targetFieldSep.setFieldType(separateField.getFieldType());
                     }
 
-                    if (outputFieldsep.getActions() != null && outputFieldsep.getActions().getActions() != null
-                            && !outputFieldsep.getActions().getActions().isEmpty()) {
+                    if (targetFieldSep.getActions() != null && targetFieldSep.getActions().getActions() != null
+                            && !targetFieldSep.getActions().getActions().isEmpty()) {
                         processFieldActions(session.getAtlasContext().getContextFactory().getFieldActionService(),
-                                outputFieldsep);
+                                targetFieldSep);
                     }
-                    writer.write(outputFieldsep);
+                    writer.write(targetFieldSep);
                 }
                 break;
             default:
@@ -307,14 +307,14 @@ public class JsonModule extends BaseAtlasModule {
             }
 
             if (logger.isDebugEnabled()) {
-                logger.debug(String.format("Processed output field oP=%s oV=%s oT=%s docId: %s", outputField.getPath(),
-                        outputField.getValue(), outputField.getFieldType(), outputField.getDocId()));
+                logger.debug(String.format("Processed target field oP=%s oV=%s oT=%s docId: %s", targetField.getPath(),
+                        targetField.getValue(), targetField.getFieldType(), targetField.getDocId()));
             }
         }
     }
 
     @Override
-    public void processPostOutputExecution(AtlasSession session) throws AtlasException {
+    public void processPostTargetExecution(AtlasSession session) throws AtlasException {
 
         List<String> docIds = new ArrayList<String>();
         for (DataSource ds : session.getMapping().getDataSource()) {
@@ -324,27 +324,27 @@ public class JsonModule extends BaseAtlasModule {
         }
 
         // for(String docId : docIds) {
-        // Object output = session.getOutput(docId);
-        Object output = session.getOutput();
-        if (output instanceof JsonFieldWriter) {
-            if (((JsonFieldWriter) output).getRootNode() != null) {
-                String outputBody = ((JsonFieldWriter) output).getRootNode().toString();
-                session.setOutput(outputBody);
+        // Object target = session.getTarget(docId);
+        Object target = session.getTarget();
+        if (target instanceof JsonFieldWriter) {
+            if (((JsonFieldWriter) target).getRootNode() != null) {
+                String targetBody = ((JsonFieldWriter) target).getRootNode().toString();
+                session.setTarget(targetBody);
                 if (logger.isDebugEnabled()) {
-                    logger.debug(String.format("processPostOutputExecution converting JsonNode to string size=%s",
-                            outputBody.length()));
+                    logger.debug(String.format("processPostTargetExecution converting JsonNode to string size=%s",
+                            targetBody.length()));
                 }
             } else {
                 // TODO: handle error where rootnode on DocumentJsonFieldWriter is set to null
                 // (which should never happen).
             }
         } else {
-            logger.error("DocumentJsonFieldWriter object expected for Json output data source");
+            logger.error("DocumentJsonFieldWriter object expected for Json target data source");
         }
         // }
 
         if (logger.isDebugEnabled()) {
-            logger.debug("processPostOutputExecution completed");
+            logger.debug("processPostTargetExecution completed");
         }
     }
 
@@ -370,11 +370,11 @@ public class JsonModule extends BaseAtlasModule {
     @Override
     public int getCollectionSize(AtlasSession session, Field field) throws AtlasException {
         String sourceDocument = null;
-        if (field.getDocId() != null && session.hasInput(field.getDocId())) {
-            // Use docId only when it exists, otherwise use default input
-            sourceDocument = (String) session.getInput(field.getDocId());
+        if (field.getDocId() != null && session.hasSource(field.getDocId())) {
+            // Use docId only when it exists, otherwise use default source
+            sourceDocument = (String) session.getSource(field.getDocId());
         } else {
-            sourceDocument = (String) session.getInput();
+            sourceDocument = (String) session.getSource();
         }
 
         // make this a JSON document

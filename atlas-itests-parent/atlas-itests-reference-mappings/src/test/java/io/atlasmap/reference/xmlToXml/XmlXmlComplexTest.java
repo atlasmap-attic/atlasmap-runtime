@@ -39,10 +39,10 @@ public class XmlXmlComplexTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         String sourceXml = AtlasTestUtil
                 .loadFileAsString("src/test/resources/xmlToXml/atlas-xml-complex-order-autodetect-attribute.xml");
-        session.setInput(sourceXml);
+        session.setSource(sourceXml);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         assertEquals(
@@ -59,10 +59,10 @@ public class XmlXmlComplexTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         String sourceXml = AtlasTestUtil
                 .loadFileAsString("src/test/resources/xmlToXml/atlas-xml-complex-order-autodetect-element.xml");
-        session.setInput(sourceXml);
+        session.setSource(sourceXml);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         assertEquals(
@@ -79,10 +79,10 @@ public class XmlXmlComplexTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         String sourceXml = AtlasTestUtil
                 .loadFileAsString("src/test/resources/xmlToXml/atlas-xml-complex-order-autodetect-attribute-ns.xml");
-        session.setInput(sourceXml);
+        session.setSource(sourceXml);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         JAXBElement<XmlOrderElement> xmlOE = (JAXBElement<XmlOrderElement>) AtlasXmlTestHelper
@@ -99,10 +99,10 @@ public class XmlXmlComplexTest extends AtlasMappingBaseTest {
         AtlasSession session = context.createSession();
         String sourceXml = AtlasTestUtil
                 .loadFileAsString("src/test/resources/xmlToXml/atlas-xml-complex-order-autodetect-element-ns.xml");
-        session.setInput(sourceXml);
+        session.setSource(sourceXml);
         context.process(session);
 
-        Object object = session.getOutput();
+        Object object = session.getTarget();
         assertNotNull(object);
         assertTrue(object instanceof String);
         JAXBElement<XmlOrderAttribute> xmlOA = (JAXBElement<XmlOrderAttribute>) AtlasXmlTestHelper

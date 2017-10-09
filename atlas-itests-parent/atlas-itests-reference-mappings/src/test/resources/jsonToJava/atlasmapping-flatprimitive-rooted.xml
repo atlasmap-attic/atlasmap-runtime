@@ -7,37 +7,37 @@
         uri="atlas:java?className=io.atlasmap.java.test.TargetFlatPrimitiveClass" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:JsonField" path="/FlatPrimitive/intField" />
-            <OutputField xsi:type="ns2:JavaField" path="/intField" />
+            <SourceField xsi:type="ns3:JsonField" path="/FlatPrimitive/intField" />
+            <TargetField xsi:type="ns2:JavaField" path="/intField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:JsonField" path="/FlatPrimitive/shortField" />
-            <OutputField xsi:type="ns2:JavaField" path="/shortField" />
+            <SourceField xsi:type="ns3:JsonField" path="/FlatPrimitive/shortField" />
+            <TargetField xsi:type="ns2:JavaField" path="/shortField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:JsonField" path="/FlatPrimitive/longField" />
-            <OutputField xsi:type="ns2:JavaField" path="/longField" />
+            <SourceField xsi:type="ns3:JsonField" path="/FlatPrimitive/longField" />
+            <TargetField xsi:type="ns2:JavaField" path="/longField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:JsonField" path="/FlatPrimitive/doubleField" />
-            <OutputField xsi:type="ns2:JavaField" path="/doubleField" />
+            <SourceField xsi:type="ns3:JsonField" path="/FlatPrimitive/doubleField" />
+            <TargetField xsi:type="ns2:JavaField" path="/doubleField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:JsonField" path="/FlatPrimitive/floatField" />
-            <OutputField xsi:type="ns2:JavaField" path="/floatField" />
+            <SourceField xsi:type="ns3:JsonField" path="/FlatPrimitive/floatField" />
+            <TargetField xsi:type="ns2:JavaField" path="/floatField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:JsonField"
+            <SourceField xsi:type="ns3:JsonField"
                 path="/FlatPrimitive/booleanField" />
-            <OutputField xsi:type="ns2:JavaField" path="/booleanField" />
+            <TargetField xsi:type="ns2:JavaField" path="/booleanField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:JsonField" path="/FlatPrimitive/charField" />
-            <OutputField xsi:type="ns2:JavaField" path="/charField" />
+            <SourceField xsi:type="ns3:JsonField" path="/FlatPrimitive/charField" />
+            <TargetField xsi:type="ns2:JavaField" path="/charField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:JsonField" path="/FlatPrimitive/byteField" />
-            <OutputField xsi:type="ns2:JavaField" path="/byteField" />
+            <SourceField xsi:type="ns3:JsonField" path="/FlatPrimitive/byteField" />
+            <TargetField xsi:type="ns2:JavaField" path="/byteField" />
         </Mapping>
     </Mappings>
     <LookupTables />

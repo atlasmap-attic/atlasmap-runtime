@@ -69,7 +69,7 @@ public class AtlasServiceTest {
     @Test
     public void testGetMapping() throws Exception {
         Response resp = service.getMappingRequest("junit3");
-        AtlasMapping mapping = (AtlasMapping) resp.getEntity();
+        resp.getEntity();
     }
 
     @Test
@@ -86,7 +86,7 @@ public class AtlasServiceTest {
         Mappings mappings = mapping.getMappings();
         for (BaseMapping baseMapping : mappings.getMapping()) {
             if (MappingType.MAP.equals(baseMapping.getMappingType())) {
-                List<Field> fields = ((Mapping) baseMapping).getOutputField();
+                List<Field> fields = ((Mapping) baseMapping).getTargetField();
                 for (Field f : fields) {
                     if (f.getActions() != null && f.getActions().getActions() != null
                             && !f.getActions().getActions().isEmpty()) {

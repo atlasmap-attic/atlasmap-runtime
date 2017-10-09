@@ -104,11 +104,11 @@ public class AtlasModelFactory {
             clone.setStrategy(mapping.getStrategy());
             clone.setStrategyClassName(mapping.getStrategyClassName());
             if (deepClone) {
-                for (Field f : mapping.getInputField()) {
-                    clone.getInputField().add(cloneField(f));
+                for (Field f : mapping.getSourceField()) {
+                    clone.getSourceField().add(cloneField(f));
                 }
-                for (Field f : mapping.getOutputField()) {
-                    clone.getOutputField().add(cloneField(f));
+                for (Field f : mapping.getTargetField()) {
+                    clone.getTargetField().add(cloneField(f));
                 }
             }
             return clone;
@@ -228,13 +228,13 @@ public class AtlasModelFactory {
             if (((CustomAction) action).getMethodName() != null) {
                 ((CustomAction) a).setMethodName(new String(((CustomAction) action).getMethodName()));
             }
-            if (((CustomAction) a).getInputFieldType() != null) {
+            if (((CustomAction) a).getSourceFieldType() != null) {
                 ((CustomAction) a)
-                        .setInputFieldType(FieldType.fromValue(((CustomAction) action).getInputFieldType().value()));
+                        .setSourceFieldType(FieldType.fromValue(((CustomAction) action).getSourceFieldType().value()));
             }
-            if (((CustomAction) a).getOutputFieldType() != null) {
+            if (((CustomAction) a).getTargetFieldType() != null) {
                 ((CustomAction) a)
-                        .setOutputFieldType(FieldType.fromValue(((CustomAction) action).getOutputFieldType().value()));
+                        .setTargetFieldType(FieldType.fromValue(((CustomAction) action).getTargetFieldType().value()));
             }
         }
         if (action instanceof GenerateUUID) {

@@ -69,7 +69,7 @@ public class XmlModule extends BaseAtlasModule {
     private static final Logger logger = LoggerFactory.getLogger(XmlModule.class);
 
     @Override
-    public void processPreOutputExecution(AtlasSession session) throws AtlasException {
+    public void processPreTargetExecution(AtlasSession session) throws AtlasException {
         XmlNamespaces xmlNs = null;
         String template = null;
         for (DataSource ds : session.getMapping().getDataSource()) {
@@ -87,10 +87,10 @@ public class XmlModule extends BaseAtlasModule {
         }
 
         XmlFieldWriter writer = new XmlFieldWriter(nsMap, template);
-        session.setOutput(writer);
+        session.setTarget(writer);
 
         if (logger.isDebugEnabled()) {
-            logger.debug("processPreOutputExcution completed");
+            logger.debug("processPreTargetExcution completed");
         }
     }
 
@@ -115,22 +115,22 @@ public class XmlModule extends BaseAtlasModule {
     }
 
     @Override
-    public void processInputMapping(AtlasSession session, BaseMapping baseMapping) throws AtlasException {
-        for (Mapping mapping : this.generateInputMappings(session, baseMapping)) {
-            if (mapping.getInputField() == null || mapping.getInputField().isEmpty()
-                    || mapping.getInputField().size() != 1) {
+    public void processSourceMapping(AtlasSession session, BaseMapping baseMapping) throws AtlasException {
+        for (Mapping mapping : this.generateSourceMappings(session, baseMapping)) {
+            if (mapping.getSourceField() == null || mapping.getSourceField().isEmpty()
+                    || mapping.getSourceField().size() != 1) {
                 addAudit(session, null,
-                        String.format("Mapping does not contain exactly one input field alias=%s desc=%s",
+                        String.format("Mapping does not contain exactly one source field alias=%s desc=%s",
                                 mapping.getAlias(), mapping.getDescription()),
                         null, AuditStatus.WARN, null);
                 return;
             }
 
-            Field field = mapping.getInputField().get(0);
+            Field field = mapping.getSourceField().get(0);
 
             if (!isSupportedField(field)) {
                 addAudit(session, field.getDocId(),
-                        String.format("Unsupported input field type=%s", field.getClass().getName()), field.getPath(),
+                        String.format("Unsupported source field type=%s", field.getClass().getName()), field.getPath(),
                         AuditStatus.ERROR, null);
                 return;
             }
@@ -138,7 +138,7 @@ public class XmlModule extends BaseAtlasModule {
             if (field instanceof ConstantField) {
                 processConstantField(session, mapping);
                 if (logger.isDebugEnabled()) {
-                    logger.debug("Processed input constantField sPath=" + field.getPath() + " sV=" + field.getValue()
+                    logger.debug("Processed source constantField sPath=" + field.getPath() + " sV=" + field.getValue()
                             + " sT=" + field.getFieldType() + " docId: " + field.getDocId());
                 }
                 continue;
@@ -148,25 +148,25 @@ public class XmlModule extends BaseAtlasModule {
                 processPropertyField(session, mapping,
                         session.getAtlasContext().getContextFactory().getPropertyStrategy());
                 if (logger.isDebugEnabled()) {
-                    logger.debug("Processed input propertyField sPath=" + field.getPath() + " sV=" + field.getValue()
+                    logger.debug("Processed source propertyField sPath=" + field.getPath() + " sV=" + field.getValue()
                             + " sT=" + field.getFieldType() + " docId: " + field.getDocId());
                 }
                 continue;
             }
 
-            XmlField inputField = (XmlField) field;
+            XmlField sourceField = (XmlField) field;
 
             Object sourceObject = null;
-            if (field.getDocId() != null && session.hasInput(field.getDocId())) {
-                // Use docId only when it exists, otherwise use default input
-                sourceObject = session.getInput(field.getDocId());
+            if (field.getDocId() != null && session.hasSource(field.getDocId())) {
+                // Use docId only when it exists, otherwise use default source
+                sourceObject = session.getSource(field.getDocId());
             } else {
-                sourceObject = session.getInput();
+                sourceObject = session.getSource();
             }
 
             if (sourceObject == null || !(sourceObject instanceof String)) {
                 addAudit(session, field.getDocId(),
-                        String.format("Unsupported input object type=%s", field.getClass().getName()), field.getPath(),
+                        String.format("Unsupported source object type=%s", field.getClass().getName()), field.getPath(),
                         AuditStatus.ERROR, null);
                 return;
             }
@@ -191,108 +191,108 @@ public class XmlModule extends BaseAtlasModule {
             try {
                 document = getDocument((String) sourceObject, enableNamespaces);
             } catch (IOException | ParserConfigurationException | SAXException e) {
-                logger.error(String.format("Error parsing xml input object msg=%s", e.getMessage()), e);
+                logger.error(String.format("Error parsing xml source object msg=%s", e.getMessage()), e);
                 Audit audit = new Audit();
                 audit.setDocId(field.getDocId());
                 audit.setPath(field.getPath());
                 audit.setStatus(AuditStatus.ERROR);
-                audit.setMessage(String.format("Error parsing xml input object msg=%s", field.getClass().getName()));
+                audit.setMessage(String.format("Error parsing xml source object msg=%s", field.getClass().getName()));
                 session.getAudits().getAudit().add(audit);
                 return;
             }
 
             XmlFieldReader dxfr = new XmlFieldReader();
-            dxfr.readNew(document, inputField);
+            dxfr.readNew(document, sourceField);
 
-            if (inputField.getFieldType() == null) {
-                inputField.setFieldType(FieldType.STRING);
+            if (sourceField.getFieldType() == null) {
+                sourceField.setFieldType(FieldType.STRING);
             }
 
             if (logger.isDebugEnabled()) {
-                logger.debug("Processed input field sPath=" + field.getPath() + " sV=" + field.getValue() + " sT="
+                logger.debug("Processed source field sPath=" + field.getPath() + " sV=" + field.getValue() + " sT="
                         + field.getFieldType() + " docId: " + field.getDocId());
             }
         }
     }
 
     @Override
-    public void processOutputMapping(AtlasSession session, BaseMapping baseMapping) throws AtlasException {
+    public void processTargetMapping(AtlasSession session, BaseMapping baseMapping) throws AtlasException {
 
         XmlFieldWriter writer = null;
-        if (session.getOutput() == null) {
+        if (session.getTarget() == null) {
             writer = new XmlFieldWriter();
-            session.setOutput(writer);
-        } else if (session.getOutput() != null && session.getOutput() instanceof XmlFieldWriter) {
-            writer = (XmlFieldWriter) session.getOutput();
+            session.setTarget(writer);
+        } else if (session.getTarget() != null && session.getTarget() instanceof XmlFieldWriter) {
+            writer = (XmlFieldWriter) session.getTarget();
         } else {
             addAudit(session, null,
-                    String.format("Unsupported output object type=%s", session.getOutput().getClass().getName()), null,
+                    String.format("Unsupported target object type=%s", session.getTarget().getClass().getName()), null,
                     AuditStatus.ERROR, null);
             return;
         }
 
-        for (Mapping mapping : this.getOutputMappings(session, baseMapping)) {
-            if (mapping.getOutputField() == null || mapping.getOutputField().isEmpty()) {
+        for (Mapping mapping : this.getTargetMappings(session, baseMapping)) {
+            if (mapping.getTargetField() == null || mapping.getTargetField().isEmpty()) {
                 addAudit(session, null,
-                        String.format("Mapping does not contain at least one output field alias=%s desc=%s",
+                        String.format("Mapping does not contain at least one target field alias=%s desc=%s",
                                 mapping.getAlias(), mapping.getDescription()),
                         null, AuditStatus.ERROR, null);
                 return;
             }
 
-            Field outputField = mapping.getOutputField().get(0);
-            if (!(outputField instanceof XmlField)) {
-                addAudit(session, outputField.getDocId(),
-                        String.format("Unsupported output field type=%s", outputField.getClass().getName()),
-                        outputField.getPath(), AuditStatus.ERROR, null);
+            Field targetField = mapping.getTargetField().get(0);
+            if (!(targetField instanceof XmlField)) {
+                addAudit(session, targetField.getDocId(),
+                        String.format("Unsupported target field type=%s", targetField.getClass().getName()),
+                        targetField.getPath(), AuditStatus.ERROR, null);
                 return;
             }
 
             switch (mapping.getMappingType()) {
             case MAP:
-                Field inField = mapping.getInputField().get(0);
+                Field inField = mapping.getSourceField().get(0);
                 if (inField.getValue() == null) {
                     continue;
                 }
 
-                // Attempt to Auto-detect field type based on input value
-                if (outputField.getFieldType() == null && inField.getValue() != null) {
-                    outputField.setFieldType(getConversionService().fieldTypeFromClass(inField.getValue().getClass()));
+                // Attempt to Auto-detect field type based on source value
+                if (targetField.getFieldType() == null && inField.getValue() != null) {
+                    targetField.setFieldType(getConversionService().fieldTypeFromClass(inField.getValue().getClass()));
                 }
 
-                Object outputValue = null;
+                Object targetValue = null;
 
                 // Do auto-conversion
-                if (inField.getFieldType() != null && inField.getFieldType().equals(outputField.getFieldType())) {
-                    outputValue = inField.getValue();
+                if (inField.getFieldType() != null && inField.getFieldType().equals(targetField.getFieldType())) {
+                    targetValue = inField.getValue();
                 } else {
                     try {
-                        outputValue = getConversionService().convertType(inField.getValue(), inField.getFieldType(),
-                                outputField.getFieldType());
+                        targetValue = getConversionService().convertType(inField.getValue(), inField.getFieldType(),
+                                targetField.getFieldType());
                     } catch (AtlasConversionException e) {
                         logger.error(String.format("Unable to auto-convert for iT=%s oT=%s oF=%s msg=%s",
-                                inField.getFieldType(), outputField.getFieldType(), outputField.getPath(),
+                                inField.getFieldType(), targetField.getFieldType(), targetField.getPath(),
                                 e.getMessage()), e);
                         continue;
                     }
                 }
 
-                outputField.setValue(outputValue);
+                targetField.setValue(targetValue);
 
-                if (outputField.getActions() != null && outputField.getActions().getActions() != null
-                        && !outputField.getActions().getActions().isEmpty()) {
+                if (targetField.getActions() != null && targetField.getActions().getActions() != null
+                        && !targetField.getActions().getActions().isEmpty()) {
                     processFieldActions(session.getAtlasContext().getContextFactory().getFieldActionService(),
-                            outputField);
+                            targetField);
                 }
 
-                writer.write((XmlField) outputField);
+                writer.write((XmlField) targetField);
                 break;
             case COMBINE:
-                processCombineField(session, mapping, mapping.getInputField(), outputField);
+                processCombineField(session, mapping, mapping.getSourceField(), targetField);
                 SimpleField combinedField = new SimpleField();
                 combinedField.setFieldType(FieldType.STRING);
-                combinedField.setPath(outputField.getPath());
-                combinedField.setValue(outputField.getValue());
+                combinedField.setPath(targetField.getPath());
+                combinedField.setValue(targetField.getValue());
 
                 if (combinedField.getActions() != null && combinedField.getActions().getActions() != null
                         && !combinedField.getActions().getActions().isEmpty()) {
@@ -303,44 +303,44 @@ public class XmlModule extends BaseAtlasModule {
                 writer.write(combinedField);
                 break;
             case LOOKUP:
-                Field inputFieldlkp = mapping.getInputField().get(0);
-                if (inputFieldlkp.getValue() != null
-                        && inputFieldlkp.getValue().getClass().isAssignableFrom(String.class)) {
-                    processLookupField(session, mapping.getLookupTableName(), (String) inputFieldlkp.getValue(),
-                            outputField);
+                Field sourceFieldLkp = mapping.getSourceField().get(0);
+                if (sourceFieldLkp.getValue() != null
+                        && sourceFieldLkp.getValue().getClass().isAssignableFrom(String.class)) {
+                    processLookupField(session, mapping.getLookupTableName(), (String) sourceFieldLkp.getValue(),
+                            targetField);
                 } else {
                     processLookupField(session, mapping.getLookupTableName(), (String) getConversionService()
-                            .convertType(inputFieldlkp.getValue(), inputFieldlkp.getFieldType(), FieldType.STRING),
-                            outputField);
+                            .convertType(sourceFieldLkp.getValue(), sourceFieldLkp.getFieldType(), FieldType.STRING),
+                            targetField);
                 }
 
-                if (outputField.getActions() != null && outputField.getActions().getActions() != null
-                        && !outputField.getActions().getActions().isEmpty()) {
+                if (targetField.getActions() != null && targetField.getActions().getActions() != null
+                        && !targetField.getActions().getActions().isEmpty()) {
                     processFieldActions(session.getAtlasContext().getContextFactory().getFieldActionService(),
-                            outputField);
+                            targetField);
                 }
 
-                writer.write(outputField);
+                writer.write(targetField);
                 break;
             case SEPARATE:
-                Field inputFieldsep = mapping.getInputField().get(0);
-                for (Field outputFieldsep : mapping.getOutputField()) {
-                    Field separateField = processSeparateField(session, mapping, inputFieldsep, outputFieldsep);
+                Field sourceFieldSep = mapping.getSourceField().get(0);
+                for (Field targetFieldSep : mapping.getTargetField()) {
+                    Field separateField = processSeparateField(session, mapping, sourceFieldSep, targetFieldSep);
                     if (separateField == null) {
                         continue;
                     }
 
-                    outputFieldsep.setValue(separateField.getValue());
-                    if (outputFieldsep.getFieldType() == null) {
-                        outputFieldsep.setFieldType(separateField.getFieldType());
+                    targetFieldSep.setValue(separateField.getValue());
+                    if (targetFieldSep.getFieldType() == null) {
+                        targetFieldSep.setFieldType(separateField.getFieldType());
                     }
 
-                    if (outputFieldsep.getActions() != null && outputFieldsep.getActions().getActions() != null
-                            && !outputFieldsep.getActions().getActions().isEmpty()) {
+                    if (targetFieldSep.getActions() != null && targetFieldSep.getActions().getActions() != null
+                            && !targetFieldSep.getActions().getActions().isEmpty()) {
                         processFieldActions(session.getAtlasContext().getContextFactory().getFieldActionService(),
-                                outputFieldsep);
+                                targetFieldSep);
                     }
-                    writer.write(outputFieldsep);
+                    writer.write(targetFieldSep);
                 }
                 break;
             default:
@@ -349,22 +349,22 @@ public class XmlModule extends BaseAtlasModule {
             }
 
             if (logger.isDebugEnabled()) {
-                logger.debug(String.format("Processed output field oP=%s oV=%s oT=%s docId: %s", outputField.getPath(),
-                        outputField.getValue(), outputField.getFieldType(), outputField.getDocId()));
+                logger.debug(String.format("Processed target field oP=%s oV=%s oT=%s docId: %s", targetField.getPath(),
+                        targetField.getValue(), targetField.getFieldType(), targetField.getDocId()));
             }
         }
     }
 
     @Override
-    public void processPostOutputExecution(AtlasSession session) throws AtlasException {
+    public void processPostTargetExecution(AtlasSession session) throws AtlasException {
         if (logger.isDebugEnabled()) {
-            logger.debug("processPostOutputExecution completed");
+            logger.debug("processPostTargetExecution completed");
         }
 
-        Object output = session.getOutput();
-        if (output != null) {
-            if (output instanceof XmlFieldWriter) {
-                session.setOutput(convertDocumentToString(((XmlFieldWriter) output).getDocument()));
+        Object target = session.getTarget();
+        if (target != null) {
+            if (target instanceof XmlFieldWriter) {
+                session.setTarget(convertDocumentToString(((XmlFieldWriter) target).getDocument()));
             }
         }
     }
@@ -414,11 +414,11 @@ public class XmlModule extends BaseAtlasModule {
     public int getCollectionSize(AtlasSession session, Field field) throws AtlasException {
         try {
             Object sourceObject = null;
-            if (field.getDocId() != null && session.hasInput(field.getDocId())) {
-                // Use docId only when it exists, otherwise use default input
-                sourceObject = session.getInput(field.getDocId());
+            if (field.getDocId() != null && session.hasSource(field.getDocId())) {
+                // Use docId only when it exists, otherwise use default source
+                sourceObject = session.getSource(field.getDocId());
             } else {
-                sourceObject = session.getInput();
+                sourceObject = session.getSource();
             }
             Document document = getDocument((String) sourceObject, false);
             Element parentNode = document.getDocumentElement();

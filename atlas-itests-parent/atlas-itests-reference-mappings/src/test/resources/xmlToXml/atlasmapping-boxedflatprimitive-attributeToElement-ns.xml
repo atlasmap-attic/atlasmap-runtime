@@ -13,44 +13,44 @@
     </DataSource>
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/ns:XmlFBPA/@boxedIntField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/ns:XmlFBPA/@boxedIntField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/ns:XmlFBPE/ns:boxedIntField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedShortField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedShortField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/ns:XmlFBPE/ns:boxedShortField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedLongField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedLongField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/ns:XmlFBPE/ns:boxedLongField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedDoubleField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedDoubleField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/ns:XmlFBPE/ns:boxedDoubleField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedFloatField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedFloatField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/ns:XmlFBPE/ns:boxedFloatField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField"
                 path="/XmlFBPA/@boxedBooleanField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <TargetField xsi:type="ns3:XmlField"
                 path="/ns:XmlFBPE/ns:boxedBooleanField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedCharField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedCharField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/ns:XmlFBPE/ns:boxedCharField" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedByteField" />
-            <OutputField xsi:type="ns3:XmlField"
+            <SourceField xsi:type="ns3:XmlField" path="/XmlFBPA/@boxedByteField" />
+            <TargetField xsi:type="ns3:XmlField"
                 path="/ns:XmlFBPE/ns:boxedByteField" />
         </Mapping>
     </Mappings>

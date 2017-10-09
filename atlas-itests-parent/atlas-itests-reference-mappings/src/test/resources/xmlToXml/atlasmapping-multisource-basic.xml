@@ -8,14 +8,14 @@
     <DataSource dataSourceType="Target" uri="atlas:xml" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Contact/@firstName"
+            <SourceField xsi:type="ns2:XmlField" path="/Contact/@firstName"
                 docId="con" />
-            <OutputField xsi:type="ns2:XmlField" path="/Contact/@firstName" />
+            <TargetField xsi:type="ns2:XmlField" path="/Contact/@firstName" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/Address/@zipCode"
+            <SourceField xsi:type="ns2:XmlField" path="/Address/@zipCode"
                 docId="addr" />
-            <OutputField xsi:type="ns2:XmlField" path="/Contact/@zipCode" />
+            <TargetField xsi:type="ns2:XmlField" path="/Contact/@zipCode" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

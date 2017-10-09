@@ -31,21 +31,21 @@ public interface AtlasModule {
 
     void processPreValidation(AtlasSession session) throws AtlasException;
 
-    void processPreInputExecution(AtlasSession session) throws AtlasException;
+    void processPreSourceExecution(AtlasSession session) throws AtlasException;
 
-    void processInputMapping(AtlasSession session, BaseMapping mapping) throws AtlasException;
+    void processSourceMapping(AtlasSession session, BaseMapping mapping) throws AtlasException;
 
-    void processInputActions(AtlasSession session, BaseMapping mapping) throws AtlasException;
+    void processSourceActions(AtlasSession session, BaseMapping mapping) throws AtlasException;
 
-    void processPostInputExecution(AtlasSession session) throws AtlasException;
+    void processPostSourceExecution(AtlasSession session) throws AtlasException;
 
-    void processPreOutputExecution(AtlasSession session) throws AtlasException;
+    void processPreTargetExecution(AtlasSession session) throws AtlasException;
 
-    void processOutputMapping(AtlasSession session, BaseMapping mapping) throws AtlasException;
+    void processTargetMapping(AtlasSession session, BaseMapping mapping) throws AtlasException;
 
-    void processOutputActions(AtlasSession session, BaseMapping mapping) throws AtlasException;
+    void processTargetActions(AtlasSession session, BaseMapping mapping) throws AtlasException;
 
-    void processPostOutputExecution(AtlasSession session) throws AtlasException;
+    void processPostTargetExecution(AtlasSession session) throws AtlasException;
 
     void processPostValidation(AtlasSession session) throws AtlasException;
 

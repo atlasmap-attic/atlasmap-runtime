@@ -8,77 +8,77 @@
     <Mappings>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@intField" />
-            <OutputField xsi:type="ns3:JsonField"
+            <SourceField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@intField" />
+            <TargetField xsi:type="ns3:JsonField"
                 path="/TargetFlatPrimitive/intField" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@shortField" />
-            <OutputField xsi:type="ns3:JsonField"
+            <SourceField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@shortField" />
+            <TargetField xsi:type="ns3:JsonField"
                 path="/TargetFlatPrimitive/shortField" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@longField" />
-            <OutputField xsi:type="ns3:JsonField"
+            <SourceField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@longField" />
+            <TargetField xsi:type="ns3:JsonField"
                 path="/TargetFlatPrimitive/longField" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@doubleField" />
-            <OutputField xsi:type="ns3:JsonField"
+            <SourceField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@doubleField" />
+            <TargetField xsi:type="ns3:JsonField"
                 path="/TargetFlatPrimitive/doubleField" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@floatField" />
-            <OutputField xsi:type="ns3:JsonField"
+            <SourceField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@floatField" />
+            <TargetField xsi:type="ns3:JsonField"
                 path="/TargetFlatPrimitive/floatField" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@booleanField" />
-            <OutputField xsi:type="ns3:JsonField"
+            <SourceField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@booleanField" />
+            <TargetField xsi:type="ns3:JsonField"
                 path="/TargetFlatPrimitive/booleanField" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@charField"
+            <SourceField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@charField"
                 fieldType="Char" />
-            <OutputField xsi:type="ns3:JsonField"
+            <TargetField xsi:type="ns3:JsonField"
                 path="/TargetFlatPrimitive/charField" fieldType="Char" />
         </Mapping>
         <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@byteField" />
-            <OutputField xsi:type="ns3:JsonField"
+            <SourceField xsi:type="ns2:XmlField" path="/ns:XmlFPA/@byteField" />
+            <TargetField xsi:type="ns3:JsonField"
                 path="/TargetFlatPrimitive/byteField" />
         </Mapping>
         <!-- [#72] <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:type="Mapping" mappingType="Map"> <InputField xsi:type="ns2:XmlField" 
-            path="/XmlFPA/@boxedBooleanField"/> <OutputField xsi:type="ns3:JsonField" 
+            xsi:type="Mapping" mappingType="Map"> <SourceField xsi:type="ns2:XmlField" 
+            path="/XmlFPA/@boxedBooleanField"/> <TargetField xsi:type="ns3:JsonField" 
             path="boxedBooleanField"/> </Mapping> <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:type="Mapping" mappingType="Map"> <InputField xsi:type="ns2:XmlField" 
-            path="/XmlFPA/@boxedByteField"/> <OutputField xsi:type="ns3:JsonField" path="boxedByteField"/> 
+            xsi:type="Mapping" mappingType="Map"> <SourceField xsi:type="ns2:XmlField" 
+            path="/XmlFPA/@boxedByteField"/> <TargetField xsi:type="ns3:JsonField" path="boxedByteField"/> 
             </Mapping> <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:type="Mapping" mappingType="Map"> <InputField xsi:type="ns2:XmlField" 
-            path="/XmlFPA/@boxedCharField"/> <OutputField xsi:type="ns3:JsonField" path="boxedCharField"/> 
+            xsi:type="Mapping" mappingType="Map"> <SourceField xsi:type="ns2:XmlField" 
+            path="/XmlFPA/@boxedCharField"/> <TargetField xsi:type="ns3:JsonField" path="boxedCharField"/> 
             </Mapping> <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:type="Mapping" mappingType="Map"> <InputField xsi:type="ns2:XmlField" 
-            path="/XmlFPA/@boxedDoubleField"/> <OutputField xsi:type="ns3:JsonField" 
+            xsi:type="Mapping" mappingType="Map"> <SourceField xsi:type="ns2:XmlField" 
+            path="/XmlFPA/@boxedDoubleField"/> <TargetField xsi:type="ns3:JsonField" 
             path="boxedDoubleField"/> </Mapping> <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:type="Mapping" mappingType="Map"> <InputField xsi:type="ns2:XmlField" 
-            path="/XmlFPA/@boxedFloatField"/> <OutputField xsi:type="ns3:JsonField" path="boxedFloatField"/> 
+            xsi:type="Mapping" mappingType="Map"> <SourceField xsi:type="ns2:XmlField" 
+            path="/XmlFPA/@boxedFloatField"/> <TargetField xsi:type="ns3:JsonField" path="boxedFloatField"/> 
             </Mapping> <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:type="Mapping" mappingType="Map"> <InputField xsi:type="ns2:XmlField" 
-            path="/XmlFPA/@boxedIntField"/> <OutputField xsi:type="ns3:JsonField" path="boxedIntField"/> 
+            xsi:type="Mapping" mappingType="Map"> <SourceField xsi:type="ns2:XmlField" 
+            path="/XmlFPA/@boxedIntField"/> <TargetField xsi:type="ns3:JsonField" path="boxedIntField"/> 
             </Mapping> <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:type="Mapping" mappingType="Map"> <InputField xsi:type="ns2:XmlField" 
-            path="/XmlFPA/@boxedLongField"/> <OutputField xsi:type="ns3:JsonField" path="boxedLongField"/> 
+            xsi:type="Mapping" mappingType="Map"> <SourceField xsi:type="ns2:XmlField" 
+            path="/XmlFPA/@boxedLongField"/> <TargetField xsi:type="ns3:JsonField" path="boxedLongField"/> 
             </Mapping> <Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:type="Mapping" mappingType="Map"> <InputField xsi:type="ns2:XmlField" 
-            path="/XmlFPA/@boxedStringField"/> <OutputField xsi:type="ns3:JsonField" 
+            xsi:type="Mapping" mappingType="Map"> <SourceField xsi:type="ns2:XmlField" 
+            path="/XmlFPA/@boxedStringField"/> <TargetField xsi:type="ns3:JsonField" 
             path="boxedStringField"/> </Mapping> -->
     </Mappings>
 </AtlasMapping>

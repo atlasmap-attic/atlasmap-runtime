@@ -18,15 +18,15 @@
                 {
                     "jsonType": "io.atlasmap.v2.Mapping",
                     "mappingType": "MAP",
-                    "inputField": [
+                    "sourceField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "map-input-value",
+                            "value": "map-source-value",
                             "fieldType": "STRING",
-                            "name": "map-input"
+                            "name": "map-source"
                         }
                     ],
-                    "outputField": [
+                    "targetField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
                             "actions": [
@@ -37,40 +37,40 @@
                                     "Lowercase": null
                                 }
                             ],
-                            "value": "map-output-value",
+                            "value": "map-target-value",
                             "fieldType": "STRING",
-                            "name": "map-output"
+                            "name": "map-target"
                         }
                     ]
                 },
                 {
                     "jsonType": "io.atlasmap.v2.Mapping",
                     "mappingType": "COMBINE",
-                    "inputField": [
+                    "sourceField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "combine-input-0-value",
+                            "value": "combine-source-0-value",
                             "index": 0,
-                            "name": "combine-input-0"
+                            "name": "combine-source-0"
                         },
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "combine-input-1-value",
+                            "value": "combine-source-1-value",
                             "index": 1,
-                            "name": "combine-input-1"
+                            "name": "combine-source-1"
                         },
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "combine-input-2-value",
+                            "value": "combine-source-2-value",
                             "index": 2,
-                            "name": "combine-input-2"
+                            "name": "combine-source-2"
                         }
                     ],
-                    "outputField": [
+                    "targetField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "combine-output-value",
-                            "name": "combine-output"
+                            "value": "combine-target-value",
+                            "name": "combine-target"
                         }
                     ],
                     "delimiterString": ","
@@ -78,15 +78,15 @@
                 {
                     "jsonType": "io.atlasmap.v2.Mapping",
                     "mappingType": "MAP",
-                    "inputField": [
+                    "sourceField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "mapActions-input-value",
+                            "value": "mapActions-source-value",
                             "fieldType": "STRING",
-                            "name": "mapActions-input"
+                            "name": "mapActions-source"
                         }
                     ],
-                    "outputField": [
+                    "targetField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
                             "actions": [
@@ -97,40 +97,40 @@
                                     "Lowercase": null
                                 }
                             ],
-                            "value": "mapActions-output-value",
+                            "value": "mapActions-target-value",
                             "fieldType": "STRING",
-                            "name": "mapActions-output"
+                            "name": "mapActions-target"
                         }
                     ]
                 },
                 {
                     "jsonType": "io.atlasmap.v2.Mapping",
                     "mappingType": "SEPARATE",
-                    "inputField": [
+                    "sourceField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "separate-input-value",
-                            "name": "separate-input"
+                            "value": "separate-source-value",
+                            "name": "separate-source"
                         }
                     ],
-                    "outputField": [
+                    "targetField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "separate-output-0-value",
+                            "value": "separate-target-0-value",
                             "index": 0,
-                            "name": "separate-output-0"
+                            "name": "separate-target-0"
                         },
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "separate-output-1-value",
+                            "value": "separate-target-1-value",
                             "index": 1,
-                            "name": "separate-output-1"
+                            "name": "separate-target-1"
                         },
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "separate-output-2-value",
+                            "value": "separate-target-2-value",
                             "index": 2,
-                            "name": "separate-output-2"
+                            "name": "separate-target-2"
                         }
                     ],
                     "delimiterString": ","
@@ -138,14 +138,14 @@
                 {
                     "jsonType": "io.atlasmap.v2.Mapping",
                     "mappingType": "MAP",
-                    "inputField": [
+                    "sourceField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "prop-input-value",
-                            "name": "prop-input"
+                            "value": "prop-source-value",
+                            "name": "prop-source"
                         }
                     ],
-                    "outputField": [
+                    "targetField": [
                         {
                             "jsonType": "io.atlasmap.v2.PropertyField",
                             "name": "p7"
@@ -155,18 +155,18 @@
                 {
                     "jsonType": "io.atlasmap.v2.Mapping",
                     "mappingType": "LOOKUP",
-                    "inputField": [
+                    "sourceField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "lookup-input-value",
-                            "name": "lookup-input"
+                            "value": "lookup-source-value",
+                            "name": "lookup-source"
                         }
                     ],
-                    "outputField": [
+                    "targetField": [
                         {
                             "jsonType": "io.atlasmap.v2.MockField",
-                            "value": "lookup-output-value",
-                            "name": "lookup-output"
+                            "value": "lookup-target-value",
+                            "name": "lookup-target"
                         }
                     ],
                     "lookupTableName": "lookup-lookupTable"

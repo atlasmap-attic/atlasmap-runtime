@@ -37,7 +37,7 @@ public class JavaToXMLJSONMarshallingTest {
         // this test is for AT-466: issue saving mappings in combine mode (parser
         // complaining about strategy property)
         // the json has been changed from what the UI was sending, now the "actions"
-        // property on the output field is "null" rather than "[]"
+        // property on the target s field is "null" rather than "[]"
         String filename = "src/test/resources/javaToXml/javaToXmlMapping-combine.json";
         AtlasMapping uMapping = mapper.readValue(new File(filename), AtlasMapping.class);
         assertNotNull(uMapping);

@@ -7,19 +7,19 @@
     <DataSource dataSourceType="Target" uri="atlas:xml" />
     <Mappings>
         <Mapping xsi:type="Mapping" mappingType="Separate">
-            <InputField xsi:type="ns2:JavaField" path="/firstName" />
-            <OutputField xsi:type="ns3:XmlField" path="/Contact/@firstName"
+            <SourceField xsi:type="ns2:JavaField" path="/firstName" />
+            <TargetField xsi:type="ns3:XmlField" path="/Contact/@firstName"
                 index="2" />
-            <OutputField xsi:type="ns3:XmlField" path="/Contact/@lastName"
+            <TargetField xsi:type="ns3:XmlField" path="/Contact/@lastName"
                 index="4" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/phoneNumber" />
-            <OutputField xsi:type="ns3:XmlField" path="/Contact/@phoneNumber" />
+            <SourceField xsi:type="ns2:JavaField" path="/phoneNumber" />
+            <TargetField xsi:type="ns3:XmlField" path="/Contact/@phoneNumber" />
         </Mapping>
         <Mapping xsi:type="Mapping" mappingType="Map">
-            <InputField xsi:type="ns2:JavaField" path="/zipCode" />
-            <OutputField xsi:type="ns3:XmlField" path="/Contact/@zipCode" />
+            <SourceField xsi:type="ns2:JavaField" path="/zipCode" />
+            <TargetField xsi:type="ns3:XmlField" path="/Contact/@zipCode" />
         </Mapping>
     </Mappings>
 </AtlasMapping>

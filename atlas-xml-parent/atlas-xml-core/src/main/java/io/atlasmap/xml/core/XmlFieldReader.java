@@ -44,7 +44,7 @@ public class XmlFieldReader extends XmlFieldTransformer {
 
     public void readNew(final Document document, final XmlField xmlField) throws AtlasException {
         if (logger.isDebugEnabled()) {
-            logger.debug("Reading input value for field: " + xmlField.getPath());
+            logger.debug("Reading source value for field: " + xmlField.getPath());
         }
         Element parentNode = document.getDocumentElement();
         for (SegmentContext sc : new PathUtil(xmlField.getPath()).getSegmentContexts(false)) {
@@ -73,7 +73,7 @@ public class XmlFieldReader extends XmlFieldTransformer {
                 List<Element> children = XmlFieldWriter.getChildrenWithName(childrenElementName, parentNode);
                 if (children == null || children.isEmpty()) {
                     if (logger.isDebugEnabled()) {
-                        logger.debug("Skipping input value set, couldn't find children with name '"
+                        logger.debug("Skipping source value set, couldn't find children with name '"
                                 + childrenElementName + "', for segment: " + sc);
                     }
                     return;
@@ -83,7 +83,7 @@ public class XmlFieldReader extends XmlFieldTransformer {
                     int index = PathUtil.indexOfSegment(sc.getSegment());
                     if (index >= children.size()) {
                         if (logger.isDebugEnabled()) {
-                            logger.debug("Skipping input value set, children list can't fit index " + index
+                            logger.debug("Skipping source value set, children list can't fit index " + index
                                     + ", children list size: " + children.size());
                         }
                         return;
