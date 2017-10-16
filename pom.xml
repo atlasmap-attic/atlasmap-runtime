@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.atlasmap</groupId>
     <artifactId>atlas</artifactId>
-    <version>1.31-SNAPSHOT</version>
+    <version>1.31.0.fuse-000002</version>
     <packaging>pom</packaging>
     <name>Atlas :: Project Build</name>
 
@@ -365,16 +365,6 @@
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
                     <goals>deploy</goals>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>
