@@ -22,7 +22,7 @@
     <parent>
         <artifactId>atlas-json-parent</artifactId>
         <groupId>io.atlasmap</groupId>
-        <version>1.31-SNAPSHOT</version>
+        <version>1.31.0.fuse-000004</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
