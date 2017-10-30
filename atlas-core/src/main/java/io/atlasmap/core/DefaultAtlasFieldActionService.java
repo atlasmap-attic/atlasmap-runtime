@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ServiceLoader;
 
@@ -83,6 +85,14 @@ public class DefaultAtlasFieldActionService implements AtlasFieldActionService {
         return actionDetails.getActionDetail();
     }
     
+    /**
+     * TODO: getActionDetailByActionName() when all references are updated to use
+     * 
+     * ActionDetail = findActionDetail(String actionName, FieldType sourceType)
+     * 
+     * ref: https://github.com/atlasmap/atlasmap-runtime/issues/216
+     */
+    @Deprecated
     protected ActionDetail getActionDetailByActionName(String actionName) {
         for(ActionDetail actionDetail : listActionDetails()) {
             if(actionDetail.getName().equals(actionName)) {
@@ -91,6 +101,43 @@ public class DefaultAtlasFieldActionService implements AtlasFieldActionService {
         }
         
         return null;
+    }
+    
+    /**
+     * 1. Find FieldAction by name
+     * 2. If multiple matches are found, return the best one based on FieldType sourceType
+     * 3. If there is not an exact match to sourceType, return the first FieldAction
+     * 4. If no matches found, return null
+     * 
+     * 
+     * @param actionName The name of the FieldAction
+     * @param sourceType A hint used to determine which FieldAction to use 
+     *                   when multiple FieldActions exist with the same name
+     *
+     * @return
+     */
+    protected ActionDetail findActionDetail(String actionName, FieldType sourceType) {
+        
+        List<ActionDetail> matches = new ArrayList<ActionDetail>();
+        for(ActionDetail actionDetail : listActionDetails()) {
+            if(actionDetail.getName().equals(actionName)) {
+                matches.add(actionDetail);
+            }
+        }
+        
+        switch(matches.size()) {
+        case 0: return null;
+        case 1: return matches.get(0);
+        default:
+            if(sourceType != null && !Arrays.asList(FieldType.ALL, FieldType.NONE).contains(sourceType)) {
+                for(ActionDetail actionDetail : matches) {
+                    if(sourceType.equals(actionDetail.getSourceType())) {
+                        return actionDetail;
+                    }
+                }
+            }
+            return matches.get(0);   
+        }
     }
 
     @Override
@@ -113,12 +160,12 @@ public class DefaultAtlasFieldActionService implements AtlasFieldActionService {
         
         FieldType currentType = sourceType;
         for(Action action : actions.getActions()) {
-            ActionDetail detail = getActionDetailByActionName(action.getClass().getSimpleName());
+            ActionDetail detail = findActionDetail(action.getClass().getSimpleName(), currentType);
             if(!detail.getSourceType().equals(currentType) && !FieldType.ALL.equals(detail.getSourceType())) {
                 tmpSourceObject = getConversionService().convertType(sourceObject, currentType, detail.getSourceType());
             }
             
-            targetObject = processAction(action, getActionDetailByActionName(action.getClass().getSimpleName()), tmpSourceObject);
+            targetObject = processAction(action, detail, tmpSourceObject);
             currentType = detail.getTargetType();
         }
         
