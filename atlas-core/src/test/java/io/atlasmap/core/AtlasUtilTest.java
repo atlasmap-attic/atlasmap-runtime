@@ -22,12 +22,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.hasItems;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class AtlasUtilTest {
 
@@ -112,4 +107,20 @@ public class AtlasUtilTest {
         assertThat(classes.stream().map(Class::getName).collect(Collectors.toList()), hasItems("io.atlasmap.v2.Field",
                 "io.atlasmap.v2.AtlasMapping", "io.atlasmap.v2.Action", "io.atlasmap.v2.Capitalize"));
     }
+    
+    @Test
+	public void testCountCharacters() throws Exception {
+		assertEquals(2, AtlasUtil.countCharacters("c2c", 'c'));
+	}
+    
+    @Test
+	public void testCountCharactersWithNoMatch() throws Exception {
+		assertEquals(0, AtlasUtil.countCharacters("nomatch", 'b'));
+	}
+    
+    @Test
+	public void testCountCharactersForEmptyString() throws Exception {
+		assertEquals(0, AtlasUtil.countCharacters("", 'c'));
+	}
+    
 }
