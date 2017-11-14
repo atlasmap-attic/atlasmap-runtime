@@ -43,56 +43,56 @@ public class ActionsJsonSerializer extends JsonSerializer<Actions> {
     protected void writeActionField(JsonGenerator gen, Action action) throws IOException {
 
         switch (action.getClass().getSimpleName()) {
-        case "ConvertAreaUnit":
-            writeConvertAreaUnit(gen, (ConvertAreaUnit) action);
-            break;
-        case "ConvertDistanceUnit":
-            writeConvertDistanceUnit(gen, (ConvertDistanceUnit) action);
-            break;
-        case "ConvertMassUnit":
-            writeConvertMassUnit(gen, (ConvertMassUnit) action);
-            break;
-        case "ConvertVolumeUnit":
-            writeConvertVolumeUnit(gen, (ConvertVolumeUnit) action);
-            break;
-        case "CurrentDate":
-            writeCurrentDate(gen, (CurrentDate) action);
-            break;
-        case "CurrentDateTime":
-            writeCurrentDateTime(gen, (CurrentDateTime) action);
-            break;
-        case "CurrentTime":
-            writeCurrentTime(gen, (CurrentTime) action);
-            break;
-        case "CustomAction":
-            writeCustomAction(gen, (CustomAction) action);
-            break;
-        case "PadStringLeft":
-            writePadStringLeft(gen, (PadStringLeft) action);
-            break;
-        case "PadStringRight":
-            writePadStringRight(gen, (PadStringRight) action);
-            break;
-        case "Replace":
-            writeReplace(gen, (Replace) action);
-            break;
-        case "SubString":
-            writeSubString(gen, (SubString) action);
-            break;
-        case "SubStringAfter":
-            writeSubStringAfter(gen, (SubStringAfter) action);
-            break;
-        case "SubStringBefore":
-            writeSubStringBefore(gen, (SubStringBefore) action);
-            break;
-        case "SumUp":
-            writeSumUp(gen, (SumUp) action);
-            break;
-        default:
-            gen.writeStartObject();
-            gen.writeNullField(action.getClass().getSimpleName());
-            gen.writeEndObject();
-            break;
+            case "ConvertAreaUnit":
+                writeConvertAreaUnit(gen, (ConvertAreaUnit) action);
+                break;
+            case "ConvertDistanceUnit":
+                writeConvertDistanceUnit(gen, (ConvertDistanceUnit) action);
+                break;
+            case "ConvertMassUnit":
+                writeConvertMassUnit(gen, (ConvertMassUnit) action);
+                break;
+            case "ConvertVolumeUnit":
+                writeConvertVolumeUnit(gen, (ConvertVolumeUnit) action);
+                break;
+            case "CurrentDate":
+                writeCurrentDate(gen, (CurrentDate) action);
+                break;
+            case "CurrentDateTime":
+                writeCurrentDateTime(gen, (CurrentDateTime) action);
+                break;
+            case "CurrentTime":
+                writeCurrentTime(gen, (CurrentTime) action);
+                break;
+            case "CustomAction":
+                writeCustomAction(gen, (CustomAction) action);
+                break;
+            case "PadStringLeft":
+                writePadStringLeft(gen, (PadStringLeft) action);
+                break;
+            case "PadStringRight":
+                writePadStringRight(gen, (PadStringRight) action);
+                break;
+            case "Replace":
+                writeReplace(gen, (Replace) action);
+                break;
+            case "SubString":
+                writeSubString(gen, (SubString) action);
+                break;
+            case "SubStringAfter":
+                writeSubStringAfter(gen, (SubStringAfter) action);
+                break;
+            case "SubStringBefore":
+                writeSubStringBefore(gen, (SubStringBefore) action);
+                break;
+            case "SumUp":
+                writeSumUp(gen, (SumUp) action);
+                break;
+            default:
+                gen.writeStartObject();
+                gen.writeNullField(action.getClass().getSimpleName());
+                gen.writeEndObject();
+                break;
         }
     }
 
