@@ -15,10 +15,10 @@
  */
 package io.atlasmap.v2;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.rules.TestName;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -30,10 +30,10 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 
 public abstract class BaseMarshallerTest {
 
@@ -69,9 +69,8 @@ public abstract class BaseMarshallerTest {
                     if (exc == null) {
                         Files.delete(dir);
                         return FileVisitResult.CONTINUE;
-                    } else {
-                        throw exc;
                     }
+                    throw exc;
                 }
             });
         }
@@ -529,12 +528,39 @@ public abstract class BaseMarshallerTest {
     }
 
     protected List<Action> generateReferenceFieldActions() {
-        List<Action> actions = Arrays.asList(new Camelize(), new Capitalize(), new CurrentDate(), new CurrentDateTime(),
-                new CurrentTime(), new CustomAction(), new GenerateUUID(), new Lowercase(), new PadStringLeft(),
-                new PadStringRight(), new Replace(), new SeparateByDash(), new SeparateByUnderscore(), new StringLength(),
-                new SubString(), new SubStringAfter(), new SubStringBefore(), new Trim(), new TrimLeft(),
-                new TrimRight(), new Uppercase(), new ConvertAreaUnit(), new ConvertDistanceUnit(),
-                new ConvertMassUnit(), new ConvertVolumeUnit(), new SumUp());
+        List<Action> actions = Arrays.asList(
+                new AbsoluteValue(),
+                new Average(),
+                new Camelize(),
+                new Capitalize(),
+                new Ceiling(),
+                new ConvertAreaUnit(),
+                new ConvertDistanceUnit(),
+                new ConvertMassUnit(),
+                new ConvertVolumeUnit(),
+                new CurrentDate(),
+                new CurrentDateTime(),
+                new CurrentTime(),
+                new CustomAction(),
+                new Floor(),
+                new GenerateUUID(),
+                new Lowercase(),
+                new Maximum(),
+                new Minimum(),
+                new PadStringLeft(),
+                new PadStringRight(),
+                new Replace(),
+                new SeparateByDash(),
+                new SeparateByUnderscore(),
+                new StringLength(),
+                new SubString(),
+                new SubStringAfter(),
+                new SubStringBefore(),
+                new SumUp(),
+                new Trim(),
+                new TrimLeft(),
+                new TrimRight(),
+                new Uppercase());
         return actions;
     }
 }

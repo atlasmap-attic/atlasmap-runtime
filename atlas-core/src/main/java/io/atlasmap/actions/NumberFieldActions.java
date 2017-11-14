@@ -18,6 +18,7 @@ package io.atlasmap.actions;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -168,6 +169,81 @@ public class NumberFieldActions implements AtlasFieldAction {
         volumeConvertionTable = Collections.unmodifiableMap(rootTable);
     }
 
+    @AtlasFieldActionInfo(name = "AbsoluteValue", sourceType = FieldType.NUMBER, targetType = FieldType.NUMBER, sourceCollectionType = CollectionType.NONE, targetCollectionType = CollectionType.NONE)
+    public static Number absoluteValue(Action action, Number input) {
+        if (input == null) {
+            return 0;
+        }
+        if (input instanceof BigDecimal) {
+            return ((BigDecimal) input).abs();
+        } else if (input instanceof Double) {
+            return Math.abs(input.doubleValue());
+        } else if (input instanceof Float) {
+            return Math.abs(input.floatValue());
+        } else if (input instanceof Long) {
+            return Math.abs(input.longValue());
+        } else if (input instanceof AtomicLong) {
+            return Math.abs(((AtomicLong) input).get());
+        } else if (input instanceof Integer) {
+            return Math.abs(input.intValue());
+        } else if (input instanceof AtomicInteger) {
+            return Math.abs(((AtomicInteger) input).get());
+        } else if (input instanceof Byte) {
+            return (byte) Math.abs(input.byteValue());
+        } else {
+            return Math.abs(Double.parseDouble(input.toString()));
+        }
+    }
+
+    @AtlasFieldActionInfo(name = "Average", sourceType = FieldType.COMPLEX, targetType = FieldType.NUMBER, sourceCollectionType = CollectionType.ALL, targetCollectionType = CollectionType.NONE)
+    public static Number average(Action action, Object input) {
+        if (input == null) {
+            return 0;
+        }
+
+        Collection<?> inputs = collection(input);
+
+        double sum = 0.0;
+        for (Object entry : inputs) {
+            if (entry instanceof Number) {
+                sum += ((Number) entry).doubleValue();
+            } else {
+                sum += Double.parseDouble(entry.toString());
+            }
+        }
+        return sum / inputs.size();
+    }
+
+    @AtlasFieldActionInfo(name = "Ceiling", sourceType = FieldType.NUMBER, targetType = FieldType.NUMBER, sourceCollectionType = CollectionType.NONE, targetCollectionType = CollectionType.NONE)
+    public static Number ceiling(Action action, Number input) {
+        if (input == null) {
+            return 0.0;
+        }
+        if (input instanceof AtomicLong) {
+            return (long)Math.ceil(((AtomicLong) input).get());
+        }
+        if (input instanceof AtomicInteger) {
+            return (int)Math.ceil(((AtomicInteger) input).get());
+        }
+        double ceil = Math.ceil(input.doubleValue());
+        if (input instanceof BigDecimal) {
+            return new BigDecimal(ceil);
+        }
+        if (input instanceof Float) {
+            return (float)ceil;
+        }
+        if (input instanceof Long) {
+            return (long)ceil;
+        }
+        if (input instanceof Integer) {
+            return (int)ceil;
+        }
+        if (input instanceof Byte) {
+            return (byte)ceil;
+        }
+        return ceil;
+    }
+
     @AtlasFieldActionInfo(name = "ConvertMassUnit", sourceType = FieldType.NUMBER, targetType = FieldType.NUMBER, sourceCollectionType = CollectionType.NONE, targetCollectionType = CollectionType.NONE)
     public static Number convertMassUnit(Action action, Number input) {
         if (input == null) {
@@ -238,26 +314,88 @@ public class NumberFieldActions implements AtlasFieldAction {
         return doMultiply(input, rate);
     }
 
-    private static Number doMultiply(Number input, double rate) {
-        if (input instanceof BigDecimal) {
-            return ((BigDecimal) input).multiply(new BigDecimal(rate));
-        } else if (input instanceof Double) {
-            return (double) ((Double) input * rate);
-        } else if (input instanceof Float) {
-            return (float) ((Float) input * rate);
-        } else if (input instanceof Long) {
-            return (long) ((Long) input * rate);
-        } else if (input instanceof AtomicLong) {
-            return (long) (((AtomicLong) input).get() * rate);
-        } else if (input instanceof Integer) {
-            return (int) ((Integer) input * rate);
-        } else if (input instanceof AtomicInteger) {
-            return (int) (((AtomicInteger) input).get() * rate);
-        } else if (input instanceof Byte) {
-            return (byte) ((Byte) input * rate);
-        } else {
-            return Double.parseDouble(input.toString()) * rate;
+    @AtlasFieldActionInfo(name = "Floor", sourceType = FieldType.NUMBER, targetType = FieldType.NUMBER, sourceCollectionType = CollectionType.NONE, targetCollectionType = CollectionType.NONE)
+    public static Number floor(Action action, Number input) {
+        if (input == null) {
+            return 0.0;
         }
+        if (input instanceof AtomicLong) {
+            return (long)Math.floor(((AtomicLong) input).get());
+        }
+        if (input instanceof AtomicInteger) {
+            return (int)Math.floor(((AtomicInteger) input).get());
+        }
+        double floor = Math.floor(input.doubleValue());
+        if (input instanceof BigDecimal) {
+            return new BigDecimal(floor);
+        }
+        if (input instanceof Float) {
+            return (float)floor;
+        }
+        if (input instanceof Long) {
+            return (long)floor;
+        }
+        if (input instanceof Integer) {
+            return (int)floor;
+        }
+        if (input instanceof Byte) {
+            return (byte)floor;
+        }
+        return floor;
+    }
+
+    @AtlasFieldActionInfo(name = "Maximum", sourceType = FieldType.COMPLEX, targetType = FieldType.NUMBER, sourceCollectionType = CollectionType.ALL, targetCollectionType = CollectionType.NONE)
+    public static Number maximum(Action action, Object input) {
+        if (input == null) {
+            return 0;
+        }
+
+        Collection<?> inputs = collection(input);
+
+        Number max = null;
+        for (Object entry : inputs) {
+            if (entry instanceof Number) {
+                if (max instanceof BigDecimal && entry instanceof BigDecimal) {
+                    max = ((BigDecimal) entry).max((BigDecimal)max);
+                } else if (max == null || ((Number) entry).doubleValue() > max.doubleValue()) {
+                    max = (Number) entry;
+                }
+            } else {
+                double val = Double.parseDouble(entry.toString());
+                if (max == null || val > max.doubleValue()) {
+                    max = val;
+                }
+            }
+        }
+
+        return max;
+    }
+
+    @AtlasFieldActionInfo(name = "Minimum", sourceType = FieldType.COMPLEX, targetType = FieldType.NUMBER, sourceCollectionType = CollectionType.ALL, targetCollectionType = CollectionType.NONE)
+    public static Number minimum(Action action, Object input) {
+        if (input == null) {
+            return 0;
+        }
+
+        Collection<?> inputs = collection(input);
+
+        Number min = null;
+        for (Object entry : inputs) {
+            if (entry instanceof Number) {
+                if (min instanceof BigDecimal && entry instanceof BigDecimal) {
+                    min = ((BigDecimal) entry).min((BigDecimal)min);
+                } else if (min == null || ((Number) entry).doubleValue() < min.doubleValue()) {
+                    min = (Number) entry;
+                }
+            } else {
+                double val = Double.parseDouble(entry.toString());
+                if (min == null || val < min.doubleValue()) {
+                    min = val;
+                }
+            }
+        }
+
+        return min;
     }
 
     @AtlasFieldActionInfo(name = "SumUp", sourceType = FieldType.COMPLEX, targetType = FieldType.NUMBER, sourceCollectionType = CollectionType.ALL, targetCollectionType = CollectionType.NONE)
@@ -441,4 +579,73 @@ public class NumberFieldActions implements AtlasFieldAction {
 
     }
 
+    private static Number doMultiply(Number input, double rate) {
+        if (input instanceof BigDecimal) {
+            return ((BigDecimal) input).multiply(new BigDecimal(rate));
+        } else if (input instanceof Double) {
+            return (double) ((Double) input * rate);
+        } else if (input instanceof Float) {
+            return (float) ((Float) input * rate);
+        } else if (input instanceof Long) {
+            return (long) ((Long) input * rate);
+        } else if (input instanceof AtomicLong) {
+            return (long) (((AtomicLong) input).get() * rate);
+        } else if (input instanceof Integer) {
+            return (int) ((Integer) input * rate);
+        } else if (input instanceof AtomicInteger) {
+            return (int) (((AtomicInteger) input).get() * rate);
+        } else if (input instanceof Byte) {
+            return (byte) ((Byte) input * rate);
+        } else {
+            return Double.parseDouble(input.toString()) * rate;
+        }
+    }
+
+    private static Collection<?> collection(Object input) {
+        if (input instanceof Collection) {
+            return (Collection<?>) input;
+        } else if (input instanceof Map) {
+            return ((Map<?, ?>) input).values();
+        } else if (input instanceof Number[]) {
+            return Arrays.asList((Object[]) input);
+        } else if (input instanceof double[]) {
+            double[] din = (double[]) input;
+            List<Double> dinList = new ArrayList<>(din.length);
+            for (double e : din) {
+                dinList.add(e);
+            }
+            return dinList;
+        } else if (input instanceof float[]) {
+            float[] fin = (float[]) input;
+            List<Float> finList = new ArrayList<>(fin.length);
+            for (float e : fin) {
+                finList.add(e);
+            }
+            return finList;
+        } else if (input instanceof long[]) {
+            long[] lin = (long[]) input;
+            List<Long> linList = new ArrayList<>(lin.length);
+            for (long e : lin) {
+                linList.add(e);
+            }
+            return linList;
+        } else if (input instanceof int[]) {
+            int[] iin = (int[]) input;
+            List<Integer> iinList = new ArrayList<>(iin.length);
+            for (int e : iin) {
+                iinList.add(e);
+            }
+            return iinList;
+        } else if (input instanceof byte[]) {
+            byte[] bin = (byte[]) input;
+            List<Byte> binList = new ArrayList<>(bin.length);
+            for (byte e : bin) {
+                binList.add(e);
+            }
+            return binList;
+        } else {
+            throw new IllegalArgumentException(
+                    "Illegal input[" + input + "]. Input must be a Collection, Map or array of numbers");
+        }
+    }
 }

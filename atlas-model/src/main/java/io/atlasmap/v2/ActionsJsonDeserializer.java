@@ -58,73 +58,85 @@ public class ActionsJsonDeserializer extends JsonDeserializer<Actions> {
         }
 
         switch (jsonToken.getCurrentName()) {
-        case "Camelize":
-            action = new Camelize();
-            return action;
-        case "Capitalize":
-            action = new Capitalize();
-            return action;
-        case "ConvertAreaUnit":
-            return processConvertAreaUnitJsonToken(jsonToken);
-        case "ConvertDistanceUnit":
-            return processConvertDistanceUnitJsonToken(jsonToken);
-        case "ConvertMassUnit":
-            return processConvertMassUnitJsonToken(jsonToken);
-        case "ConvertVolumeUnit":
-            return processConvertVolumeUnitJsonToken(jsonToken);
-        case "CurrentDate":
-            return processCurrentDateJsonToken(jsonToken);
-        case "CurrentDateTime":
-            return processCurrentDateTimeJsonToken(jsonToken);
-        case "CurrentTime":
-            return processCurrentTimeJsonToken(jsonToken);
-        case "CustomAction":
-            return processCustomActionJsonToken(jsonToken);
-        case "GenerateUUID":
-            action = new GenerateUUID();
-            return action;
-        case "Lowercase":
-            action = new Lowercase();
-            return action;
-        case "PadStringLeft":
-            return processPadStringLeftJsonToken(jsonToken);
-        case "PadStringRight":
-            return processPadStringRightJsonToken(jsonToken);
-        case "replace":
-            return processReplaceJsonToken(jsonToken);
-        case "SeparateByDash":
-            action = new SeparateByDash();
-            return action;
-        case "SeparateByUnderscore":
-            action = new SeparateByUnderscore();
-            return action;
-        case "StringLength":
-            action = new StringLength();
-            return action;
-        case "SubString":
-            return processSubStringJsonToken(jsonToken);
-        case "SubStringAfter":
-            return processSubStringAfterJsonToken(jsonToken);
-        case "SubStringBefore":
-            return processSubStringBeforeJsonToken(jsonToken);
-        case "SumUp":
-            return processSumUpJsonToken(jsonToken);
-        case "Trim":
-            action = new Trim();
-            return action;
-        case "TrimLeft":
-            action = new TrimLeft();
-            return action;
-        case "TrimRight":
-            action = new TrimRight();
-            return action;
-        case "Uppercase":
-            action = new Uppercase();
-            return action;
-        default:
-            // ref: https://github.com/atlasmap/atlasmap/issues/6
-            // TODO: Logger not required in model module
-            // logger.warn("Unsupported action named: " + jsonToken.getCurrentName());
+            case "AbsoluteValue":
+                return new AbsoluteValue();
+            case "Average":
+                return new Average();
+            case "Camelize":
+                action = new Camelize();
+                return action;
+            case "Capitalize":
+                action = new Capitalize();
+                return action;
+            case "Ceiling":
+                return new Ceiling();
+            case "ConvertAreaUnit":
+                return processConvertAreaUnitJsonToken(jsonToken);
+            case "ConvertDistanceUnit":
+                return processConvertDistanceUnitJsonToken(jsonToken);
+            case "ConvertMassUnit":
+                return processConvertMassUnitJsonToken(jsonToken);
+            case "ConvertVolumeUnit":
+                return processConvertVolumeUnitJsonToken(jsonToken);
+            case "CurrentDate":
+                return processCurrentDateJsonToken(jsonToken);
+            case "CurrentDateTime":
+                return processCurrentDateTimeJsonToken(jsonToken);
+            case "CurrentTime":
+                return processCurrentTimeJsonToken(jsonToken);
+            case "CustomAction":
+                return processCustomActionJsonToken(jsonToken);
+            case "Floor":
+                return new Floor();
+            case "GenerateUUID":
+                action = new GenerateUUID();
+                return action;
+            case "Maximum":
+                return new Maximum();
+            case "Minimum":
+                return new Minimum();
+            case "Lowercase":
+                action = new Lowercase();
+                return action;
+            case "PadStringLeft":
+                return processPadStringLeftJsonToken(jsonToken);
+            case "PadStringRight":
+                return processPadStringRightJsonToken(jsonToken);
+            case "replace":
+                return processReplaceJsonToken(jsonToken);
+            case "SeparateByDash":
+                action = new SeparateByDash();
+                return action;
+            case "SeparateByUnderscore":
+                action = new SeparateByUnderscore();
+                return action;
+            case "StringLength":
+                action = new StringLength();
+                return action;
+            case "SubString":
+                return processSubStringJsonToken(jsonToken);
+            case "SubStringAfter":
+                return processSubStringAfterJsonToken(jsonToken);
+            case "SubStringBefore":
+                return processSubStringBeforeJsonToken(jsonToken);
+            case "SumUp":
+                return processSumUpJsonToken(jsonToken);
+            case "Trim":
+                action = new Trim();
+                return action;
+            case "TrimLeft":
+                action = new TrimLeft();
+                return action;
+            case "TrimRight":
+                action = new TrimRight();
+                return action;
+            case "Uppercase":
+                action = new Uppercase();
+                return action;
+            default:
+                // ref: https://github.com/atlasmap/atlasmap/issues/6
+                // TODO: Logger not required in model module
+                // logger.warn("Unsupported action named: " + jsonToken.getCurrentName());
         }
 
         return null;
@@ -466,7 +478,7 @@ public class ActionsJsonDeserializer extends JsonDeserializer<Actions> {
         return action;
     }
 
-    protected ConvertVolumeUnit processConvertVolumeUnitJsonToken(JsonParser jsonToken) throws IOException {
+    protected ConvertVolumeUnit processConvertVolumeUnitJsonToken(JsonParser jsonToken) {
         ConvertVolumeUnit action = new ConvertVolumeUnit();
 
         if (JsonToken.END_ARRAY.equals(jsonToken.currentToken())

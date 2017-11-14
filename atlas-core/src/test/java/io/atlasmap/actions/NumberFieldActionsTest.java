@@ -15,26 +15,125 @@
  */
 package io.atlasmap.actions;
 
+import static org.junit.Assert.assertEquals;
+
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Test;
 
+import io.atlasmap.v2.AbsoluteValue;
 import io.atlasmap.v2.AreaUnitType;
+import io.atlasmap.v2.Average;
+import io.atlasmap.v2.Ceiling;
 import io.atlasmap.v2.ConvertAreaUnit;
 import io.atlasmap.v2.ConvertDistanceUnit;
 import io.atlasmap.v2.ConvertMassUnit;
 import io.atlasmap.v2.ConvertVolumeUnit;
 import io.atlasmap.v2.DistanceUnitType;
+import io.atlasmap.v2.Floor;
 import io.atlasmap.v2.MassUnitType;
+import io.atlasmap.v2.Maximum;
+import io.atlasmap.v2.Minimum;
 import io.atlasmap.v2.NumberType;
 import io.atlasmap.v2.SumUp;
 import io.atlasmap.v2.VolumeUnitType;
 
-import static org.junit.Assert.assertEquals;
-
 public class NumberFieldActionsTest {
+
+    @Test
+    public void testAbsoluteValue() {
+        assertEquals(0, NumberFieldActions.absoluteValue(new AbsoluteValue(), null));
+        assertEquals(new BigDecimal(1), NumberFieldActions.absoluteValue(new AbsoluteValue(), new BigDecimal(-1)));
+        assertEquals(1.0, NumberFieldActions.absoluteValue(new AbsoluteValue(), -1.0));
+        assertEquals(1F, NumberFieldActions.absoluteValue(new AbsoluteValue(), -1F));
+        assertEquals(1L, NumberFieldActions.absoluteValue(new AbsoluteValue(), new AtomicLong(-1L)));
+        assertEquals(1L, NumberFieldActions.absoluteValue(new AbsoluteValue(), -1L));
+        assertEquals(1, NumberFieldActions.absoluteValue(new AbsoluteValue(), new AtomicInteger(-1)));
+        assertEquals(1, NumberFieldActions.absoluteValue(new AbsoluteValue(), -1));
+        assertEquals((byte)1, NumberFieldActions.absoluteValue(new AbsoluteValue(), (byte)-1));
+    }
+
+    @Test
+    public void testAverage() {
+        assertEquals(2.5, NumberFieldActions.average(new Average(), new double[] {1.0, 2.0, 3.0, 4.0}));
+        assertEquals(2.5, NumberFieldActions.average(new Average(), new int[] {1, 2, 3, 4}));
+        assertEquals(2.5, NumberFieldActions.average(new Average(), Arrays.asList(1, 2, 3, 4)));
+        assertEquals(2.5, NumberFieldActions.average(new Average(), Arrays.asList("1", "2", "3", "4")));
+        Map<String, Integer> map = new HashMap<>();
+        map.put("1", 1);
+        map.put("2", 2);
+        map.put("3", 3);
+        map.put("4", 4);
+        assertEquals(2.5, NumberFieldActions.average(new Average(), map));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAverageOfNonNumber() {
+        NumberFieldActions.average(new AbsoluteValue(), Arrays.asList(new Object[] { "a", "b", "c" }));
+    }
+
+    @Test
+    public void testCeiling() {
+        assertEquals(0.0, NumberFieldActions.ceiling(new Ceiling(), null));
+        assertEquals(new BigDecimal(2), NumberFieldActions.ceiling(new Ceiling(), new BigDecimal(1.5)));
+        assertEquals(2.0, NumberFieldActions.ceiling(new Ceiling(), 1.5));
+        assertEquals(2F, NumberFieldActions.ceiling(new Ceiling(), 1.5F));
+        assertEquals(2L, NumberFieldActions.ceiling(new Ceiling(), new AtomicLong(2L)));
+        assertEquals(2L, NumberFieldActions.ceiling(new Ceiling(), 2L));
+        assertEquals(2, NumberFieldActions.ceiling(new Ceiling(), new AtomicInteger(2)));
+        assertEquals(2, NumberFieldActions.ceiling(new Ceiling(), 2));
+        assertEquals((byte)2, NumberFieldActions.ceiling(new Ceiling(), (byte)2));
+    }
+
+    @Test
+    public void testFloor() {
+        assertEquals(0.0, NumberFieldActions.floor(new Floor(), null));
+        assertEquals(new BigDecimal(1), NumberFieldActions.floor(new Floor(), new BigDecimal(1.5)));
+        assertEquals(1.0, NumberFieldActions.floor(new Floor(), 1.5));
+        assertEquals(1F, NumberFieldActions.floor(new Floor(), 1.5F));
+        assertEquals(2L, NumberFieldActions.floor(new Floor(), new AtomicLong(2L)));
+        assertEquals(2L, NumberFieldActions.floor(new Floor(), 2L));
+        assertEquals(2, NumberFieldActions.floor(new Floor(), new AtomicInteger(2)));
+        assertEquals(2, NumberFieldActions.floor(new Floor(), 2));
+        assertEquals((byte)2, NumberFieldActions.floor(new Floor(), (byte)2));
+    }
+
+    @Test
+    public void testMaximum() {
+        assertEquals(new BigDecimal(4), NumberFieldActions.maximum(new Maximum(), new BigDecimal[] {new BigDecimal(1), new BigDecimal(2), new BigDecimal(3), new BigDecimal(4)}));
+        assertEquals(4.0, NumberFieldActions.maximum(new Maximum(), new double[] {1.0, 2.0, 3.0, 4.0}));
+        assertEquals(4, NumberFieldActions.maximum(new Maximum(), new int[] {1, 2, 3, 4}));
+        assertEquals(4, NumberFieldActions.maximum(new Maximum(), Arrays.asList(1, 2, 3, 4)));
+        assertEquals(4.0, NumberFieldActions.maximum(new Maximum(), Arrays.asList("1", "2", "3", "4")));
+        Map<String, Integer> map = new HashMap<>();
+        map.put("1", 1);
+        map.put("2", 2);
+        map.put("3", 3);
+        map.put("4", 4);
+        assertEquals(4, NumberFieldActions.maximum(new Maximum(), map));
+        assertEquals(new BigDecimal(4), NumberFieldActions.maximum(new Maximum(), Arrays.asList((byte)1, 2, 3.0, new BigDecimal(4))));
+    }
+
+    @Test
+    public void testMinimum() {
+        assertEquals(new BigDecimal(1), NumberFieldActions.minimum(new Minimum(), new BigDecimal[] {new BigDecimal(1), new BigDecimal(2), new BigDecimal(3), new BigDecimal(4)}));
+        assertEquals(1.0, NumberFieldActions.minimum(new Minimum(), new double[] {1.0, 2.0, 3.0, 4.0}));
+        assertEquals(1, NumberFieldActions.minimum(new Minimum(), new int[] {1, 2, 3, 4}));
+        assertEquals(1, NumberFieldActions.minimum(new Minimum(), Arrays.asList(1, 2, 3, 4)));
+        assertEquals(1.0, NumberFieldActions.minimum(new Minimum(), Arrays.asList("1", "2", "3", "4")));
+        Map<String, Integer> map = new HashMap<>();
+        map.put("1", 1);
+        map.put("2", 2);
+        map.put("3", 3);
+        map.put("4", 4);
+        assertEquals(1, NumberFieldActions.minimum(new Minimum(), map));
+        assertEquals((byte)1, NumberFieldActions.minimum(new Minimum(), Arrays.asList((byte)1, 2, 3.0, new BigDecimal(4))));
+    }
 
     @Test
     public void testSumUp() {

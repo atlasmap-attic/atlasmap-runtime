@@ -12,7 +12,22 @@
 
     <complexType name="Action" abstract="true" />
 
-    <!-- String Actions -->
+    <element name="AbsoluteValue">
+        <complexType>
+            <complexContent>
+                <extension base="atlas:Action" />
+            </complexContent>
+        </complexType>
+    </element>
+
+    <element name="Average">
+        <complexType>
+            <complexContent>
+                <extension base="atlas:Action" />
+            </complexContent>
+        </complexType>
+    </element>
+
     <element name="Camelize">
         <complexType>
             <complexContent>
@@ -22,6 +37,14 @@
     </element>
 
     <element name="Capitalize">
+        <complexType>
+            <complexContent>
+                <extension base="atlas:Action" />
+            </complexContent>
+        </complexType>
+    </element>
+
+    <element name="Ceiling">
         <complexType>
             <complexContent>
                 <extension base="atlas:Action" />
@@ -119,6 +142,14 @@
         </complexType>
     </element>
 
+    <element name="Floor">
+        <complexType>
+            <complexContent>
+                <extension base="atlas:Action" />
+            </complexContent>
+        </complexType>
+    </element>
+
     <element name="GenerateUUID">
         <complexType>
             <complexContent>
@@ -128,6 +159,22 @@
     </element>
 
     <element name="Lowercase">
+        <complexType>
+            <complexContent>
+                <extension base="atlas:Action" />
+            </complexContent>
+        </complexType>
+    </element>
+
+    <element name="Maximum">
+        <complexType>
+            <complexContent>
+                <extension base="atlas:Action" />
+            </complexContent>
+        </complexType>
+    </element>
+
+    <element name="Minimum">
         <complexType>
             <complexContent>
                 <extension base="atlas:Action" />
@@ -273,8 +320,11 @@
     <complexType name="Actions">
         <sequence>
             <choice minOccurs="0" maxOccurs="unbounded">
+                <element ref="atlas:AbsoluteValue" />
+                <element ref="atlas:Average" />
                 <element ref="atlas:Camelize" />
                 <element ref="atlas:Capitalize" />
+                <element ref="atlas:Ceiling" />
                 <element ref="atlas:ConvertAreaUnit" />
                 <element ref="atlas:ConvertDistanceUnit" />
                 <element ref="atlas:ConvertMassUnit" />
@@ -282,8 +332,11 @@
                 <element ref="atlas:CurrentDate" />
                 <element ref="atlas:CurrentDateTime" />
                 <element ref="atlas:CurrentTime" />
+                <element ref="atlas:Floor" />
                 <element ref="atlas:GenerateUUID" />
                 <element ref="atlas:Lowercase" />
+                <element ref="atlas:Maximum" />
+                <element ref="atlas:Minimum" />
                 <element ref="atlas:PadStringLeft" />
                 <element ref="atlas:PadStringRight" />
                 <element ref="atlas:Replace" />

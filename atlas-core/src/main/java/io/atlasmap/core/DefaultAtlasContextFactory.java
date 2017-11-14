@@ -15,27 +15,6 @@
  */
 package io.atlasmap.core;
 
-import io.atlasmap.api.AtlasContext;
-import io.atlasmap.api.AtlasContextFactory;
-import io.atlasmap.api.AtlasConversionService;
-import io.atlasmap.api.AtlasException;
-import io.atlasmap.api.AtlasFieldActionService;
-import io.atlasmap.api.AtlasValidationService;
-import io.atlasmap.core.AtlasMappingService.AtlasMappingFormat;
-import io.atlasmap.mxbean.AtlasContextFactoryMXBean;
-import io.atlasmap.spi.AtlasCombineStrategy;
-import io.atlasmap.spi.AtlasModule;
-import io.atlasmap.spi.AtlasModuleDetail;
-import io.atlasmap.spi.AtlasModuleInfo;
-import io.atlasmap.spi.AtlasPropertyStrategy;
-import io.atlasmap.spi.AtlasSeparateStrategy;
-import io.atlasmap.v2.AtlasMapping;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.management.MalformedObjectNameException;
-import javax.management.ObjectName;
 import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Constructor;
@@ -52,6 +31,28 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import io.atlasmap.api.AtlasContext;
+import io.atlasmap.api.AtlasContextFactory;
+import io.atlasmap.api.AtlasConversionService;
+import io.atlasmap.api.AtlasException;
+import io.atlasmap.api.AtlasFieldActionService;
+import io.atlasmap.api.AtlasValidationService;
+import io.atlasmap.core.AtlasMappingService.AtlasMappingFormat;
+import io.atlasmap.mxbean.AtlasContextFactoryMXBean;
+import io.atlasmap.spi.AtlasCombineStrategy;
+import io.atlasmap.spi.AtlasModule;
+import io.atlasmap.spi.AtlasModuleDetail;
+import io.atlasmap.spi.AtlasModuleInfo;
+import io.atlasmap.spi.AtlasPropertyStrategy;
+import io.atlasmap.spi.AtlasSeparateStrategy;
+import io.atlasmap.v2.AtlasMapping;
+
 public class DefaultAtlasContextFactory implements AtlasContextFactory, AtlasContextFactoryMXBean {
 
     private static Logger logger = LoggerFactory.getLogger(DefaultAtlasContextFactory.class);
@@ -60,7 +61,7 @@ public class DefaultAtlasContextFactory implements AtlasContextFactory, AtlasCon
     private String uuid = null;
     private String threadName = null;
     private ObjectName objectName = null;
-    private List<AtlasModuleInfo> modules = new ArrayList<AtlasModuleInfo>();
+    private List<AtlasModuleInfo> modules = new ArrayList<>();
     private AtlasMappingService atlasMappingService = null;
     private DefaultAtlasConversionService atlasConversionService = null;
     private DefaultAtlasFieldActionService atlasFieldActionService = null;
@@ -89,7 +90,7 @@ public class DefaultAtlasContextFactory implements AtlasContextFactory, AtlasCon
     }
 
     public DefaultAtlasContextFactory(Properties properties) {
-        Map<String, String> tmpProps = new HashMap<String, String>();
+        Map<String, String> tmpProps = new HashMap<>();
         for (final String name : properties.stringPropertyNames()) {
             tmpProps.put(name, properties.getProperty(name));
         }
@@ -186,7 +187,7 @@ public class DefaultAtlasContextFactory implements AtlasContextFactory, AtlasCon
     protected void loadModules(String moduleClassProperty, Class<?> moduleInterface) {
         Class<?> moduleClass = null;
         String moduleClassName = null;
-        Set<String> serviceClasses = new HashSet<String>();
+        Set<String> serviceClasses = new HashSet<>();
 
         ClassLoader classLoader = this.getClass().getClassLoader();
         try {
@@ -323,7 +324,7 @@ public class DefaultAtlasContextFactory implements AtlasContextFactory, AtlasCon
         AtlasModuleDetail detail = clazz.getAnnotation(AtlasModuleDetail.class);
 
         if (detail != null) {
-            dataFormats = new ArrayList<String>();
+            dataFormats = new ArrayList<>();
 
             String[] formats = detail.dataFormats();
 
@@ -345,7 +346,7 @@ public class DefaultAtlasContextFactory implements AtlasContextFactory, AtlasCon
         AtlasModuleDetail detail = clazz.getAnnotation(AtlasModuleDetail.class);
 
         if (detail != null) {
-            configPackages = new ArrayList<String>();
+            configPackages = new ArrayList<>();
 
             String[] packages = detail.configPackages();
 
@@ -362,7 +363,7 @@ public class DefaultAtlasContextFactory implements AtlasContextFactory, AtlasCon
     }
 
     protected List<String> getAllModuleConfigPackages(List<AtlasModuleInfo> moduleInfos) {
-        List<String> pkgs = new ArrayList<String>();
+        List<String> pkgs = new ArrayList<>();
         for (AtlasModuleInfo moduleInfo : moduleInfos) {
             pkgs.addAll(Arrays.asList(moduleInfo.getPackageNames()));
         }
